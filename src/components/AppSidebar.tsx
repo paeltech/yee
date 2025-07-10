@@ -69,8 +69,8 @@ export function AppSidebar() {
             <Users className="w-6 h-6 text-white" />
           </div>
           <div>
-            <h1 className="text-xl font-bold text-neutral-900">Yee Platform</h1>
-            <p className="text-sm text-neutral-600">Groups Management System</p>
+            <h1 className="text-xl font-bold text-neutral-900">Yee Portal</h1>
+            <p className="text-sm text-neutral-600">Youth Economic Empowerment</p>
           </div>
         </div>
       </SidebarHeader>
