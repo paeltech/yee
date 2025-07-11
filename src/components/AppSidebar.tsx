@@ -75,7 +75,7 @@ export function AppSidebar() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-neutral-900">Yee Portal</h1>
-            <p className="text-sm text-neutral-600">Youth Economic Empowerment.</p>
+            <p className="text-sm text-neutral-600">Youth Economic Empowerment Portal.</p>
           </div>
         </div>
       </SidebarHeader>
