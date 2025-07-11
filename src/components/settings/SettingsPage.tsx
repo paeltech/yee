@@ -7,6 +7,8 @@ import { Separator } from "@/components/ui/separator";
 import { Settings, Database, Users, Shield } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { GroupDocumentUpload } from "./GroupDocumentUpload";
+import { DocumentUpload } from "./DocumentUpload";
+import { DocumentList } from "./DocumentList";
 
 export function SettingsPage() {
   const { toast } = useToast();
@@ -165,7 +167,16 @@ export function SettingsPage() {
         </Card>
 
         <div className="lg:col-span-2">
-          <GroupDocumentUpload />
+          <Separator className="my-8" />
+          <h2 className="text-2xl font-bold mb-4">General Documents</h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <DocumentUpload onUpload={() => {}} />
+            </div>
+            <div>
+              <DocumentList />
+            </div>
+          </div>
         </div>
       </div>
     </div>

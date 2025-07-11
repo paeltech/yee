@@ -1,5 +1,5 @@
 
-import { Calendar, Home, Users, BarChart3, MapPin, Settings, Building2, Layers3 } from "lucide-react";
+import { Calendar, Home, Users, BarChart3, MapPin, Settings, Building2, Layers3, FileText } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -54,6 +54,11 @@ const menuItems = [
     icon: MapPin,
   },
   {
+    title: "Resource Center",
+    url: "/documents",
+    icon: FileText,
+  },
+  {
     title: "Settings",
     url: "/settings",
     icon: Settings,
@@ -70,7 +75,7 @@ export function AppSidebar() {
           </div>
           <div>
             <h1 className="text-xl font-bold text-neutral-900">Yee Portal</h1>
-            <p className="text-sm text-neutral-600">Youth Economic Empowerment</p>
+            <p className="text-sm text-neutral-600">Youth Economic Empowerment.</p>
           </div>
         </div>
       </SidebarHeader>

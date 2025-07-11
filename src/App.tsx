@@ -15,6 +15,7 @@ import Activities from "./pages/Activities";
 import Analytics from "./pages/Analytics";
 import Locations from "./pages/Locations";
 import Settings from "./pages/Settings";
+import Documents from "./pages/Documents";
 
 const queryClient = new QueryClient();
 
@@ -36,6 +37,7 @@ const App = () => (
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/locations" element={<Locations />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/documents" element={<Documents />} />
         </Routes>
       </BrowserRouter>
     </TooltipProvider>

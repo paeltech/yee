@@ -7,7 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Users, Calendar, MapPin, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
-import { AddGroupDialog } from "./AddGroupDialog";
+import { GroupDialog } from "@/components/groups/GroupDialog";
 import { Link } from "react-router-dom";
 
 export function GroupsPage() {
@@ -56,7 +56,7 @@ export function GroupsPage() {
           <h1 className="text-3xl font-bold text-neutral-900">Youth Groups</h1>
           <p className="text-neutral-600 mt-2">Manage youth groups and their activities</p>
         </div>
-        <AddGroupDialog />
+        <GroupDialog mode="add" trigger={<Button className="bg-amber-500 hover:bg-amber-600 text-white">Add Group</Button>} />
       </div>
 
       <div className="flex items-center space-x-4">
