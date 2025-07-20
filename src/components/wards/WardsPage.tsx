@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Search, Layers3 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { AddWardDialog } from "./AddWardDialog";
+import { EditWardDialog } from "./EditWardDialog";
+import { DeleteWardDialog } from "./DeleteWardDialog";
 
 export function WardsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -83,13 +85,15 @@ export function WardsPage() {
           {filteredWards.map((ward) => (
             <Card key={ward.id} className="hover:shadow-lg transition-shadow border-neutral-200">
               <CardHeader className="pb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
-                    <Layers3 className="w-6 h-6 text-amber-600" />
-                  </div>
-                  <div>
-                    <CardTitle className="text-lg text-neutral-900">{ward.name}</CardTitle>
-                    <p className="text-sm text-neutral-600">{ward.councils?.name}</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
+                      <Layers3 className="w-6 h-6 text-amber-600" />
+                    </div>
+                    <div>
+                      <CardTitle className="text-lg text-neutral-900">{ward.name}</CardTitle>
+                      <p className="text-sm text-neutral-600">{ward.councils?.name}</p>
+                    </div>
                   </div>
                 </div>
               </CardHeader>
@@ -122,6 +126,10 @@ export function WardsPage() {
                     }`}>
                       {ward.status}
                     </span>
+                  </div>
+                  <div className="flex items-center gap-2 pt-8">
+                    <EditWardDialog ward={ward} />
+                    <DeleteWardDialog ward={ward} />
                   </div>
                 </div>
               </CardContent>

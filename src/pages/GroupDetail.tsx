@@ -9,6 +9,10 @@ import { ArrowLeft, Edit, Trash2, Users, MapPin, Calendar, Phone } from "lucide-
 import { GroupDocuments } from "@/components/groups/GroupDocuments";
 import { GroupDialog } from "@/components/groups/GroupDialog";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { EditMemberDialog } from "@/components/members/EditMemberDialog";
+import { DeleteMemberDialog } from "@/components/members/DeleteMemberDialog";
+import { MemberDetailsDialog } from "@/components/members/MemberDetailsDialog";
+import { AddMemberDialog } from "@/components/members/AddMemberDialog";
 import { useState } from "react";
 
 const GroupDetail = () => {
@@ -114,19 +118,19 @@ const GroupDetail = () => {
               mode="edit"
               initialData={group}
               trigger={
-                <Button variant="outline" size="sm">
-                  <Edit className="w-4 h-4 mr-2" />
-                  Edit
-                </Button>
+            <Button variant="outline" size="sm">
+              <Edit className="w-4 h-4 mr-2" />
+              Edit
+            </Button>
               }
               onSuccess={() => queryClient.invalidateQueries({ queryKey: ["group", id] })}
             />
             <Dialog open={deleteOpen} onOpenChange={setDeleteOpen}>
               <DialogTrigger asChild>
-                <Button variant="destructive" size="sm">
-                  <Trash2 className="w-4 h-4 mr-2" />
-                  Delete
-                </Button>
+            <Button variant="destructive" size="sm">
+              <Trash2 className="w-4 h-4 mr-2" />
+              Delete
+            </Button>
               </DialogTrigger>
               <DialogContent>
                 <DialogHeader>
@@ -214,23 +218,36 @@ const GroupDetail = () => {
 
             <Card>
               <CardHeader>
-                <CardTitle>Members ({members?.length || 0})</CardTitle>
+                <div className="flex items-center justify-between">
+                  <CardTitle>Members ({members?.length || 0})</CardTitle>
+                  <AddMemberDialog />
+                </div>
               </CardHeader>
               <CardContent>
                 {members && members.length > 0 ? (
                   <div className="space-y-2">
-                    {members.slice(0, 5).map((member) => (
-                      <div key={member.id} className="flex items-center justify-between p-2 border rounded">
-                        <div>
-                          <p className="font-medium">{member.first_name} {member.last_name}</p>
-                          <p className="text-sm text-neutral-600">{member.member_role}</p>
-                        </div>
-                        <Badge variant={member.membership_status === 'active' ? 'default' : 'secondary'}>
-                          {member.membership_status}
-                        </Badge>
-                      </div>
+                    {members.slice(0, 7).map((member) => (
+                      <MemberDetailsDialog
+                        key={member.id}
+                        member={member}
+                        trigger={
+                          <div className="flex items-center justify-between p-2 border rounded hover:bg-neutral-50 cursor-pointer transition-colors">
+                            <div>
+                              <p className="font-medium">{member.first_name} {member.last_name}</p>
+                              <p className="text-sm text-neutral-600">{member.member_role}</p>
+                            </div>
+                            <div className="flex items-center gap-2">
+                              <Badge variant={member.membership_status === 'active' ? 'default' : 'secondary'}>
+                                {member.membership_status}
+                              </Badge>
+                              <EditMemberDialog member={member} />
+                              <DeleteMemberDialog member={member} />
+                            </div>
+                          </div>
+                        }
+                      />
                     ))}
-                    {members.length > 5 && (
+                    {members.length > 7 && (
                       <p className="text-sm text-neutral-600 text-center">
                         and {members.length - 5} more members...
                       </p>
