@@ -7,6 +7,8 @@ import { Input } from "@/components/ui/input";
 import { Search, Building2 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { AddCouncilDialog } from "./AddCouncilDialog";
+import { EditCouncilDialog } from "./EditCouncilDialog";
+import { DeleteCouncilDialog } from "./DeleteCouncilDialog";
 
 export function CouncilsPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -77,13 +79,10 @@ export function CouncilsPage() {
           {filteredCouncils.map((council) => (
             <Card key={council.id} className="hover:shadow-lg transition-shadow border-neutral-200">
               <CardHeader className="pb-4">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
-                    <Building2 className="w-6 h-6 text-amber-600" />
-                  </div>
+                <div className="flex items-center justify-between">
                   <div>
                     <CardTitle className="text-lg text-neutral-900">{council.name}</CardTitle>
-                    <p className="text-sm text-neutral-600">{council.code}</p>
+                    <p className="text-sm text-neutral-600">{council.region}</p>
                   </div>
                 </div>
               </CardHeader>
@@ -109,6 +108,10 @@ export function CouncilsPage() {
                       <span className="text-sm font-medium text-neutral-900">{council.contact_person}</span>
                     </div>
                   )}
+                  <div className="flex items-center gap-2 pt-8">
+                    <EditCouncilDialog council={council} />
+                    <DeleteCouncilDialog council={council} />
+                  </div>
                 </div>
               </CardContent>
             </Card>
