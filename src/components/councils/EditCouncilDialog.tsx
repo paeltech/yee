@@ -59,9 +59,17 @@ export function EditCouncilDialog({ council }: EditCouncilDialogProps) {
       form.reset();
     },
     onError: (error) => {
+      let description = "Unknown error";
+      if (error instanceof Error && error.message) {
+        description = error.message;
+      } else if (typeof error === "object" && error !== null && "message" in error) {
+        description = (error as any).message;
+      } else {
+        description = JSON.stringify(error);
+      }
       toast({
         title: "Error",
-        description: "Failed to update council",
+        description,
         variant: "destructive",
       });
       console.error('Update council error:', error);

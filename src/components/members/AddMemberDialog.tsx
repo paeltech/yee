@@ -109,9 +109,17 @@ export function AddMemberDialog() {
       });
     },
     onError: (error) => {
+      let description = "Unknown error";
+      if (error instanceof Error && error.message) {
+        description = error.message;
+      } else if (typeof error === "object" && error !== null && "message" in error) {
+        description = (error as any).message;
+      } else {
+        description = JSON.stringify(error);
+      }
       toast({
         title: "Error",
-        description: "Failed to add member",
+        description,
         variant: "destructive",
       });
       console.error('Error adding member:', error);

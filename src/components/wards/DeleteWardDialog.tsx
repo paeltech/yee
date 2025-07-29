@@ -33,9 +33,17 @@ export function DeleteWardDialog({ ward }: DeleteWardDialogProps) {
       setOpen(false);
     },
     onError: (error) => {
+      let description = "Unknown error";
+      if (error instanceof Error && error.message) {
+        description = error.message;
+      } else if (typeof error === "object" && error !== null && "message" in error) {
+        description = (error as any).message;
+      } else {
+        description = JSON.stringify(error);
+      }
       toast({
         title: "Error",
-        description: "Failed to delete ward",
+        description,
         variant: "destructive",
       });
       console.error('Delete ward error:', error);

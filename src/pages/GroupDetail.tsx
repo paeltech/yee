@@ -259,7 +259,7 @@ const GroupDetail = () => {
               </CardContent>
             </Card>
 
-            <GroupDocuments groupId={parseInt(id!)} />
+            <GroupDocuments groupId={parseInt(id!)} groupName={group.name} />
           </div>
 
           <div className="space-y-6">

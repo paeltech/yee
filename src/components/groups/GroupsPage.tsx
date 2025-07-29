@@ -5,9 +5,10 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Search, Users, Calendar, MapPin, Eye } from "lucide-react";
+import { Search, Users, Calendar, MapPin, Eye, Upload } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { GroupDialog } from "@/components/groups/GroupDialog";
+import { UploadGroupDocumentDialog } from "@/components/groups/UploadGroupDocumentDialog";
 import { Link } from "react-router-dom";
 
 export function GroupsPage() {
@@ -140,12 +141,14 @@ export function GroupsPage() {
                   )}
 
                   <div className="pt-2 border-t">
-                    <Link to={`/groups/${group.id}`}>
-                      <Button variant="outline" size="sm" className="w-full">
-                        <Eye className="w-4 h-4 mr-2" />
-                        View Details
-                      </Button>
-                    </Link>
+                    <div className="flex gap-2">
+                      <Link to={`/groups/${group.id}`} className="flex-1">
+                        <Button variant="outline" size="sm" className="w-full">
+                          <Eye className="w-4 h-4 mr-2" />
+                          View Details
+                        </Button>
+                      </Link>
+                    </div>
                   </div>
                 </div>
               </CardContent>

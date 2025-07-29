@@ -113,9 +113,17 @@ export function EditMemberDialog({ member }: EditMemberDialogProps) {
       form.reset();
     },
     onError: (error) => {
+      let description = "Unknown error";
+      if (error instanceof Error && error.message) {
+        description = error.message;
+      } else if (typeof error === "object" && error !== null && "message" in error) {
+        description = (error as any).message;
+      } else {
+        description = JSON.stringify(error);
+      }
       toast({
         title: "Error",
-        description: "Failed to update member",
+        description,
         variant: "destructive",
       });
       console.error('Update member error:', error);
