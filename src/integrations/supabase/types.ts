@@ -104,6 +104,7 @@ export type Database = {
           budget_allocated: number | null
           budget_spent: number | null
           created_at: string | null
+          created_by: string | null
           description: string | null
           group_id: number | null
           id: number
@@ -111,6 +112,7 @@ export type Database = {
           outcomes: string | null
           status: string | null
           updated_at: string | null
+          updated_by: string | null
         }
         Insert: {
           activity_date: string
@@ -120,6 +122,7 @@ export type Database = {
           budget_allocated?: number | null
           budget_spent?: number | null
           created_at?: string | null
+          created_by?: string | null
           description?: string | null
           group_id?: number | null
           id?: number
@@ -127,6 +130,7 @@ export type Database = {
           outcomes?: string | null
           status?: string | null
           updated_at?: string | null
+          updated_by?: string | null
         }
         Update: {
           activity_date?: string
@@ -136,6 +140,7 @@ export type Database = {
           budget_allocated?: number | null
           budget_spent?: number | null
           created_at?: string | null
+          created_by?: string | null
           description?: string | null
           group_id?: number | null
           id?: number
@@ -143,6 +148,7 @@ export type Database = {
           outcomes?: string | null
           status?: string | null
           updated_at?: string | null
+          updated_by?: string | null
         }
         Relationships: [
           {
@@ -159,11 +165,26 @@ export type Database = {
             referencedRelation: "v_group_stats"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "group_activities_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "group_activities_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
         ]
       }
       group_documents: {
         Row: {
           created_at: string
+          created_by: string | null
           description: string | null
           file_name: string
           file_path: string
@@ -172,11 +193,13 @@ export type Database = {
           group_id: number
           id: string
           updated_at: string
+          updated_by: string | null
           upload_date: string
           uploaded_by: number | null
         }
         Insert: {
           created_at?: string
+          created_by?: string | null
           description?: string | null
           file_name: string
           file_path: string
@@ -185,11 +208,13 @@ export type Database = {
           group_id: number
           id?: string
           updated_at?: string
+          updated_by?: string | null
           upload_date?: string
           uploaded_by?: number | null
         }
         Update: {
           created_at?: string
+          created_by?: string | null
           description?: string | null
           file_name?: string
           file_path?: string
@@ -198,6 +223,7 @@ export type Database = {
           group_id?: number
           id?: string
           updated_at?: string
+          updated_by?: string | null
           upload_date?: string
           uploaded_by?: number | null
         }
@@ -216,11 +242,78 @@ export type Database = {
             referencedRelation: "v_group_stats"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "group_documents_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "group_documents_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      group_roles: {
+        Row: {
+          assigned_at: string
+          assigned_by: string
+          group_id: number
+          id: string
+          is_active: boolean
+          role: string
+          user_id: string
+        }
+        Insert: {
+          assigned_at?: string
+          assigned_by: string
+          group_id: number
+          id?: string
+          is_active?: boolean
+          role: string
+          user_id: string
+        }
+        Update: {
+          assigned_at?: string
+          assigned_by?: string
+          group_id?: number
+          id?: string
+          is_active?: boolean
+          role?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "group_roles_assigned_by_fkey"
+            columns: ["assigned_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "group_roles_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "group_roles_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
         ]
       }
       groups: {
         Row: {
           created_at: string | null
+          created_by: string | null
           description: string | null
           dissolution_date: string | null
           dissolution_reason: string | null
@@ -237,10 +330,12 @@ export type Database = {
           registration_number: string | null
           status: string | null
           updated_at: string | null
+          updated_by: string | null
           ward_id: number | null
         }
         Insert: {
           created_at?: string | null
+          created_by?: string | null
           description?: string | null
           dissolution_date?: string | null
           dissolution_reason?: string | null
@@ -253,14 +348,16 @@ export type Database = {
           primary_contact_email?: string | null
           primary_contact_name?: string | null
           primary_contact_phone?: string | null
-          registration_date?: string
+          registration_date: string
           registration_number?: string | null
           status?: string | null
           updated_at?: string | null
+          updated_by?: string | null
           ward_id?: number | null
         }
         Update: {
           created_at?: string | null
+          created_by?: string | null
           description?: string | null
           dissolution_date?: string | null
           dissolution_reason?: string | null
@@ -277,6 +374,7 @@ export type Database = {
           registration_number?: string | null
           status?: string | null
           updated_at?: string | null
+          updated_by?: string | null
           ward_id?: number | null
         }
         Relationships: [
@@ -287,6 +385,20 @@ export type Database = {
             referencedRelation: "wards"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "groups_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "groups_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
         ]
       }
       member_history: {
@@ -376,7 +488,7 @@ export type Database = {
         Row: {
           alternative_phone: string | null
           created_at: string | null
-          created_by: number | null
+          created_by: string | null
           date_of_birth: string | null
           education_level: string | null
           email_address: string | null
@@ -400,11 +512,12 @@ export type Database = {
           postal_address: string | null
           residential_address: string | null
           updated_at: string | null
+          updated_by: string | null
         }
         Insert: {
           alternative_phone?: string | null
           created_at?: string | null
-          created_by?: number | null
+          created_by?: string | null
           date_of_birth?: string | null
           education_level?: string | null
           email_address?: string | null
@@ -414,7 +527,7 @@ export type Database = {
           gender: string
           group_id?: number | null
           id?: number
-          join_date?: string
+          join_date: string
           last_name: string
           member_number?: string | null
           member_role?: string | null
@@ -428,11 +541,12 @@ export type Database = {
           postal_address?: string | null
           residential_address?: string | null
           updated_at?: string | null
+          updated_by?: string | null
         }
         Update: {
           alternative_phone?: string | null
           created_at?: string | null
-          created_by?: number | null
+          created_by?: string | null
           date_of_birth?: string | null
           education_level?: string | null
           email_address?: string | null
@@ -456,6 +570,7 @@ export type Database = {
           postal_address?: string | null
           residential_address?: string | null
           updated_at?: string | null
+          updated_by?: string | null
         }
         Relationships: [
           {
@@ -472,6 +587,102 @@ export type Database = {
             referencedRelation: "v_group_stats"
             referencedColumns: ["id"]
           },
+          {
+            foreignKeyName: "members_created_by_fkey"
+            columns: ["created_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "members_updated_by_fkey"
+            columns: ["updated_by"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      user_sessions: {
+        Row: {
+          created_at: string
+          expires_at: string
+          id: string
+          session_token: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          expires_at: string
+          id?: string
+          session_token: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          expires_at?: string
+          id?: string
+          session_token?: string
+          user_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_sessions_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
+      users: {
+        Row: {
+          created_at: string
+          email: string
+          first_name: string
+          group_id: number | null
+          id: string
+          is_active: boolean
+          last_login: string | null
+          last_name: string
+          password_hash: string
+          role: string
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          first_name: string
+          group_id?: number | null
+          id?: string
+          is_active?: boolean
+          last_login?: string | null
+          last_name: string
+          password_hash: string
+          role: string
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          first_name?: string
+          group_id?: number | null
+          id?: string
+          is_active?: boolean
+          last_login?: string | null
+          last_name?: string
+          password_hash?: string
+          role?: string
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "users_group_id_fkey"
+            columns: ["group_id"]
+            isOneToOne: false
+            referencedRelation: "groups"
+            referencedColumns: ["id"]
+          }
         ]
       }
       wards: {
@@ -528,7 +739,7 @@ export type Database = {
             columns: ["council_id"]
             isOneToOne: false
             referencedRelation: "v_group_stats"
-            referencedColumns: ["council_id"]
+            referencedColumns: ["id"]
           },
         ]
       }

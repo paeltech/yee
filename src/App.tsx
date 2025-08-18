@@ -3,7 +3,9 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import Councils from "./pages/Councils";
 import Wards from "./pages/Wards";
@@ -16,31 +18,90 @@ import Analytics from "./pages/Analytics";
 import Locations from "./pages/Locations";
 import Settings from "./pages/Settings";
 import Documents from "./pages/Documents";
+import Login from "./pages/Login";
+import AdminUsers from "./pages/AdminUsers";
 
 const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/councils" element={<Councils />} />
-          <Route path="/wards" element={<Wards />} />
-          <Route path="/groups" element={<Groups />} />
-          <Route path="/groups/:id" element={<GroupDetail />} />
-          <Route path="/members" element={<Members />} />
-          <Route path="/members/:id" element={<MemberDetail />} />
-          <Route path="/activities" element={<Activities />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/locations" element={<Locations />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/documents" element={<Documents />} />
-        </Routes>
-      </BrowserRouter>
-    </TooltipProvider>
+    <AuthProvider>
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/" element={
+              <ProtectedRoute>
+                <Index />
+              </ProtectedRoute>
+            } />
+            <Route path="/councils" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <Councils />
+              </ProtectedRoute>
+            } />
+            <Route path="/wards" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <Wards />
+              </ProtectedRoute>
+            } />
+            <Route path="/groups" element={
+              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                <Groups />
+              </ProtectedRoute>
+            } />
+            <Route path="/groups/:id" element={
+              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                <GroupDetail />
+              </ProtectedRoute>
+            } />
+            <Route path="/members" element={
+              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                <Members />
+              </ProtectedRoute>
+            } />
+            <Route path="/members/:id" element={
+              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                <MemberDetail />
+              </ProtectedRoute>
+            } />
+            <Route path="/activities" element={
+              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                <Activities />
+              </ProtectedRoute>
+            } />
+            <Route path="/analytics" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <Analytics />
+              </ProtectedRoute>
+            } />
+            <Route path="/locations" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <Locations />
+              </ProtectedRoute>
+            } />
+            <Route path="/settings" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <Settings />
+              </ProtectedRoute>
+            } />
+            <Route path="/documents" element={
+              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                <Documents />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/users" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <AdminUsers />
+              </ProtectedRoute>
+            } />
+            <Route path="*" element={<Navigate to="/" replace />} />
+          </Routes>
+        </BrowserRouter>
+      </TooltipProvider>
+    </AuthProvider>
   </QueryClientProvider>
 );
 

@@ -7,6 +7,7 @@ import { FileText, Download, Calendar, User, File, Trash2, Upload } from "lucide
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 import { format } from "date-fns";
 import { UploadGroupDocumentDialog } from "./UploadGroupDocumentDialog";
 
@@ -27,6 +28,7 @@ interface GroupDocument {
 
 export function GroupDocuments({ groupId, groupName }: GroupDocumentsProps) {
   const { toast } = useToast();
+  const { user, canManageGroup } = useAuth();
   const queryClient = useQueryClient();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [documentToDelete, setDocumentToDelete] = useState<GroupDocument | null>(null);
@@ -147,6 +149,9 @@ export function GroupDocuments({ groupId, groupName }: GroupDocumentsProps) {
     return "bg-gray-100 text-gray-800";
   };
 
+  // Check if user can manage this group
+  const canManage = canManageGroup(groupId);
+
   if (isLoading) {
     return (
       <Card className="border-neutral-200">
@@ -173,16 +178,18 @@ export function GroupDocuments({ groupId, groupName }: GroupDocumentsProps) {
               <span>Group Documents</span>
               <Badge variant="secondary">{documents?.length || 0}</Badge>
             </CardTitle>
-            <UploadGroupDocumentDialog 
-              groupId={groupId} 
-              groupName={groupName} 
-              trigger={
-                <Button variant="outline" size="sm">
-                  <Upload className="w-4 h-4 mr-2" />
-                  Upload Document
-                </Button>
-              } 
-            />
+            {canManage && (
+              <UploadGroupDocumentDialog 
+                groupId={groupId} 
+                groupName={groupName} 
+                trigger={
+                  <Button variant="outline" size="sm">
+                    <Upload className="w-4 h-4 mr-2" />
+                    Upload Document
+                  </Button>
+                } 
+              />
+            )}
           </div>
         </CardHeader>
         <CardContent>
@@ -234,13 +241,15 @@ export function GroupDocuments({ groupId, groupName }: GroupDocumentsProps) {
                       <Download className="w-4 h-4 mr-1" />
                       Download
                     </Button>
-                    <Button
-                      variant="destructive"
-                      size="sm"
-                      onClick={() => handleDelete(document)}
-                    >
-                      <Trash2 className="w-4 h-4" />
-                    </Button>
+                    {canManage && (
+                      <Button
+                        variant="destructive"
+                        size="sm"
+                        onClick={() => handleDelete(document)}
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </Button>
+                    )}
                   </div>
                 </div>
               ))}
@@ -249,28 +258,30 @@ export function GroupDocuments({ groupId, groupName }: GroupDocumentsProps) {
         </CardContent>
       </Card>
 
-      <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>Delete Document</DialogTitle>
-            <DialogDescription>
-              Are you sure you want to delete "{documentToDelete?.file_name}"? This action cannot be undone.
-            </DialogDescription>
-          </DialogHeader>
-          <div className="flex justify-end space-x-2">
-            <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
-              Cancel
-            </Button>
-            <Button 
-              variant="destructive" 
-              onClick={confirmDelete}
-              disabled={deleteDocument.isPending}
-            >
-              {deleteDocument.isPending ? "Deleting..." : "Delete"}
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
+      {canManage && (
+        <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+          <DialogContent>
+            <DialogHeader>
+              <DialogTitle>Delete Document</DialogTitle>
+              <DialogDescription>
+                Are you sure you want to delete "{documentToDelete?.file_name}"? This action cannot be undone.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="flex justify-end space-x-2">
+              <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
+                Cancel
+              </Button>
+              <Button 
+                variant="destructive" 
+                onClick={confirmDelete}
+                disabled={deleteDocument.isPending}
+              >
+                {deleteDocument.isPending ? "Deleting..." : "Delete"}
+              </Button>
+            </div>
+          </DialogContent>
+        </Dialog>
+      )}
     </>
   );
 }

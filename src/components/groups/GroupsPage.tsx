@@ -7,6 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Search, Users, Calendar, MapPin, Eye, Upload } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 import { GroupDialog } from "@/components/groups/GroupDialog";
 import { UploadGroupDocumentDialog } from "@/components/groups/UploadGroupDocumentDialog";
 import { Link } from "react-router-dom";
@@ -14,6 +15,7 @@ import { Link } from "react-router-dom";
 export function GroupsPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
+  const { user, canManageGroup } = useAuth();
 
   const { data: groups, isLoading, error } = useQuery({
     queryKey: ['groups'],
@@ -57,7 +59,9 @@ export function GroupsPage() {
           <h1 className="text-3xl font-bold text-neutral-900">Youth Groups</h1>
           <p className="text-neutral-600 mt-2">Manage youth groups and their activities</p>
         </div>
-        <GroupDialog mode="add" trigger={<Button className="bg-amber-500 hover:bg-amber-600 text-white">Add Group</Button>} />
+        {user?.role === 'admin' && (
+          <GroupDialog mode="add" trigger={<Button className="bg-amber-500 hover:bg-amber-600 text-white">Add Group</Button>} />
+        )}
       </div>
 
       <div className="flex items-center space-x-4">

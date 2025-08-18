@@ -1,12 +1,15 @@
 
 import { Layout } from "@/components/Layout";
 import { Dashboard } from "@/components/Dashboard";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 
 const Index = () => {
   return (
-    <Layout>
-      <Dashboard />
-    </Layout>
+    <ProtectedRoute>
+      <Layout>
+        <Dashboard />
+      </Layout>
+    </ProtectedRoute>
   );
 };
 

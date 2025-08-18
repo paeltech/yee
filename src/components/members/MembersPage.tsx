@@ -10,6 +10,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Toggle } from "@/components/ui/toggle";
 import { Search, User, Phone, Mail, Eye, LayoutGrid, LayoutList } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 import { AddMemberDialog } from "./AddMemberDialog";
 import { EditMemberDialog } from "./EditMemberDialog";
 import { DeleteMemberDialog } from "./DeleteMemberDialog";
@@ -19,6 +20,7 @@ export function MembersPage() {
   const [searchTerm, setSearchTerm] = useState("");
   const [viewMode, setViewMode] = useState<"cards" | "table">("cards");
   const { toast } = useToast();
+  const { user, canManageMember } = useAuth();
 
   const { data: members, isLoading, error } = useQuery({
     queryKey: ['members'],
@@ -78,7 +80,9 @@ export function MembersPage() {
           <h1 className="text-3xl font-bold text-neutral-900">Members</h1>
           <p className="text-neutral-600 mt-2">Manage youth group members and their information</p>
         </div>
-        <AddMemberDialog />
+        {(user?.role === 'admin' || user?.role === 'chairperson' || user?.role === 'secretary') && (
+          <AddMemberDialog />
+        )}
       </div>
 
       <div className="flex items-center justify-between">
