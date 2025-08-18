@@ -109,13 +109,7 @@ export default function Login() {
             </Button>
           </form>
           
-          <div className="mt-6 text-center text-sm text-neutral-600">
-            <p>Demo Credentials:</p>
-            <p className="font-mono text-xs mt-1">
-              Email: admin@yeeplatform.com<br />
-              Password: admin123
-            </p>
-          </div>
+        
         </CardContent>
       </Card>
     </div>
