@@ -20,6 +20,7 @@ interface AuthContextType {
   logout: () => Promise<void>;
   register: (userData: RegisterData) => Promise<{ success: boolean; error?: string }>;
   updateProfile: (data: Partial<User>) => Promise<{ success: boolean; error?: string }>;
+  resetPassword: (email: string, newPassword: string) => Promise<{ success: boolean; error?: string }>;
   isAuthenticated: boolean;
   hasRole: (role: User['role']) => boolean;
   hasAnyRole: (roles: User['role'][]) => boolean;
@@ -224,6 +225,52 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     }
   };
 
+  const resetPassword = async (email: string, newPassword: string) => {
+    try {
+      // Check if user exists
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .select('id, is_active')
+        .eq('email', email)
+        .single();
+
+      if (userError || !userData) {
+        return { success: false, error: 'User not found' };
+      }
+
+      if (!userData.is_active) {
+        return { success: false, error: 'User account is deactivated' };
+      }
+
+      // Hash the new password
+      const passwordHash = hashPassword(newPassword);
+
+      // Update password in database
+      const { error: updateError } = await supabase
+        .from('users')
+        .update({ 
+          password_hash: passwordHash,
+          updated_at: new Date().toISOString()
+        })
+        .eq('id', userData.id);
+
+      if (updateError) {
+        return { success: false, error: 'Failed to update password' };
+      }
+
+      // Invalidate all existing sessions for this user for security
+      await supabase
+        .from('user_sessions')
+        .delete()
+        .eq('user_id', userData.id);
+
+      return { success: true };
+    } catch (error) {
+      console.error('Password reset error:', error);
+      return { success: false, error: 'An unexpected error occurred' };
+    }
+  };
+
   const isAuthenticated = !!user;
 
   const hasRole = (role: User['role']) => {
@@ -254,6 +301,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     logout,
     register,
     updateProfile,
+    resetPassword,
     isAuthenticated,
     hasRole,
     hasAnyRole,
