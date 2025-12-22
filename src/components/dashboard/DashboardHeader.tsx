@@ -3,7 +3,6 @@ import { CalendarIcon, Bell } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AddMemberDialog } from "@/components/members/AddMemberDialog";
 import { YEELogo } from "@/components/YEELogo";
-import { ThemeToggle } from "@/components/ThemeToggle";
 
 export function DashboardHeader() {
   const currentDate = new Date().toLocaleDateString('en-US', {
@@ -25,9 +24,8 @@ export function DashboardHeader() {
           </div>
         </div>
       </div>
-      
+
       <div className="flex items-center space-x-3">
-        <ThemeToggle />
         <Button variant="outline" size="sm" className="border-neutral-300 text-neutral-700 hover:bg-neutral-50">
           <Bell className="w-4 h-4 mr-2" />
           Notifications
