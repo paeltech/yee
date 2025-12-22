@@ -20,6 +20,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
+import { RefreshCw } from "lucide-react";
+import { generateUniqueGroupId } from "@/lib/groupId";
 
 export function GroupDialog({
   mode,
@@ -33,6 +35,7 @@ export function GroupDialog({
   trigger: React.ReactNode;
 }) {
   const [open, setOpen] = useState(false);
+  const [generatingId, setGeneratingId] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -49,6 +52,24 @@ export function GroupDialog({
     primary_contact_email: "",
   });
 
+  // Generate unique group ID when dialog opens in add mode
+  const generateGroupNumber = async () => {
+    setGeneratingId(true);
+    try {
+      const uniqueId = await generateUniqueGroupId(supabase, initialData?.id);
+      setFormData(prev => ({ ...prev, group_number: uniqueId }));
+    } catch (error) {
+      console.error('Error generating group ID:', error);
+      toast({
+        title: "Error",
+        description: "Failed to generate group ID. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setGeneratingId(false);
+    }
+  };
+
   useEffect(() => {
     if (mode === "edit" && initialData) {
       setFormData({
@@ -64,7 +85,7 @@ export function GroupDialog({
         primary_contact_email: initialData.primary_contact_email || "",
       });
     } else if (mode === "add") {
-      setFormData({
+      const resetData = {
         name: "",
         group_number: "",
         ward_id: "",
@@ -75,9 +96,17 @@ export function GroupDialog({
         primary_contact_name: "",
         primary_contact_phone: "",
         primary_contact_email: "",
-      });
+      };
+      setFormData(resetData);
     }
-  }, [mode, initialData, open]);
+  }, [mode, initialData]);
+
+  // Generate ID when dialog opens in add mode
+  useEffect(() => {
+    if (open && mode === "add" && !formData.group_number) {
+      generateGroupNumber();
+    }
+  }, [open, mode]);
 
   const { data: wards } = useQuery({
     queryKey: ["wards-for-groups"],
@@ -187,12 +216,38 @@ export function GroupDialog({
             </div>
             <div className="space-y-2">
               <Label htmlFor="group_number">Group Number</Label>
-              <Input
-                id="group_number"
-                value={formData.group_number}
-                onChange={(e) => setFormData({ ...formData, group_number: e.target.value })}
-                placeholder="Enter group number"
-              />
+              {mode === "add" ? (
+                <div className="flex gap-2">
+                  <Input
+                    id="group_number"
+                    value={formData.group_number}
+                    readOnly
+                    className="bg-neutral-50 font-mono font-semibold text-center"
+                    placeholder={generatingId ? "Generating..." : "Auto-generated"}
+                  />
+                  <Button
+                    type="button"
+                    variant="outline"
+                    size="icon"
+                    onClick={generateGroupNumber}
+                    disabled={generatingId}
+                    title="Generate new ID"
+                  >
+                    <RefreshCw className={`w-4 h-4 ${generatingId ? 'animate-spin' : ''}`} />
+                  </Button>
+                </div>
+              ) : (
+                <Input
+                  id="group_number"
+                  value={formData.group_number}
+                  readOnly
+                  className="bg-neutral-50 font-mono font-semibold"
+                  placeholder="Group number"
+                />
+              )}
+              <p className="text-xs text-neutral-500">
+                {mode === "add" ? "Unique 6-character ID (auto-generated)" : "Group ID (cannot be changed)"}
+              </p>
             </div>
           </div>
           <div className="space-y-2">

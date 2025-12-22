@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { ThemeProvider } from "next-themes";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
@@ -20,23 +21,29 @@ import Settings from "./pages/Settings";
 import Documents from "./pages/Documents";
 import Login from "./pages/Login";
 import AdminUsers from "./pages/AdminUsers";
+import AdminFeedback from "./pages/AdminFeedback";
+import Landing from "./pages/Landing";
+import PublicGroups from "./pages/PublicGroups";
 
 const queryClient = new QueryClient();
 
 const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
+  <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <QueryClientProvider client={queryClient}>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
           <Routes>
+            <Route path="/landing" element={<Landing />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/" element={
+            <Route path="/dashboard" element={
               <ProtectedRoute>
                 <Index />
               </ProtectedRoute>
             } />
+            <Route path="/" element={<Landing />} />
             <Route path="/councils" element={
               <ProtectedRoute requiredRoles={['admin']}>
                 <Councils />
@@ -47,6 +54,7 @@ const App = () => (
                 <Wards />
               </ProtectedRoute>
             } />
+            <Route path="/groups/public" element={<PublicGroups />} />
             <Route path="/groups" element={
               <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
                 <Groups />
@@ -97,12 +105,18 @@ const App = () => (
                 <AdminUsers />
               </ProtectedRoute>
             } />
-            <Route path="*" element={<Navigate to="/" replace />} />
+            <Route path="/admin/feedback" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <AdminFeedback />
+              </ProtectedRoute>
+            } />
+            <Route path="*" element={<Navigate to="/landing" replace />} />
           </Routes>
         </BrowserRouter>
       </TooltipProvider>
     </AuthProvider>
   </QueryClientProvider>
+  </ThemeProvider>
 );
 
 export default App;

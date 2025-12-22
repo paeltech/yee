@@ -83,18 +83,23 @@ export function DashboardStats() {
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-      {stats.map((stat) => (
-        <Card key={stat.title} className="border-neutral-200 hover:shadow-lg transition-shadow">
+      {stats.map((stat, index) => (
+        <Card 
+          key={stat.title} 
+          className="border-neutral-200 hover:shadow-xl hover:border-amber-300 transition-all duration-300 hover:-translate-y-1 group cursor-pointer bg-gradient-to-br from-white to-amber-50/30"
+        >
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-neutral-600">
+            <CardTitle className="text-sm font-medium text-neutral-600 group-hover:text-neutral-900 transition-colors">
               {stat.title}
             </CardTitle>
-            <stat.icon className="h-4 w-4 text-amber-500" />
+            <div className="p-2 rounded-lg bg-amber-100 group-hover:bg-amber-200 transition-colors">
+              <stat.icon className="h-5 w-5 text-amber-600 group-hover:text-amber-700 transition-colors" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold text-neutral-900">{stat.value}</div>
+            <div className="text-3xl font-bold text-neutral-900 mb-2">{stat.value}</div>
             <div className="flex items-center space-x-1 mt-1">
-              <span className={`text-sm font-medium ${
+              <span className={`text-sm font-semibold ${
                 stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
               }`}>
                 {stat.change}

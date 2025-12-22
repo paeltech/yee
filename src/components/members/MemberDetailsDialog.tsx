@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button";
 import { User, Phone, Mail, MapPin, Calendar, Briefcase, Edit, Trash2 } from "lucide-react";
 import { EditMemberDialog } from "./EditMemberDialog";
 import { DeleteMemberDialog } from "./DeleteMemberDialog";
+import { UploadMemberPhotoDialog } from "./UploadMemberPhotoDialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 interface MemberDetailsDialogProps {
   member: any;
@@ -38,6 +40,30 @@ export function MemberDetailsDialog({ member, trigger }: MemberDetailsDialogProp
         </DialogHeader>
         
         <div className="space-y-6">
+          {/* Photo Section */}
+          <div className="flex items-center justify-center">
+            <div className="relative">
+              <Avatar className="w-32 h-32">
+                <AvatarImage src={member.photo_url || undefined} alt={`${member.first_name} ${member.last_name}`} />
+                <AvatarFallback className="text-3xl">
+                  {member.first_name[0]}{member.last_name[0]}
+                </AvatarFallback>
+              </Avatar>
+              <div className="absolute bottom-0 right-0">
+                <UploadMemberPhotoDialog
+                  memberId={member.id}
+                  memberName={`${member.first_name} ${member.last_name}`}
+                  currentPhotoUrl={member.photo_url}
+                  trigger={
+                    <Button size="sm" variant="secondary" className="rounded-full">
+                      <Edit className="w-3 h-3" />
+                    </Button>
+                  }
+                />
+              </div>
+            </div>
+          </div>
+
           {/* Basic Information */}
           <Card>
             <CardHeader>

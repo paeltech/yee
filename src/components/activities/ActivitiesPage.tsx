@@ -4,9 +4,11 @@ import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Search, Calendar, MapPin, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Search, Calendar, MapPin, Users, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { AddActivityDialog } from "./AddActivityDialog";
+import { ActivityDetailDialog } from "./ActivityDetailDialog";
 
 export function ActivitiesPage() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -156,6 +158,18 @@ export function ActivitiesPage() {
                       {activity.description}
                     </p>
                   )}
+
+                  <div className="pt-2 border-t">
+                    <ActivityDetailDialog
+                      activity={activity}
+                      trigger={
+                        <Button variant="outline" size="sm" className="w-full">
+                          <Eye className="w-4 h-4 mr-2" />
+                          View Details
+                        </Button>
+                      }
+                    />
+                  </div>
                 </div>
               </CardContent>
             </Card>

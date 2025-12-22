@@ -10,6 +10,8 @@ import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { GroupDialog } from "@/components/groups/GroupDialog";
 import { UploadGroupDocumentDialog } from "@/components/groups/UploadGroupDocumentDialog";
+import { UploadGroupPhotoDialog } from "@/components/groups/UploadGroupPhotoDialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
 
 export function GroupsPage() {
@@ -94,8 +96,27 @@ export function GroupsPage() {
             <Card key={group.id} className="hover:shadow-lg transition-shadow border-neutral-200">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center">
-                    <Users className="w-6 h-6 text-amber-600" />
+                  <div className="relative">
+                    <Avatar className="w-12 h-12">
+                      <AvatarImage src={group.photo_url || undefined} alt={group.name} />
+                      <AvatarFallback className="bg-amber-100 text-amber-600">
+                        <Users className="w-6 h-6" />
+                      </AvatarFallback>
+                    </Avatar>
+                    {(user?.role === 'admin' || canManageGroup?.(group.id)) && (
+                      <div className="absolute -bottom-1 -right-1">
+                        <UploadGroupPhotoDialog
+                          groupId={group.id}
+                          groupName={group.name}
+                          currentPhotoUrl={group.photo_url}
+                          trigger={
+                            <Button size="sm" variant="secondary" className="h-6 w-6 rounded-full p-0">
+                              <Upload className="w-3 h-3" />
+                            </Button>
+                          }
+                        />
+                      </div>
+                    )}
                   </div>
                   <div className="flex-1">
                     <CardTitle className="text-lg text-neutral-900">{group.name}</CardTitle>

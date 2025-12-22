@@ -1,17 +1,20 @@
+import { useState } from "react";
 import { useQuery, useMutation } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Download, Trash2, Calendar, File, Loader2 } from "lucide-react";
+import { FileText, Download, Trash2, Calendar, File, Loader2, Eye } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { format } from "date-fns";
+import { DocumentViewer } from "@/components/DocumentViewer";
 import type { Database } from "@/integrations/supabase/types";
 
 type DocumentRow = Database["public"]["Tables"]["documents"]["Row"];
 
 export function DocumentList() {
   const { toast } = useToast();
+  const [viewingDocument, setViewingDocument] = useState<DocumentRow | null>(null);
 
   const { data: documents, isLoading, refetch } = useQuery<DocumentRow[]>({
     queryKey: ["documents"],
@@ -137,10 +140,13 @@ export function DocumentList() {
                   </div>
                 </div>
                 <div className="flex items-center space-x-2 ml-4">
-                  <Button size="icon" variant="ghost" onClick={() => handleDownload(doc)}>
+                  <Button size="icon" variant="ghost" onClick={() => setViewingDocument(doc)} title="View">
+                    <Eye className="w-4 h-4" />
+                  </Button>
+                  <Button size="icon" variant="ghost" onClick={() => handleDownload(doc)} title="Download">
                     <Download className="w-4 h-4" />
                   </Button>
-                  <Button size="icon" variant="destructive" onClick={() => deleteMutation.mutate(doc)} disabled={deleteMutation.isPending}>
+                  <Button size="icon" variant="destructive" onClick={() => deleteMutation.mutate(doc)} disabled={deleteMutation.isPending} title="Delete">
                     {deleteMutation.isPending ? <Loader2 className="w-4 h-4 animate-spin" /> : <Trash2 className="w-4 h-4" />}
                   </Button>
                 </div>
@@ -149,6 +155,17 @@ export function DocumentList() {
           </div>
         )}
       </CardContent>
+
+      {viewingDocument && (
+        <DocumentViewer
+          document={{
+            ...viewingDocument,
+            bucket: 'documents'
+          }}
+          open={!!viewingDocument}
+          onOpenChange={(open) => !open && setViewingDocument(null)}
+        />
+      )}
     </Card>
   );
 } 

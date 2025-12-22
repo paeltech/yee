@@ -32,11 +32,11 @@ export function ProtectedRoute({
   }
 
   if (requiredRoles && !hasAnyRole(requiredRoles)) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   if (requireGroupAccess && !user?.group_id) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/dashboard" replace />;
   }
 
   return <>{children}</>;

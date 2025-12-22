@@ -1,5 +1,5 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import {
@@ -21,10 +21,13 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Plus } from "lucide-react";
+import { Plus, RefreshCw } from "lucide-react";
+import { generateUniqueGroupId } from "@/lib/groupId";
+import { supabase } from "@/integrations/supabase/client";
 
 export function AddGroupDialog() {
   const [open, setOpen] = useState(false);
+  const [generatingId, setGeneratingId] = useState(false);
   const { toast } = useToast();
   const queryClient = useQueryClient();
 
@@ -40,6 +43,31 @@ export function AddGroupDialog() {
     primary_contact_phone: "",
     primary_contact_email: "",
   });
+
+  // Generate unique group ID when dialog opens
+  const generateGroupNumber = async () => {
+    setGeneratingId(true);
+    try {
+      const uniqueId = await generateUniqueGroupId(supabase);
+      setFormData(prev => ({ ...prev, group_number: uniqueId }));
+    } catch (error) {
+      console.error('Error generating group ID:', error);
+      toast({
+        title: "Error",
+        description: "Failed to generate group ID. Please try again.",
+        variant: "destructive",
+      });
+    } finally {
+      setGeneratingId(false);
+    }
+  };
+
+  // Generate ID when dialog opens
+  useEffect(() => {
+    if (open && !formData.group_number) {
+      generateGroupNumber();
+    }
+  }, [open]);
 
   const { data: wards } = useQuery({
     queryKey: ['wards-for-groups'],
@@ -79,7 +107,8 @@ export function AddGroupDialog() {
         description: "Group added successfully",
       });
       setOpen(false);
-      setFormData({
+      // Reset form but don't clear group_number yet - will be regenerated on next open
+      const resetData = {
         name: "",
         group_number: "",
         ward_id: "",
@@ -90,7 +119,8 @@ export function AddGroupDialog() {
         primary_contact_name: "",
         primary_contact_phone: "",
         primary_contact_email: "",
-      });
+      };
+      setFormData(resetData);
     },
     onError: (error) => {
       toast({
@@ -145,12 +175,26 @@ export function AddGroupDialog() {
             </div>
             <div className="space-y-2">
               <Label htmlFor="group_number">Group Number</Label>
-              <Input
-                id="group_number"
-                value={formData.group_number}
-                onChange={(e) => setFormData({ ...formData, group_number: e.target.value })}
-                placeholder="Enter group number"
-              />
+              <div className="flex gap-2">
+                <Input
+                  id="group_number"
+                  value={formData.group_number}
+                  readOnly
+                  className="bg-neutral-50 font-mono font-semibold text-center"
+                  placeholder={generatingId ? "Generating..." : "Auto-generated"}
+                />
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="icon"
+                  onClick={generateGroupNumber}
+                  disabled={generatingId}
+                  title="Generate new ID"
+                >
+                  <RefreshCw className={`w-4 h-4 ${generatingId ? 'animate-spin' : ''}`} />
+                </Button>
+              </div>
+              <p className="text-xs text-neutral-500">Unique 6-character ID (auto-generated)</p>
             </div>
           </div>
           

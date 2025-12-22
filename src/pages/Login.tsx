@@ -39,7 +39,7 @@ export default function Login() {
     const result = await login(email, password);
     
     if (result.success) {
-      navigate('/');
+      navigate('/dashboard');
     } else {
       setError(result.error || 'Login failed');
     }
@@ -120,6 +120,15 @@ export default function Login() {
           <CardDescription className="text-neutral-600">
             Sign in to your Yee Portal account
           </CardDescription>
+          <div className="mt-4">
+            <Button
+              variant="link"
+              onClick={() => navigate('/landing')}
+              className="text-sm text-amber-600 hover:text-amber-700"
+            >
+              Learn more about YEE Program
+            </Button>
+          </div>
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">

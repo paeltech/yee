@@ -3,13 +3,14 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { FileText, Download, Calendar, User, File, Trash2, Upload } from "lucide-react";
+import { FileText, Download, Calendar, User, File, Trash2, Upload, Eye } from "lucide-react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
 import { useAuth } from "@/contexts/AuthContext";
 import { format } from "date-fns";
 import { UploadGroupDocumentDialog } from "./UploadGroupDocumentDialog";
+import { DocumentViewer } from "@/components/DocumentViewer";
 
 interface GroupDocumentsProps {
   groupId: number;
@@ -32,6 +33,7 @@ export function GroupDocuments({ groupId, groupName }: GroupDocumentsProps) {
   const queryClient = useQueryClient();
   const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
   const [documentToDelete, setDocumentToDelete] = useState<GroupDocument | null>(null);
+  const [viewingDocument, setViewingDocument] = useState<GroupDocument | null>(null);
 
   const { data: documents, isLoading, refetch } = useQuery({
     queryKey: ["group-documents", groupId],
@@ -236,7 +238,17 @@ export function GroupDocuments({ groupId, groupName }: GroupDocumentsProps) {
                     <Button
                       variant="outline"
                       size="sm"
+                      onClick={() => setViewingDocument(document)}
+                      title="View"
+                    >
+                      <Eye className="w-4 h-4 mr-1" />
+                      View
+                    </Button>
+                    <Button
+                      variant="outline"
+                      size="sm"
                       onClick={() => handleDownload(document)}
+                      title="Download"
                     >
                       <Download className="w-4 h-4 mr-1" />
                       Download
@@ -246,6 +258,7 @@ export function GroupDocuments({ groupId, groupName }: GroupDocumentsProps) {
                         variant="destructive"
                         size="sm"
                         onClick={() => handleDelete(document)}
+                        title="Delete"
                       >
                         <Trash2 className="w-4 h-4" />
                       </Button>
@@ -281,6 +294,17 @@ export function GroupDocuments({ groupId, groupName }: GroupDocumentsProps) {
             </div>
           </DialogContent>
         </Dialog>
+      )}
+
+      {viewingDocument && (
+        <DocumentViewer
+          document={{
+            ...viewingDocument,
+            bucket: 'group-documents'
+          }}
+          open={!!viewingDocument}
+          onOpenChange={(open) => !open && setViewingDocument(null)}
+        />
       )}
     </>
   );

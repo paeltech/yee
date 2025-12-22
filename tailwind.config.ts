@@ -61,6 +61,13 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// YEE Brand Colors
+				yee: {
+					gold: '#F59E0B', // amber-500
+					'gold-light': '#FCD34D', // amber-300
+					'gold-dark': '#D97706', // amber-600
+					'gold-hover': '#FBBF24', // amber-400
 				}
 			},
 			borderRadius: {
