@@ -1,4 +1,3 @@
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Lightbulb, Users, Target, Award, Handshake, TrendingUp } from "lucide-react";
 
 export function ProjectDetails() {
@@ -6,92 +5,57 @@ export function ProjectDetails() {
     {
       icon: Lightbulb,
       title: "Program Overview",
-      description: "The Youth Economic Empowerment (YEE) Program is a comprehensive initiative designed to empower young people through economic opportunities, skills development, and community engagement."
+      description: "Comprehensive initiative designed to empower young people through economic opportunities, skills development, and community engagement."
     },
     {
       icon: Target,
       title: "Objectives",
-      description: "Our primary objectives include creating sustainable economic opportunities, building entrepreneurial skills, fostering community leadership, and promoting financial independence among youth."
+      description: "Creating sustainable economic opportunities, building entrepreneurial skills, and promoting financial independence among youth."
     },
     {
       icon: Users,
       title: "Implementation",
-      description: "Implemented under Mulika Tanzania, the program operates through youth groups, providing training, resources, and support to help young people achieve their economic goals."
+      description: "Implemented under Mulika Tanzania, providing training, resources, and support to help young people achieve their economic goals."
     },
     {
       icon: Award,
       title: "Key Benefits",
-      description: "Participants gain access to training programs, mentorship opportunities, networking events, financial resources, and ongoing support to build successful enterprises."
+      description: "Access to training programs, mentorship opportunities, networking events, and financial resources."
     },
     {
       icon: Handshake,
       title: "Community Impact",
-      description: "The program strengthens local communities by creating jobs, supporting local businesses, and developing a new generation of economically empowered leaders."
+      description: "Strengthening local communities by creating jobs, supporting local businesses, and developing economically empowered leaders."
     },
     {
       icon: TrendingUp,
       title: "Success Metrics",
-      description: "We track success through member engagement, business growth, employment rates, and community development indicators to ensure continuous improvement."
+      description: "Tracking member engagement, business growth, employment rates, and community development indicators."
     }
   ];
 
   return (
-    <section id="project-details" className="py-20 px-4 bg-white">
+    <section id="project-details" className="py-24 px-4 bg-neutral-50">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-neutral-900 mb-4">
-            About the YEE Program
+        <div className="text-center mb-16">
+          <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
+            About the Program
           </h2>
           <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-            Empowering Tanzania's youth through economic opportunities and community engagement
+            Empowering Tanzania's youth through economic opportunities
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {features.map((feature, index) => (
-            <Card 
-              key={index}
-              className="border-neutral-200 hover:shadow-lg hover:border-amber-300 transition-all duration-300 hover:-translate-y-1"
-            >
-              <CardHeader>
-                <div className="w-12 h-12 bg-amber-100 rounded-lg flex items-center justify-center mb-4">
-                  <feature.icon className="h-6 w-6 text-amber-600" />
-                </div>
-                <CardTitle className="text-xl text-neutral-900">{feature.title}</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <CardDescription className="text-neutral-600 leading-relaxed">
-                  {feature.description}
-                </CardDescription>
-              </CardContent>
-            </Card>
+            <div key={index} className="space-y-3">
+              <feature.icon className="h-8 w-8 text-amber-600" />
+              <h3 className="text-xl font-semibold text-neutral-900">{feature.title}</h3>
+              <p className="text-neutral-600 leading-relaxed">
+                {feature.description}
+              </p>
+            </div>
           ))}
-        </div>
-
-        <div className="mt-12 p-8 bg-gradient-to-r from-amber-50 to-amber-100 rounded-lg border border-amber-200">
-          <h3 className="text-2xl font-bold text-neutral-900 mb-4">Program Goals</h3>
-          <ul className="space-y-3 text-neutral-700">
-            <li className="flex items-start gap-3">
-              <span className="text-amber-600 font-bold">•</span>
-              <span>Increase youth participation in economic activities by 40%</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-amber-600 font-bold">•</span>
-              <span>Create sustainable income-generating opportunities for 1000+ youth</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-amber-600 font-bold">•</span>
-              <span>Develop entrepreneurial skills through comprehensive training programs</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-amber-600 font-bold">•</span>
-              <span>Foster community leadership and social responsibility</span>
-            </li>
-            <li className="flex items-start gap-3">
-              <span className="text-amber-600 font-bold">•</span>
-              <span>Build strong networks and partnerships for long-term success</span>
-            </li>
-          </ul>
         </div>
       </div>
     </section>
