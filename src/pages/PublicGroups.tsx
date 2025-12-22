@@ -10,6 +10,7 @@ import { Search, Users, MapPin, Calendar, Award, MessageCircle, FileText } from 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
 import { DocumentViewer } from "@/components/DocumentViewer";
+import { motion } from "framer-motion";
 
 export default function PublicGroups() {
   const [searchTerm, setSearchTerm] = useState("");
@@ -41,7 +42,7 @@ export default function PublicGroups() {
         `)
         .eq('status', 'active')
         .order('name');
-      
+
       if (error) {
         console.error('Error fetching groups:', error);
         throw error;
@@ -55,16 +56,16 @@ export default function PublicGroups() {
     queryKey: ['public-group-documents'],
     queryFn: async () => {
       if (!groups) return {};
-      
+
       const groupIds = groups.map(g => g.id);
       const { data, error } = await supabase
         .from('group_documents')
         .select('group_id, file_name, file_path, file_type')
         .in('group_id', groupIds)
         .or('file_name.ilike.%certificate%,file_name.ilike.%cert%,file_name.ilike.%registration%');
-      
+
       if (error) throw error;
-      
+
       // Group by group_id
       const docsByGroup: Record<number, any[]> = {};
       data?.forEach(doc => {
@@ -73,7 +74,7 @@ export default function PublicGroups() {
         }
         docsByGroup[doc.group_id].push(doc);
       });
-      
+
       return docsByGroup;
     },
     enabled: !!groups,
@@ -83,16 +84,16 @@ export default function PublicGroups() {
     queryKey: ['public-group-stats'],
     queryFn: async () => {
       if (!groups) return {};
-      
+
       const groupIds = groups.map(g => g.id);
       const { data, error } = await supabase
         .from('members')
         .select('group_id, gender')
         .in('group_id', groupIds)
         .eq('membership_status', 'active');
-      
+
       if (error) throw error;
-      
+
       // Calculate stats per group
       const stats: Record<number, { total: number; male: number; female: number }> = {};
       data?.forEach(member => {
@@ -104,7 +105,7 @@ export default function PublicGroups() {
         if (member.gender === 'Male') stats[member.group_id].male++;
         if (member.gender === 'Female') stats[member.group_id].female++;
       });
-      
+
       return stats;
     },
     enabled: !!groups,
@@ -124,7 +125,7 @@ export default function PublicGroups() {
           )
         `)
         .order('name');
-      
+
       if (error) {
         console.error('Error fetching wards:', error);
         throw error;
@@ -194,10 +195,10 @@ export default function PublicGroups() {
     if (genderFilter && genderFilter !== 'all') {
       const stats = groupStats?.[group.id];
       if (!stats) return false;
-      
+
       const malePercentage = stats.total > 0 ? (stats.male / stats.total) * 100 : 0;
       const femalePercentage = stats.total > 0 ? (stats.female / stats.total) * 100 : 0;
-      
+
       switch (genderFilter) {
         case 'male-majority':
           if (malePercentage <= 50) return false;
@@ -217,19 +218,21 @@ export default function PublicGroups() {
   return (
     <div className="min-h-screen bg-white">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+      <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
+
           <div className="flex items-center space-x-2">
-            <span className="text-xl font-bold text-neutral-900">YEE Portal</span>
+            <img src="/mulika-logo.png" className="w-32" alt="" />
+            <span className="text-lg font-bold text-neutral-900">YEE Portal</span>
           </div>
           <div className="flex gap-2">
-            <Button 
+            <Button
               variant="outline"
               onClick={() => window.location.href = '/'}
             >
               Home
             </Button>
-            <Button 
+            <Button
               onClick={() => window.location.href = '/login'}
               className="bg-amber-500 hover:bg-amber-600"
             >
@@ -242,12 +245,17 @@ export default function PublicGroups() {
       {/* Main Content */}
       <main className="py-12 px-4">
         <div className="container mx-auto max-w-7xl">
-          <div className="mb-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-8"
+          >
             <h1 className="text-4xl font-bold text-neutral-900 mb-4">Youth Groups</h1>
             <p className="text-lg text-neutral-600">
               Explore active youth groups in the YEE Program
             </p>
-          </div>
+          </motion.div>
 
           {/* Show error message if query fails */}
           {(groupsError || wardsError) && (
@@ -395,94 +403,102 @@ export default function PublicGroups() {
                     const stats = groupStats?.[group.id];
                     const certificates = groupDocuments?.[group.id] || [];
                     const hasCertificate = certificates.length > 0 || group.registration_number;
-                    
+
                     return (
-                      <Card key={group.id} className="border-neutral-200 hover:shadow-lg transition-shadow">
-                        <CardHeader>
-                          <div className="flex items-start gap-3">
-                            <Avatar className="w-12 h-12">
-                              <AvatarImage src={group.photo_url || undefined} alt={group.name} />
-                              <AvatarFallback className="bg-amber-100 text-amber-600">
-                                <Users className="w-6 h-6" />
-                              </AvatarFallback>
-                            </Avatar>
-                            <div className="flex-1">
-                              <CardTitle className="text-lg mb-1">{group.name}</CardTitle>
-                              {group.group_number && (
-                                <p className="text-sm text-neutral-600">{group.group_number}</p>
-                              )}
-                            </div>
-                          </div>
-                        </CardHeader>
-                        <CardContent>
-                          <div className="space-y-3">
-                            <div className="flex items-center text-sm text-neutral-600">
-                              <MapPin className="w-4 h-4 mr-2" />
-                              <span>{group.wards?.name}, {group.wards?.councils?.name}</span>
-                            </div>
-
-                            {stats && (
-                              <div className="space-y-2">
-                                <div className="flex items-center text-sm">
-                                  <Users className="w-4 h-4 mr-2 text-neutral-400" />
-                                  <span className="font-medium text-neutral-900">{stats.total} members</span>
-                                </div>
-                                {stats.total > 0 && (
-                                  <div className="flex items-center gap-4 text-xs text-neutral-600">
-                                    <span>👥 Male: {stats.male}</span>
-                                    <span>👩 Female: {stats.female}</span>
-                                  </div>
+                      <motion.div
+                        key={group.id}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-50px" }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        <Card className="border-neutral-200 hover:shadow-lg transition-shadow">
+                          <CardHeader>
+                            <div className="flex items-start gap-3">
+                              <Avatar className="w-12 h-12">
+                                <AvatarImage src={group.photo_url || undefined} alt={group.name} />
+                                <AvatarFallback className="bg-amber-100 text-amber-600">
+                                  <Users className="w-6 h-6" />
+                                </AvatarFallback>
+                              </Avatar>
+                              <div className="flex-1">
+                                <CardTitle className="text-lg mb-1">{group.name}</CardTitle>
+                                {group.group_number && (
+                                  <p className="text-sm text-neutral-600">{group.group_number}</p>
                                 )}
                               </div>
-                            )}
-
-                            {group.registration_date && (
+                            </div>
+                          </CardHeader>
+                          <CardContent>
+                            <div className="space-y-3">
                               <div className="flex items-center text-sm text-neutral-600">
-                                <Calendar className="w-4 h-4 mr-2" />
-                                <span>Registered {new Date(group.registration_date).toLocaleDateString()}</span>
+                                <MapPin className="w-4 h-4 mr-2" />
+                                <span>{group.wards?.name}, {group.wards?.councils?.name}</span>
                               </div>
-                            )}
 
-                            {hasCertificate && (
-                              <div className="space-y-2 pt-2 border-t">
-                                {group.registration_number && (
-                                  <div className="flex items-center text-sm text-neutral-600">
-                                    <Award className="w-4 h-4 mr-2" />
-                                    <span className="font-medium">Registration: {group.registration_number}</span>
+                              {stats && (
+                                <div className="space-y-2">
+                                  <div className="flex items-center text-sm">
+                                    <Users className="w-4 h-4 mr-2 text-neutral-400" />
+                                    <span className="font-medium text-neutral-900">{stats.total} members</span>
                                   </div>
-                                )}
-                                {certificates.length > 0 && (
-                                  <div className="space-y-1">
-                                    {certificates.map((cert: any) => (
-                                      <Button
-                                        key={cert.file_path}
-                                        variant="outline"
-                                        size="sm"
-                                        className="w-full justify-start"
-                                        onClick={() => setViewingCertificate({
-                                          ...cert,
-                                          bucket: 'group-documents'
-                                        })}
-                                      >
-                                        <FileText className="w-4 h-4 mr-2" />
-                                        View Certificate: {cert.file_name}
-                                      </Button>
-                                    ))}
-                                  </div>
-                                )}
-                              </div>
-                            )}
+                                  {stats.total > 0 && (
+                                    <div className="flex items-center gap-4 text-xs text-neutral-600">
+                                      <span>👥 Male: {stats.male}</span>
+                                      <span>👩 Female: {stats.female}</span>
+                                    </div>
+                                  )}
+                                </div>
+                              )}
 
-                            <Button
-                              className="w-full bg-amber-500 hover:bg-amber-600 mt-4"
-                              onClick={() => handleWhatsAppRequest(group)}
-                            >
-                              <MessageCircle className="w-4 h-4 mr-2" />
-                              Request More Information
-                            </Button>
-                          </div>
-                        </CardContent>
-                      </Card>
+                              {group.registration_date && (
+                                <div className="flex items-center text-sm text-neutral-600">
+                                  <Calendar className="w-4 h-4 mr-2" />
+                                  <span>Registered {new Date(group.registration_date).toLocaleDateString()}</span>
+                                </div>
+                              )}
+
+                              {hasCertificate && (
+                                <div className="space-y-2 pt-2 border-t">
+                                  {group.registration_number && (
+                                    <div className="flex items-center text-sm text-neutral-600">
+                                      <Award className="w-4 h-4 mr-2" />
+                                      <span className="font-medium">Registration: {group.registration_number}</span>
+                                    </div>
+                                  )}
+                                  {certificates.length > 0 && (
+                                    <div className="space-y-1">
+                                      {certificates.map((cert: any) => (
+                                        <Button
+                                          key={cert.file_path}
+                                          variant="outline"
+                                          size="sm"
+                                          className="w-full justify-start"
+                                          onClick={() => setViewingCertificate({
+                                            ...cert,
+                                            bucket: 'group-documents'
+                                          })}
+                                        >
+                                          <FileText className="w-4 h-4 mr-2" />
+                                          View Certificate: {cert.file_name}
+                                        </Button>
+                                      ))}
+                                    </div>
+                                  )}
+                                </div>
+                              )}
+
+                              <Button
+                                className="w-full bg-amber-500 hover:bg-amber-600 mt-4"
+                                onClick={() => handleWhatsAppRequest(group)}
+                              >
+                                <MessageCircle className="w-4 h-4 mr-2" />
+                                Request More Information
+                              </Button>
+                            </div>
+                          </CardContent>
+                        </Card>
+                      </motion.div>
                     );
                   })}
                 </div>

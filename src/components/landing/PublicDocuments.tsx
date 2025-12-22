@@ -5,6 +5,7 @@ import { FileText, Download, Calendar } from "lucide-react";
 import { format } from "date-fns";
 import { DocumentViewer } from "@/components/DocumentViewer";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export function PublicDocuments() {
   const [viewingDocument, setViewingDocument] = useState<any | null>(null);
@@ -64,18 +65,31 @@ export function PublicDocuments() {
   return (
     <section className="py-24 px-4 bg-white">
       <div className="container mx-auto max-w-6xl">
-        <div className="text-center mb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
           <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
             Resources
           </h2>
           <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
             Access important documents and information about the YEE Program
           </p>
-        </div>
+        </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {documents.map((doc) => (
-            <div key={doc.id} className="border border-neutral-200 rounded-lg p-6 hover:border-amber-300 transition-colors">
+          {documents.map((doc, idx) => (
+            <motion.div
+              key={doc.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: idx * 0.1 }}
+              className="border border-neutral-200 rounded-lg p-6 hover:border-amber-300 transition-colors"
+            >
               <div className="flex items-start gap-3 mb-4">
                 <FileText className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
                 <h3 className="text-lg font-semibold text-neutral-900 line-clamp-2">{doc.file_name}</h3>
@@ -107,7 +121,7 @@ export function PublicDocuments() {
                   <Download className="w-4 h-4" />
                 </Button>
               </div>
-            </div>
+            </motion.div>
           ))}
         </div>
 

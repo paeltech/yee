@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Dialog,
   DialogContent,
@@ -22,7 +22,7 @@ interface DocumentViewerProps {
 }
 
 export function DocumentViewer({ document, open, onOpenChange }: DocumentViewerProps) {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [viewUrl, setViewUrl] = useState<string | null>(null);
   const bucket = document.bucket || 'documents';
@@ -56,32 +56,28 @@ export function DocumentViewer({ document, open, onOpenChange }: DocumentViewerP
       const { data, error } = await supabase.storage
         .from(bucket)
         .download(document.file_path);
-      
+
       if (error) throw error;
-      
+
       const url = URL.createObjectURL(data);
-      const a = document.createElement('a');
+      const a = window.document.createElement('a');
       a.href = url;
       a.download = document.file_name;
-      document.body.appendChild(a);
+      window.document.body.appendChild(a);
       a.click();
-      document.body.removeChild(a);
+      window.document.body.removeChild(a);
       URL.revokeObjectURL(url);
     } catch (err) {
       console.error('Download error:', err);
     }
   };
 
-  const handleOpen = () => {
+  // Load document when dialog opens
+  useEffect(() => {
     if (open && !viewUrl) {
       loadDocument();
     }
-  };
-
-  // Load document when dialog opens
-  if (open && !viewUrl && !loading && !error) {
-    loadDocument();
-  }
+  }, [open]);
 
   // Cleanup URL when dialog closes
   const handleClose = () => {

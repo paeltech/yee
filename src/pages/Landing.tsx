@@ -14,14 +14,17 @@ export default function Landing() {
     <div className="min-h-screen bg-white">
       <LandingRedirect />
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b border-neutral-200 bg-white/95 backdrop-blur">
+      <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur">
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
           <div className="flex items-center">
-            <span className="text-xl font-bold text-neutral-900">YEE Portal</span>
+            <img src="mulika-logo.png" className="w-32" alt="" />
+            <span className="text-lg font-bold text-neutral-900">YEE Portal</span>
           </div>
           <div className="flex gap-2">
             <Button
-              variant="ghost"
+              size="lg"
+              variant="outline"
+              className="border-neutral-300 hover:bg-neutral-50 px-8"
               onClick={() => navigate('/groups/public')}
             >
               View Groups
