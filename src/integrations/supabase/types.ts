@@ -373,6 +373,7 @@ export type Database = {
           meeting_location: string | null
           meeting_time: string | null
           name: string
+          photo_url: string | null
           primary_contact_email: string | null
           primary_contact_name: string | null
           primary_contact_phone: string | null
@@ -398,6 +399,7 @@ export type Database = {
           primary_contact_email?: string | null
           primary_contact_name?: string | null
           primary_contact_phone?: string | null
+          photo_url?: string | null
           registration_date: string
           registration_number?: string | null
           status?: string | null
@@ -417,6 +419,7 @@ export type Database = {
           meeting_location?: string | null
           meeting_time?: string | null
           name?: string
+          photo_url?: string | null
           primary_contact_email?: string | null
           primary_contact_name?: string | null
           primary_contact_phone?: string | null
@@ -559,6 +562,7 @@ export type Database = {
           national_id: string | null
           occupation: string | null
           passport_number: string | null
+          photo_url: string | null
           postal_address: string | null
           residential_address: string | null
           updated_at: string | null
@@ -588,6 +592,7 @@ export type Database = {
           national_id?: string | null
           occupation?: string | null
           passport_number?: string | null
+          photo_url?: string | null
           postal_address?: string | null
           residential_address?: string | null
           updated_at?: string | null
@@ -617,6 +622,7 @@ export type Database = {
           national_id?: string | null
           occupation?: string | null
           passport_number?: string | null
+          photo_url?: string | null
           postal_address?: string | null
           residential_address?: string | null
           updated_at?: string | null

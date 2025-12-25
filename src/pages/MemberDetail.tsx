@@ -6,6 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Edit, Trash2, User, Phone, Mail, MapPin, Calendar, Briefcase } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { UploadMemberPhotoDialog } from "@/components/members/UploadMemberPhotoDialog";
 import { EditMemberDialog } from "@/components/members/EditMemberDialog";
 import { DeleteMemberDialog } from "@/components/members/DeleteMemberDialog";
 
@@ -32,7 +34,7 @@ const MemberDetail = () => {
         `)
         .eq('id', parseInt(id!))
         .single();
-      
+
       if (error) throw error;
       return data;
     },
@@ -88,6 +90,26 @@ const MemberDetail = () => {
                 Back
               </Button>
             </Link>
+            <div className="relative group">
+              <Avatar className="w-16 h-16 border-2 border-brand-500">
+                <AvatarImage src={member.photo_url || undefined} alt={`${member.first_name} ${member.last_name}`} />
+                <AvatarFallback className="text-xl bg-brand-100 text-brand-600">
+                  {member.first_name[0]}{member.last_name[0]}
+                </AvatarFallback>
+              </Avatar>
+              <div className="absolute -bottom-1 -right-1">
+                <UploadMemberPhotoDialog
+                  memberId={member.id}
+                  memberName={`${member.first_name} ${member.last_name}`}
+                  currentPhotoUrl={member.photo_url}
+                  trigger={
+                    <Button size="icon" variant="secondary" className="h-6 w-6 rounded-full p-0 shadow-sm border border-neutral-200">
+                      <Edit className="w-3 h-3" />
+                    </Button>
+                  }
+                />
+              </div>
+            </div>
             <div>
               <h1 className="text-3xl font-bold text-neutral-900">
                 {member.first_name} {member.middle_name} {member.last_name}

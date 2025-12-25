@@ -14,6 +14,7 @@ import { useAuth } from "@/contexts/AuthContext";
 import { AddMemberDialog } from "./AddMemberDialog";
 import { EditMemberDialog } from "./EditMemberDialog";
 import { DeleteMemberDialog } from "./DeleteMemberDialog";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
 
 export function MembersPage() {
@@ -41,7 +42,7 @@ export function MembersPage() {
           )
         `)
         .order('first_name');
-      
+
       if (error) throw error;
       return data;
     },
@@ -95,7 +96,7 @@ export function MembersPage() {
             className="pl-10"
           />
         </div>
-        
+
         <div className="flex items-center space-x-2">
           <Toggle
             pressed={viewMode === "cards"}
@@ -135,9 +136,12 @@ export function MembersPage() {
               <CardHeader className="pb-4">
                 <div className="flex items-start justify-between">
                   <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center">
-                      <User className="w-6 h-6 text-brand-600" />
-                    </div>
+                    <Avatar className="w-12 h-12">
+                      <AvatarImage src={member.photo_url || undefined} alt={`${member.first_name} ${member.last_name}`} />
+                      <AvatarFallback className="bg-brand-100 text-brand-600">
+                        <User className="w-6 h-6" />
+                      </AvatarFallback>
+                    </Avatar>
                     <div>
                       <CardTitle className="text-lg text-neutral-900">
                         {member.first_name} {member.middle_name} {member.last_name}
@@ -163,7 +167,7 @@ export function MembersPage() {
                     <Phone className="w-4 h-4 mr-2 text-neutral-400" />
                     <span className="text-neutral-900">{member.mobile_number}</span>
                   </div>
-                  
+
                   {member.email_address && (
                     <div className="flex items-center text-sm">
                       <Mail className="w-4 h-4 mr-2 text-neutral-400" />
@@ -232,7 +236,15 @@ export function MembersPage() {
               {filteredMembers.map((member) => (
                 <TableRow key={member.id}>
                   <TableCell className="font-medium">
-                    {member.first_name} {member.middle_name} {member.last_name}
+                    <div className="flex items-center space-x-3">
+                      <Avatar className="w-8 h-8">
+                        <AvatarImage src={member.photo_url || undefined} alt={`${member.first_name} ${member.last_name}`} />
+                        <AvatarFallback className="bg-brand-100 text-brand-600">
+                          <User className="w-4 h-4" />
+                        </AvatarFallback>
+                      </Avatar>
+                      <span>{member.first_name} {member.middle_name} {member.last_name}</span>
+                    </div>
                   </TableCell>
                   <TableCell>{member.groups?.name}</TableCell>
                   <TableCell>{member.mobile_number}</TableCell>

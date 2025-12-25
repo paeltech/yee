@@ -20,11 +20,13 @@ INSERT INTO storage.buckets (
 
 -- Ensure storage policies exist for photos bucket
 -- Drop existing policies if they exist, then create new ones
+-- Using ALL/TO public because the project uses a custom session management system
 DROP POLICY IF EXISTS "Allow authenticated users to upload photos" ON storage.objects;
-CREATE POLICY "Allow authenticated users to upload photos"
+DROP POLICY IF EXISTS "Allow public to upload photos" ON storage.objects;
+CREATE POLICY "Allow public to upload photos"
   ON storage.objects
   FOR INSERT
-  TO authenticated
+  TO public
   WITH CHECK (bucket_id = 'photos');
 
 DROP POLICY IF EXISTS "Allow public to view photos" ON storage.objects;
@@ -35,16 +37,18 @@ CREATE POLICY "Allow public to view photos"
   USING (bucket_id = 'photos');
 
 DROP POLICY IF EXISTS "Allow authenticated users to update photos" ON storage.objects;
-CREATE POLICY "Allow authenticated users to update photos"
+DROP POLICY IF EXISTS "Allow public to update photos" ON storage.objects;
+CREATE POLICY "Allow public to update photos"
   ON storage.objects
   FOR UPDATE
-  TO authenticated
+  TO public
   USING (bucket_id = 'photos');
 
 DROP POLICY IF EXISTS "Allow authenticated users to delete photos" ON storage.objects;
-CREATE POLICY "Allow authenticated users to delete photos"
+DROP POLICY IF EXISTS "Allow public to delete photos" ON storage.objects;
+CREATE POLICY "Allow public to delete photos"
   ON storage.objects
   FOR DELETE
-  TO authenticated
+  TO public
   USING (bucket_id = 'photos');
 

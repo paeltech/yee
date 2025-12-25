@@ -21,7 +21,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { Plus } from "lucide-react";
+import { Plus, Upload, X } from "lucide-react";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
 export function AddMemberDialog() {
   const [open, setOpen] = useState(false);
@@ -47,6 +48,45 @@ export function AddMemberDialog() {
     member_role: "Member",
   });
 
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
+  const [isUploading, setIsUploading] = useState(false);
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      if (!file.type.startsWith('image/')) {
+        toast({
+          title: "Invalid File",
+          description: "Please select an image file (JPEG, PNG, or WebP)",
+          variant: "destructive",
+        });
+        return;
+      }
+      if (file.size > 10 * 1024 * 1024) {
+        toast({
+          title: "File Too Large",
+          description: "Please select an image smaller than 10MB",
+          variant: "destructive",
+        });
+        return;
+      }
+      setSelectedFile(file);
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setPreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleRemovePhoto = () => {
+    setSelectedFile(null);
+    setPreview(null);
+    const fileInput = document.getElementById('member-photo-upload') as HTMLInputElement;
+    if (fileInput) fileInput.value = '';
+  };
+
   const { data: groups } = useQuery({
     queryKey: ['groups-for-members'],
     queryFn: async () => {
@@ -64,7 +104,7 @@ export function AddMemberDialog() {
         `)
         .eq('status', 'active')
         .order('name');
-      
+
       if (error) throw error;
       return data;
     },
@@ -72,15 +112,46 @@ export function AddMemberDialog() {
 
   const addMemberMutation = useMutation({
     mutationFn: async (data: any) => {
-      const { error } = await supabase
+      const { data: memberData, error } = await supabase
         .from('members')
         .insert([{
           ...data,
           group_id: parseInt(data.group_id),
           monthly_income: data.monthly_income ? parseFloat(data.monthly_income) : null,
-        }]);
-      
+        }])
+        .select()
+        .single();
+
       if (error) throw error;
+
+      // Handle photo upload if a file was selected
+      if (selectedFile && memberData) {
+        setIsUploading(true);
+        const fileExt = selectedFile.name.split('.').pop();
+        const fileName = `members/${memberData.id}/${Date.now()}.${fileExt}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('photos')
+          .upload(fileName, selectedFile);
+
+        if (uploadError) {
+          toast({
+            title: "Photo Upload Failed",
+            description: "Member was created, but the photo could not be uploaded.",
+            variant: "destructive",
+          });
+        } else {
+          const { data: { publicUrl } } = supabase.storage
+            .from('photos')
+            .getPublicUrl(fileName);
+
+          await supabase
+            .from('members')
+            .update({ photo_url: publicUrl })
+            .eq('id', memberData.id);
+        }
+        setIsUploading(false);
+      }
     },
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['members'] });
@@ -107,6 +178,8 @@ export function AddMemberDialog() {
         group_id: "",
         member_role: "Member",
       });
+      setSelectedFile(null);
+      setPreview(null);
     },
     onError: (error) => {
       let description = "Unknown error";
@@ -159,7 +232,44 @@ export function AddMemberDialog() {
         <DialogHeader>
           <DialogTitle>Add New Member</DialogTitle>
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="flex flex-col items-center space-y-4 py-2">
+            <Avatar className="w-24 h-24 border-2 border-brand-500 shadow-sm">
+              <AvatarImage src={preview || undefined} />
+              <AvatarFallback className="bg-brand-50 text-brand-600 text-2xl">
+                {formData.first_name?.[0] || '?'}{formData.last_name?.[0] || ''}
+              </AvatarFallback>
+            </Avatar>
+            <div className="flex flex-col items-center space-y-2">
+              <Label htmlFor="member-photo-upload" className="cursor-pointer">
+                <div className="flex items-center gap-2 text-sm font-medium text-brand-600 hover:text-brand-700 transition-colors">
+                  <Upload className="w-4 h-4" />
+                  {selectedFile ? "Change Photo" : "Upload Photo"}
+                </div>
+              </Label>
+              <Input
+                id="member-photo-upload"
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleFileChange}
+                disabled={addMemberMutation.isPending || isUploading}
+              />
+              {selectedFile && (
+                <Button
+                  type="button"
+                  variant="ghost"
+                  size="sm"
+                  onClick={handleRemovePhoto}
+                  className="text-red-500 hover:text-red-600 hover:bg-red-50 h-7"
+                >
+                  <X className="w-3 h-3 mr-1" />
+                  Remove
+                </Button>
+              )}
+            </div>
+          </div>
+
           <div className="grid grid-cols-3 gap-4">
             <div className="space-y-2">
               <Label htmlFor="first_name">First Name *</Label>
@@ -195,8 +305,8 @@ export function AddMemberDialog() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Gender *</Label>
-              <Select 
-                value={formData.gender} 
+              <Select
+                value={formData.gender}
                 onValueChange={(value) => setFormData({ ...formData, gender: value })}
               >
                 <SelectTrigger>
@@ -275,8 +385,8 @@ export function AddMemberDialog() {
             </div>
             <div className="space-y-2">
               <Label>Education Level</Label>
-              <Select 
-                value={formData.education_level} 
+              <Select
+                value={formData.education_level}
                 onValueChange={(value) => setFormData({ ...formData, education_level: value })}
               >
                 <SelectTrigger>
@@ -318,8 +428,8 @@ export function AddMemberDialog() {
           <div className="grid grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label>Group *</Label>
-              <Select 
-                value={formData.group_id} 
+              <Select
+                value={formData.group_id}
                 onValueChange={(value) => setFormData({ ...formData, group_id: value })}
               >
                 <SelectTrigger>
@@ -336,8 +446,8 @@ export function AddMemberDialog() {
             </div>
             <div className="space-y-2">
               <Label>Member Role</Label>
-              <Select 
-                value={formData.member_role} 
+              <Select
+                value={formData.member_role}
                 onValueChange={(value) => setFormData({ ...formData, member_role: value })}
               >
                 <SelectTrigger>
@@ -358,8 +468,8 @@ export function AddMemberDialog() {
             <Button type="button" variant="outline" onClick={() => setOpen(false)}>
               Cancel
             </Button>
-            <Button 
-              type="submit" 
+            <Button
+              type="submit"
               className="bg-brand-500 text-black hover:bg-brand-600"
               disabled={addMemberMutation.isPending}
             >

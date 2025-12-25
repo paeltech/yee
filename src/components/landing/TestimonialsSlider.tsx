@@ -62,30 +62,32 @@ const testimonials = [
 
 export function TestimonialsSlider() {
     return (
-        <section className="py-24 bg-neutral-50 px-4 overflow-hidden">
-            <div className="container mx-auto max-w-6xl">
-                <div className="text-center space-y-4 mb-16">
+        <section className="py-32 bg-neutral-50 px-4 overflow-hidden relative">
+            <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent" />
+
+            <div className="container mx-auto max-w-6xl relative z-10">
+                <div className="text-center space-y-6 mb-20">
                     <motion.h2
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="text-3xl md:text-4xl font-bold text-neutral-900 tracking-tight"
+                        className="text-4xl md:text-6xl font-black text-neutral-900 tracking-tight"
                     >
-                        Success Stories
+                        Success <span className="text-brand-600">Stories</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-lg text-neutral-600 max-w-2xl mx-auto"
+                        className="text-xl text-neutral-600 max-w-3xl mx-auto font-medium"
                     >
-                        Hear from the young women who have transformed their lives through the YEE Program.
+                        Hear from the incredible young women who have transformed their lives and communities through the YEE Program.
                     </motion.p>
                 </div>
 
-                <div className="relative px-12">
+                <div className="relative px-4 md:px-12">
                     <Carousel
                         opts={{
                             align: "start",
@@ -93,30 +95,36 @@ export function TestimonialsSlider() {
                         }}
                         className="w-full"
                     >
-                        <CarouselContent className="-ml-4">
+                        <CarouselContent className="-ml-6">
                             {testimonials.map((testimonial, index) => (
-                                <CarouselItem key={index} className="pl-4 md:basis-1/2 lg:basis-1/3">
+                                <CarouselItem key={index} className="pl-6 md:basis-1/2 lg:basis-1/3">
                                     <motion.div
-                                        initial={{ opacity: 0, scale: 0.95 }}
+                                        initial={{ opacity: 0, scale: 0.9 }}
                                         whileInView={{ opacity: 1, scale: 1 }}
                                         viewport={{ once: true }}
-                                        transition={{ duration: 0.4, delay: index * 0.1 }}
-                                        className="h-full"
+                                        transition={{ duration: 0.5, delay: index * 0.1 }}
+                                        className="h-full py-4"
                                     >
-                                        <Card className="h-full border-none shadow-sm hover:shadow-md transition-shadow duration-300 bg-white">
-                                            <CardContent className="p-8 flex flex-col h-full">
-                                                <Quote className="h-8 w-8 text-brand-500/20 mb-4" />
-                                                <blockquote className="flex-grow">
-                                                    <p className="text-neutral-700 italic leading-relaxed text-lg">
+                                        <Card className="h-full border border-neutral-100 shadow-xl hover:shadow-2xl transition-all duration-500 bg-white rounded-[2.5rem] overflow-hidden group hover:-translate-y-2">
+                                            <CardContent className="p-10 flex flex-col h-full relative">
+                                                <div className="absolute top-6 right-8 opacity-10 group-hover:opacity-20 transition-opacity">
+                                                    <Quote className="h-16 w-16 text-brand-600" />
+                                                </div>
+                                                <blockquote className="flex-grow relative z-10">
+                                                    <p className="text-neutral-700 italic leading-relaxed text-xl font-medium">
                                                         &ldquo;{testimonial.quote}&rdquo;
                                                     </p>
                                                 </blockquote>
-                                                <div className="mt-8 pt-6 border-t border-neutral-100">
-                                                    <div className="font-bold text-neutral-900 text-lg">
-                                                        {testimonial.name}, {testimonial.age}
+                                                <div className="mt-10 pt-8 border-t border-neutral-100">
+                                                    <div className="font-black text-neutral-900 text-xl tracking-tight">
+                                                        {testimonial.name}
                                                     </div>
-                                                    <div className="text-brand-600 font-medium">
-                                                        {testimonial.location}
+                                                    <div className="flex items-center gap-2 mt-1">
+                                                        <span className="text-neutral-400 font-bold uppercase tracking-widest text-xs">{testimonial.age} YEARS OLD</span>
+                                                        <span className="text-neutral-300">•</span>
+                                                        <span className="text-brand-600 font-black uppercase tracking-widest text-xs">
+                                                            {testimonial.location}
+                                                        </span>
                                                     </div>
                                                 </div>
                                             </CardContent>
@@ -125,11 +133,13 @@ export function TestimonialsSlider() {
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <CarouselPrevious className="hidden md:flex -left-4 hover:bg-brand-500 text-black hover:text-black transition-colors" />
-                        <CarouselNext className="hidden md:flex -right-4 hover:bg-brand-500 text-black hover:text-black transition-colors" />
+                        <CarouselPrevious className="hidden md:flex -left-6 w-14 h-14 bg-white border-neutral-200 hover:bg-brand-500 hover:border-brand-500 text-black transition-all shadow-lg" />
+                        <CarouselNext className="hidden md:flex -right-6 w-14 h-14 bg-white border-neutral-200 hover:bg-brand-500 hover:border-brand-500 text-black transition-all shadow-lg" />
                     </Carousel>
                 </div>
             </div>
+
+            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent" />
         </section>
     );
 }

@@ -6,7 +6,8 @@ import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Clock, User, ChevronRight } from "lucide-react";
+import { ArrowLeft, Clock, User, ChevronRight, LogIn } from "lucide-react";
+import { motion } from "framer-motion";
 
 const Blogs = () => {
     const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -29,125 +30,156 @@ const Blogs = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-neutral-50">
-            {/* Simple Header */}
-            <header className="bg-white border-b border-neutral-200 sticky top-0 z-50">
-                <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+        <div className="min-h-screen bg-white selection:bg-brand-200 selection:text-black">
+            {/* Header */}
+            <header className="fixed top-0 z-50 w-full transition-all duration-500 bg-white/80 backdrop-blur-xl border-b border-neutral-100 py-4 shadow-sm">
+                <div className="container mx-auto px-6 lg:px-12 h-16 flex items-center justify-between">
                     <div className="flex items-center gap-4">
-                        <a href="/">
-                            <img src="/mulika-logo.png" className="w-24" alt="Logo" />
+                        <a href="/" className="hover:scale-105 transition-transform">
+                            <img src="/mulika-logo.png" className="w-32 md:w-40" alt="YEE Platform" />
                         </a>
-                        <div className="h-6 w-[1px] bg-neutral-200 hidden md:block" />
-                        <span className="font-semibold text-neutral-900 hidden md:block">Stories & Updates</span>
                     </div>
-                    <div className="flex gap-2">
-                        <Button variant="ghost" onClick={() => navigate("/")}>Home</Button>
-                        <Button variant="ghost" onClick={() => navigate("/groups/public")}>Groups</Button>
+                    <div className="hidden md:flex items-center gap-8 font-black uppercase tracking-widest text-sm">
+                        <button onClick={() => navigate('/')} className="text-neutral-600 hover:text-brand-600 transition-colors">Home</button>
+                        <button onClick={() => navigate('/blogs')} className="text-brand-600">Stories</button>
+                        <button onClick={() => navigate('/groups/public')} className="text-neutral-600 hover:text-brand-600 transition-colors">Groups</button>
+                        <Button
+                            onClick={() => navigate('/login')}
+                            className="bg-brand-500 text-black hover:bg-brand-600 px-8 py-6 rounded-2xl font-black shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                        >
+                            <LogIn className="mr-2 h-4 w-4" />
+                            Sign In
+                        </Button>
+                    </div>
+                    <div className="md:hidden">
+                        <Button onClick={() => navigate('/login')} className="bg-brand-500 text-black p-3 rounded-xl">
+                            <LogIn className="h-5 w-5" />
+                        </Button>
                     </div>
                 </div>
             </header>
 
-            <main className="container mx-auto px-4 py-12 max-w-6xl">
-                <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
-                    <div>
-                        <h1 className="text-4xl md:text-5xl font-extrabold text-neutral-900 mb-4">The YEE Journal</h1>
-                        <p className="text-xl text-neutral-600 max-w-2xl">
-                            Exploring stories of impact, youth empowerment, and economic transformation across Tanzania.
+            <main className="container mx-auto px-6 lg:px-12 py-32 max-w-7xl">
+                <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20 mt-12">
+                    <div className="max-w-3xl">
+                        <motion.h1
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            className="text-5xl md:text-8xl font-black text-neutral-900 mb-6 tracking-tighter leading-none"
+                        >
+                            The YEE <span className="text-brand-600">Journal</span>
+                        </motion.h1>
+                        <p className="text-xl md:text-2xl text-neutral-600 font-medium leading-relaxed">
+                            Exploring stories of impact, youth empowerment, and economic transformation across the vibrant communities of Tanzania.
                         </p>
                     </div>
                 </div>
 
                 {loading ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                         {[1, 2, 3].map((i) => (
-                            <Card key={i} className="animate-pulse">
-                                <div className="h-48 bg-neutral-200" />
-                                <CardHeader className="space-y-2">
-                                    <div className="h-4 bg-neutral-200 w-1/4" />
-                                    <div className="h-6 bg-neutral-200 w-full" />
-                                </CardHeader>
-                                <CardContent className="space-y-2">
-                                    <div className="h-4 bg-neutral-200 w-full" />
-                                    <div className="h-4 bg-neutral-200 w-3/4" />
-                                </CardContent>
-                            </Card>
+                            <div key={i} className="space-y-6 animate-pulse">
+                                <div className="h-80 bg-neutral-100 rounded-[2.5rem]" />
+                                <div className="space-y-3">
+                                    <div className="h-4 bg-neutral-100 w-1/4" />
+                                    <div className="h-8 bg-neutral-100 w-full" />
+                                    <div className="h-4 bg-neutral-100 w-3/4" />
+                                </div>
+                            </div>
                         ))}
                     </div>
                 ) : posts.length === 0 ? (
-                    <div className="text-center py-20 bg-white rounded-2xl border border-neutral-200 shadow-sm">
-                        <div className="mb-4 text-neutral-300">
-                            <Clock className="w-16 h-16 mx-auto" />
+                    <div className="text-center py-32 bg-white rounded-[3rem] border border-neutral-100 shadow-xl">
+                        <div className="mb-6 text-neutral-200">
+                            <Clock className="w-20 h-20 mx-auto" />
                         </div>
-                        <h3 className="text-2xl font-bold text-neutral-900">No stories yet</h3>
-                        <p className="text-neutral-500 mt-2">Check back soon for new updates and insights.</p>
-                        <Button className="mt-6" variant="outline" onClick={() => navigate("/")}>Go Home</Button>
+                        <h3 className="text-3xl font-black text-neutral-900 tracking-tight">No stories yet</h3>
+                        <p className="text-xl text-neutral-500 mt-2 font-medium">Check back soon for new updates and insights.</p>
+                        <Button
+                            className="mt-10 bg-brand-500 text-black hover:bg-brand-600 px-10 py-7 rounded-2xl font-black text-lg"
+                            onClick={() => navigate("/")}
+                        >
+                            Go Home
+                        </Button>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                        {posts.map((post) => (
-                            <Card
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
+                        {posts.map((post, idx) => (
+                            <motion.div
+                                initial={{ opacity: 0, y: 30 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ delay: idx * 0.1 }}
                                 key={post.id}
-                                className="group overflow-hidden border-neutral-200 hover:border-brand-300 transition-all duration-300 cursor-pointer shadow-sm hover:shadow-md h-full flex flex-col"
+                                className="group cursor-pointer"
                                 onClick={() => navigate(`/blogs/${post.slug}`)}
                             >
-                                <div className="relative h-56 overflow-hidden">
+                                <div className="relative h-80 rounded-[2.5rem] overflow-hidden mb-8 shadow-sm group-hover:shadow-2xl transition-all duration-700 group-hover:-translate-y-2">
                                     {post.featured_image ? (
                                         <img
                                             src={post.featured_image}
                                             alt={post.title}
-                                            className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                                            className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                         />
                                     ) : (
                                         <div className="w-full h-full bg-brand-50 flex items-center justify-center">
-                                            <img src="/mulika-logo.png" className="w-20 opacity-20 grayscale" alt="" />
+                                            <img src="/mulika-logo.png" className="w-24 opacity-30 grayscale" alt="" />
                                         </div>
                                     )}
-                                    <div className="absolute top-4 left-4">
-                                        <Badge className="bg-white/90 text-neutral-900 border-none backdrop-blur shadow-sm">
-                                            {format(new Date(post.published_at || post.created_at), "MMM d")}
-                                        </Badge>
+                                    <div className="absolute inset-x-4 bottom-4 glass-dark p-4 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 flex justify-between items-center text-white">
+                                        <span className="font-bold">Read Story</span>
+                                        <ChevronRight className="h-5 w-5" />
                                     </div>
                                 </div>
-                                <CardHeader className="p-6 pb-2">
-                                    <h2 className="text-2xl font-bold text-neutral-900 leading-tight group-hover:text-brand-600 transition-colors">
+                                <div className="space-y-4 px-2">
+                                    <div className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-neutral-400">
+                                        <span className="text-brand-600">Growth</span>
+                                        <span>•</span>
+                                        <span>{format(new Date(post.published_at || post.created_at), "MMM d, yyyy")}</span>
+                                    </div>
+                                    <h2 className="text-3xl font-black text-neutral-900 leading-tight group-hover:text-brand-600 transition-colors tracking-tight">
                                         {post.title}
                                     </h2>
-                                </CardHeader>
-                                <CardContent className="p-6 pt-2 flex-grow">
-                                    <p className="text-neutral-600 line-clamp-3">
+                                    <p className="text-neutral-600 line-clamp-2 text-lg font-medium leading-relaxed">
                                         {post.excerpt || "Click to read more about this story and stay updated with the latest YEE initiatives."}
                                     </p>
-                                </CardContent>
-                                <CardFooter className="p-6 pt-0 flex items-center justify-between text-sm text-neutral-500">
-                                    <div className="flex items-center gap-1">
-                                        <Clock className="w-4 h-4" />
-                                        <span>5 min read</span>
-                                    </div>
-                                    <div className="flex items-center gap-1 font-semibold text-brand-600">
-                                        Read Story <ChevronRight className="w-4 h-4" />
-                                    </div>
-                                </CardFooter>
-                            </Card>
+                                </div>
+                            </motion.div>
                         ))}
                     </div>
                 )}
             </main>
 
-            {/* Basic Footer */}
-            <footer className="bg-white border-t border-neutral-200 pt-16 pb-12">
-                <div className="container mx-auto px-4 text-center">
-                    <img src="/mulika-logo.png" className="w-24 mx-auto mb-6" alt="" />
-                    <p className="text-neutral-500 text-sm max-w-lg mx-auto mb-8">
-                        The Youth Economic Empowerment (YEE) Portal is a platform dedicated to fostering economic growth among young people in Tanzania.
-                    </p>
-                    <div className="flex justify-center gap-6 text-sm font-medium text-neutral-600 mb-8">
-                        <a href="/" className="hover:text-brand-600">Home</a>
-                        <a href="/blogs" className="hover:text-brand-600">Stories</a>
-                        <a href="/groups/public" className="hover:text-brand-600">Find Groups</a>
+            {/* Footer */}
+            <footer className="bg-neutral-900 text-white py-24 px-6 lg:px-12">
+                <div className="container mx-auto max-w-7xl">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                        <div className="col-span-1 md:col-span-2 space-y-8">
+                            <img src="/mulika-logo.png" className="w-48" alt="YEE Platform" />
+                            <p className="text-neutral-400 text-xl max-w-md leading-relaxed">
+                                Empowering the next generation of Tanzanian entrepreneurs through technology and community support.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">Explore</h4>
+                            <ul className="space-y-4 text-neutral-400 font-medium">
+                                <li><a href="#" onClick={() => navigate('/')} className="hover:text-brand-500 transition-colors">Home</a></li>
+                                <li><a href="#" onClick={() => navigate('/blogs')} className="hover:text-brand-500 transition-colors">Latest Stories</a></li>
+                                <li><a href="#" onClick={() => navigate('/groups/public')} className="hover:text-brand-500 transition-colors">Groups Portal</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">Connect</h4>
+                            <ul className="space-y-4 text-neutral-400 font-medium">
+                                <li><a href="mailto:info@mulika.or.tz" className="hover:text-brand-500 transition-colors">info@mulika.or.tz</a></li>
+                                <li><a href="#" className="hover:text-brand-500 transition-colors">Privacy Policy</a></li>
+                                <li><a href="#" className="hover:text-brand-500 transition-colors">Terms</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <p className="text-xs text-neutral-400">
-                        © {new Date().getFullYear()} Mulika Tanzania. All rights reserved.
-                    </p>
+                    <div className="pt-12 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-6 text-neutral-500 font-medium">
+                        <p>© {new Date().getFullYear()} Youth Economic Empowerment Portal</p>
+                        <p>Implemented under <span className="text-white font-bold">Mulika Tanzania</span></p>
+                    </div>
                 </div>
             </footer>
         </div>

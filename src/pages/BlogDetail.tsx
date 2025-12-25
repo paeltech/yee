@@ -136,21 +136,37 @@ const BlogDetail = () => {
                 </article>
             </main>
 
-            {/* Simple Footer */}
-            <footer className="bg-neutral-900 py-16 text-white text-center">
-                <div className="container mx-auto px-4">
-                    <img src="/mulika-logo.png" className="w-24 mx-auto mb-8 invert grayscale brightness-200" alt="Logo" />
-                    <p className="text-neutral-400 max-w-sm mx-auto mb-8">
-                        Empowering Tanzanian youth through technology, connection, and economic opportunity.
-                    </p>
-                    <div className="flex justify-center gap-6 text-sm mb-12">
-                        <a href="/" className="text-neutral-400 hover:text-white transition-colors">Home</a>
-                        <a href="/blogs" className="text-neutral-400 hover:text-white transition-colors">All Stories</a>
-                        <a href="/groups/public" className="text-neutral-400 hover:text-white transition-colors">Projects</a>
+            {/* Footer */}
+            <footer className="bg-neutral-900 text-white py-24 px-6 lg:px-12">
+                <div className="container mx-auto max-w-7xl">
+                    <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                        <div className="col-span-1 md:col-span-2 space-y-8">
+                            <img src="/mulika-logo.png" className="w-48" alt="YEE Platform" />
+                            <p className="text-neutral-400 text-xl max-w-md leading-relaxed">
+                                Empowering the next generation of Tanzanian entrepreneurs through technology and community support.
+                            </p>
+                        </div>
+                        <div>
+                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">Explore</h4>
+                            <ul className="space-y-4 text-neutral-400 font-medium">
+                                <li><a href="#" onClick={() => navigate('/')} className="hover:text-brand-500 transition-colors">Home</a></li>
+                                <li><a href="#" onClick={() => navigate('/blogs')} className="hover:text-brand-500 transition-colors">Latest Stories</a></li>
+                                <li><a href="#" onClick={() => navigate('/groups/public')} className="hover:text-brand-500 transition-colors">Groups Portal</a></li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">Connect</h4>
+                            <ul className="space-y-4 text-neutral-400 font-medium">
+                                <li><a href="mailto:info@mulika.or.tz" className="hover:text-brand-500 transition-colors">info@mulika.or.tz</a></li>
+                                <li><a href="#" className="hover:text-brand-500 transition-colors">Privacy Policy</a></li>
+                                <li><a href="#" className="hover:text-brand-500 transition-colors">Terms</a></li>
+                            </ul>
+                        </div>
                     </div>
-                    <p className="text-xs text-neutral-600">
-                        © {new Date().getFullYear()} Mulika Tanzania. All rights reserved.
-                    </p>
+                    <div className="pt-12 border-t border-neutral-800 flex flex-col md:flex-row justify-between items-center gap-6 text-neutral-500 font-medium">
+                        <p>© {new Date().getFullYear()} Youth Economic Empowerment Portal</p>
+                        <p>Implemented under <span className="text-white font-bold">Mulika Tanzania</span></p>
+                    </div>
                 </div>
             </footer>
         </div>

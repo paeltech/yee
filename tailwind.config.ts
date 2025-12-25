@@ -80,6 +80,9 @@ export default {
 					'gold-hover': '#FBBF24',
 				}
 			},
+			fontFamily: {
+				sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+			},
 			borderRadius: {
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
