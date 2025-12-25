@@ -50,6 +50,45 @@
 
     --sidebar-ring: 217.2 91.2% 59.8%;
   }
+
+  .dark {
+    --background: 240 10% 4%;
+    --foreground: 210 40% 98%;
+
+    --card: 240 10% 6%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 240 10% 4%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 240 4.8% 12%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 240 4.8% 12%;
+    --muted-foreground: 240 5% 65%;
+
+    --accent: 240 4.8% 12%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 240 5% 15%;
+    --input: 240 5% 15%;
+    --ring: 240 5% 20%;
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
 }
 
 @layer base {
@@ -73,8 +112,17 @@
       radial-gradient(at 0% 100%, hsla(222, 47%, 11%, 0.05) 0px, transparent 50%);
   }
 
+  .dark .bg-mesh {
+    background-color: #030712;
+    background-image:
+      radial-gradient(at 0% 0%, hsla(47, 100%, 49%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, hsla(222, 47%, 11%, 0.15) 0px, transparent 50%),
+      radial-gradient(at 100% 100%, hsla(47, 100%, 49%, 0.1) 0px, transparent 50%),
+      radial-gradient(at 0% 100%, hsla(222, 47%, 11%, 0.1) 0px, transparent 50%);
+  }
+
   .glass {
-    @apply bg-white/70 backdrop-blur-md border border-white/20 shadow-xl;
+    @apply bg-white/70 dark:bg-neutral-900/70 backdrop-blur-md border border-white/20 dark:border-white/10 shadow-xl;
   }
 
   .glass-dark {

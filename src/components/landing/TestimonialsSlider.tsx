@@ -62,8 +62,8 @@ const testimonials = [
 
 export function TestimonialsSlider() {
     return (
-        <section className="py-32 bg-neutral-50 px-4 overflow-hidden relative">
-            <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white to-transparent" />
+        <section className="py-32 bg-neutral-50 dark:bg-neutral-950 px-4 overflow-hidden relative transition-colors duration-500">
+            <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white dark:from-neutral-950 to-transparent" />
 
             <div className="container mx-auto max-w-6xl relative z-10">
                 <div className="text-center space-y-6 mb-20">
@@ -72,7 +72,7 @@ export function TestimonialsSlider() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6 }}
-                        className="text-4xl md:text-6xl font-black text-neutral-900 tracking-tight"
+                        className="text-4xl md:text-6xl font-black text-neutral-900 dark:text-white tracking-tight"
                     >
                         Success <span className="text-brand-600">Stories</span>
                     </motion.h2>
@@ -81,7 +81,7 @@ export function TestimonialsSlider() {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
-                        className="text-xl text-neutral-600 max-w-3xl mx-auto font-medium"
+                        className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto font-medium"
                     >
                         Hear from the incredible young women who have transformed their lives and communities through the YEE Program.
                     </motion.p>
@@ -105,18 +105,18 @@ export function TestimonialsSlider() {
                                         transition={{ duration: 0.5, delay: index * 0.1 }}
                                         className="h-full py-4"
                                     >
-                                        <Card className="h-full border border-neutral-100 shadow-xl hover:shadow-2xl transition-all duration-500 bg-white rounded-[2.5rem] overflow-hidden group hover:-translate-y-2">
+                                        <Card className="h-full border border-neutral-100 dark:border-neutral-800 shadow-xl hover:shadow-2xl transition-all duration-500 bg-white dark:bg-neutral-900 rounded-[2.5rem] overflow-hidden group hover:-translate-y-2">
                                             <CardContent className="p-10 flex flex-col h-full relative">
                                                 <div className="absolute top-6 right-8 opacity-10 group-hover:opacity-20 transition-opacity">
                                                     <Quote className="h-16 w-16 text-brand-600" />
                                                 </div>
                                                 <blockquote className="flex-grow relative z-10">
-                                                    <p className="text-neutral-700 italic leading-relaxed text-xl font-medium">
+                                                    <p className="text-neutral-700 dark:text-neutral-300 italic leading-relaxed text-xl font-medium">
                                                         &ldquo;{testimonial.quote}&rdquo;
                                                     </p>
                                                 </blockquote>
-                                                <div className="mt-10 pt-8 border-t border-neutral-100">
-                                                    <div className="font-black text-neutral-900 text-xl tracking-tight">
+                                                <div className="mt-10 pt-8 border-t border-neutral-100 dark:border-neutral-800">
+                                                    <div className="font-black text-neutral-900 dark:text-white text-xl tracking-tight">
                                                         {testimonial.name}
                                                     </div>
                                                     <div className="flex items-center gap-2 mt-1">
@@ -133,13 +133,13 @@ export function TestimonialsSlider() {
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <CarouselPrevious className="hidden md:flex -left-6 w-14 h-14 bg-white border-neutral-200 hover:bg-brand-500 hover:border-brand-500 text-black transition-all shadow-lg" />
-                        <CarouselNext className="hidden md:flex -right-6 w-14 h-14 bg-white border-neutral-200 hover:bg-brand-500 hover:border-brand-500 text-black transition-all shadow-lg" />
+                        <CarouselPrevious className="hidden md:flex -left-6 w-14 h-14 bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700 hover:bg-brand-500 hover:border-brand-500 text-black dark:text-white dark:hover:text-black transition-all shadow-lg" />
+                        <CarouselNext className="hidden md:flex -right-6 w-14 h-14 bg-white dark:bg-neutral-800 border-neutral-200 dark:border-neutral-700 hover:bg-brand-500 hover:border-brand-500 text-black dark:text-white dark:hover:text-black transition-all shadow-lg" />
                     </Carousel>
                 </div>
             </div>
 
-            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white to-transparent" />
+            <div className="absolute bottom-0 left-0 w-full h-24 bg-gradient-to-t from-white dark:from-neutral-950 to-transparent" />
         </section>
     );
 }

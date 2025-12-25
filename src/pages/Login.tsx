@@ -16,7 +16,7 @@ export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  
+
   // Password reset states
   const [showResetDialog, setShowResetDialog] = useState(false);
   const [resetEmail, setResetEmail] = useState('');
@@ -27,7 +27,7 @@ export default function Login() {
   const [resetLoading, setResetLoading] = useState(false);
   const [resetError, setResetError] = useState('');
   const [resetSuccess, setResetSuccess] = useState(false);
-  
+
   const { login, resetPassword } = useAuth();
   const navigate = useNavigate();
 
@@ -37,13 +37,13 @@ export default function Login() {
     setError('');
 
     const result = await login(email, password);
-    
+
     if (result.success) {
       navigate('/dashboard');
     } else {
       setError(result.error || 'Login failed');
     }
-    
+
     setLoading(false);
   };
 
@@ -78,7 +78,7 @@ export default function Login() {
     }
 
     const result = await resetPassword(resetEmail, newPassword);
-    
+
     if (result.success) {
       setResetSuccess(true);
       setResetError('');
@@ -94,7 +94,7 @@ export default function Login() {
     } else {
       setResetError(result.error || 'Password reset failed');
     }
-    
+
     setResetLoading(false);
   };
 
@@ -106,18 +106,18 @@ export default function Login() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-neutral-50 px-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-neutral-50 dark:bg-stone-950 px-4 transition-colors duration-500">
+      <Card className="w-full max-w-md dark:bg-stone-900 dark:border-stone-800">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
             <div className="w-16 h-16 bg-brand-500 text-black rounded-xl flex items-center justify-center">
               <Users className="w-8 h-8 text-white" />
             </div>
           </div>
-          <CardTitle className="text-2xl font-bold text-neutral-900">
+          <CardTitle className="text-2xl font-bold text-neutral-900 dark:text-white">
             Welcome Back
           </CardTitle>
-          <CardDescription className="text-neutral-600">
+          <CardDescription className="text-neutral-600 dark:text-stone-400">
             Sign in to your Yee Portal account
           </CardDescription>
           <div className="mt-4">
@@ -137,9 +137,9 @@ export default function Login() {
                 <AlertDescription>{error}</AlertDescription>
               </Alert>
             )}
-            
+
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email" className="dark:text-stone-300">Email</Label>
               <Input
                 id="email"
                 type="email"
@@ -148,11 +148,12 @@ export default function Login() {
                 onChange={(e) => setEmail(e.target.value)}
                 required
                 disabled={loading}
+                className="dark:bg-stone-950 dark:border-stone-800 dark:text-white"
               />
             </div>
-            
+
             <div className="space-y-2">
-              <Label htmlFor="password">Password</Label>
+              <Label htmlFor="password" className="dark:text-stone-300">Password</Label>
               <div className="relative">
                 <Input
                   id="password"
@@ -162,6 +163,7 @@ export default function Login() {
                   onChange={(e) => setPassword(e.target.value)}
                   required
                   disabled={loading}
+                  className="dark:bg-stone-950 dark:border-stone-800 dark:text-white"
                 />
                 <Button
                   type="button"
@@ -179,7 +181,7 @@ export default function Login() {
                 </Button>
               </div>
             </div>
-            
+
             <Button
               type="submit"
               className="w-full bg-brand-500 text-black hover:bg-brand-600"
@@ -188,19 +190,19 @@ export default function Login() {
               {loading ? 'Signing in...' : 'Sign In'}
             </Button>
           </form>
-          
+
           <div className="mt-4 text-center">
             <Button
               variant="link"
               onClick={openResetDialog}
-              className="text-sm text-neutral-600 hover:text-brand-600"
+              className="text-sm text-neutral-600 dark:text-stone-400 hover:text-brand-600 dark:hover:text-brand-500"
               disabled={loading}
             >
               <KeyRound className="w-4 h-4 mr-2" />
               Forgot Password?
             </Button>
           </div>
-        
+
         </CardContent>
       </Card>
 
@@ -216,7 +218,7 @@ export default function Login() {
               Enter your email and choose a new password to reset your account.
             </DialogDescription>
           </DialogHeader>
-          
+
           {resetSuccess ? (
             <div className="py-6 text-center">
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -234,7 +236,7 @@ export default function Login() {
                   <AlertDescription>{resetError}</AlertDescription>
                 </Alert>
               )}
-              
+
               <div className="space-y-2">
                 <Label htmlFor="resetEmail">Email</Label>
                 <Input
@@ -247,7 +249,7 @@ export default function Login() {
                   disabled={resetLoading}
                 />
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="newPassword">New Password</Label>
                 <div className="relative">
@@ -279,7 +281,7 @@ export default function Login() {
                   Password must be at least 8 characters with uppercase, lowercase, and numbers.
                 </p>
               </div>
-              
+
               <div className="space-y-2">
                 <Label htmlFor="confirmPassword">Confirm New Password</Label>
                 <div className="relative">
@@ -308,7 +310,7 @@ export default function Login() {
                   </Button>
                 </div>
               </div>
-              
+
               <DialogFooter className="flex gap-3">
                 <Button
                   type="button"

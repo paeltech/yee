@@ -8,6 +8,8 @@ import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Clock, User, ChevronRight, LogIn } from "lucide-react";
 import { motion } from "framer-motion";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { TopNavbar } from "@/components/TopNavbar";
 
 const Blogs = () => {
     const [posts, setPosts] = useState<BlogPost[]>([]);
@@ -30,34 +32,8 @@ const Blogs = () => {
     }, []);
 
     return (
-        <div className="min-h-screen bg-white selection:bg-brand-200 selection:text-black">
-            {/* Header */}
-            <header className="fixed top-0 z-50 w-full transition-all duration-500 bg-white/80 backdrop-blur-xl border-b border-neutral-100 py-4 shadow-sm">
-                <div className="container mx-auto px-6 lg:px-12 h-16 flex items-center justify-between">
-                    <div className="flex items-center gap-4">
-                        <a href="/" className="hover:scale-105 transition-transform">
-                            <img src="/mulika-logo.png" className="w-32 md:w-40" alt="YEE Platform" />
-                        </a>
-                    </div>
-                    <div className="hidden md:flex items-center gap-8 font-black uppercase tracking-widest text-sm">
-                        <button onClick={() => navigate('/')} className="text-neutral-600 hover:text-brand-600 transition-colors">Home</button>
-                        <button onClick={() => navigate('/blogs')} className="text-brand-600">Stories</button>
-                        <button onClick={() => navigate('/groups/public')} className="text-neutral-600 hover:text-brand-600 transition-colors">Groups</button>
-                        <Button
-                            onClick={() => navigate('/login')}
-                            className="bg-brand-500 text-black hover:bg-brand-600 px-8 py-6 rounded-2xl font-black shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
-                        >
-                            <LogIn className="mr-2 h-4 w-4" />
-                            Sign In
-                        </Button>
-                    </div>
-                    <div className="md:hidden">
-                        <Button onClick={() => navigate('/login')} className="bg-brand-500 text-black p-3 rounded-xl">
-                            <LogIn className="h-5 w-5" />
-                        </Button>
-                    </div>
-                </div>
-            </header>
+        <div className="min-h-screen bg-white dark:bg-neutral-950 selection:bg-brand-200 selection:text-black transition-colors duration-500">
+            <TopNavbar />
 
             <main className="container mx-auto px-6 lg:px-12 py-32 max-w-7xl">
                 <div className="flex flex-col md:flex-row md:items-end justify-between gap-8 mb-20 mt-12">
@@ -65,11 +41,11 @@ const Blogs = () => {
                         <motion.h1
                             initial={{ opacity: 0, x: -20 }}
                             animate={{ opacity: 1, x: 0 }}
-                            className="text-5xl md:text-8xl font-black text-neutral-900 mb-6 tracking-tighter leading-none"
+                            className="text-5xl md:text-8xl font-black text-neutral-900 dark:text-white mb-6 tracking-tighter leading-none"
                         >
                             The YEE <span className="text-brand-600">Journal</span>
                         </motion.h1>
-                        <p className="text-xl md:text-2xl text-neutral-600 font-medium leading-relaxed">
+                        <p className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 font-medium leading-relaxed">
                             Exploring stories of impact, youth empowerment, and economic transformation across the vibrant communities of Tanzania.
                         </p>
                     </div>
@@ -79,22 +55,22 @@ const Blogs = () => {
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12">
                         {[1, 2, 3].map((i) => (
                             <div key={i} className="space-y-6 animate-pulse">
-                                <div className="h-80 bg-neutral-100 rounded-[2.5rem]" />
+                                <div className="h-80 bg-neutral-100 dark:bg-neutral-800 rounded-[2.5rem]" />
                                 <div className="space-y-3">
-                                    <div className="h-4 bg-neutral-100 w-1/4" />
-                                    <div className="h-8 bg-neutral-100 w-full" />
-                                    <div className="h-4 bg-neutral-100 w-3/4" />
+                                    <div className="h-4 bg-neutral-100 dark:bg-neutral-800 w-1/4" />
+                                    <div className="h-8 bg-neutral-100 dark:bg-neutral-800 w-full" />
+                                    <div className="h-4 bg-neutral-100 dark:bg-neutral-800 w-3/4" />
                                 </div>
                             </div>
                         ))}
                     </div>
                 ) : posts.length === 0 ? (
-                    <div className="text-center py-32 bg-white rounded-[3rem] border border-neutral-100 shadow-xl">
+                    <div className="text-center py-32 bg-white dark:bg-neutral-900 rounded-[3rem] border border-neutral-100 dark:border-neutral-800 shadow-xl">
                         <div className="mb-6 text-neutral-200">
                             <Clock className="w-20 h-20 mx-auto" />
                         </div>
-                        <h3 className="text-3xl font-black text-neutral-900 tracking-tight">No stories yet</h3>
-                        <p className="text-xl text-neutral-500 mt-2 font-medium">Check back soon for new updates and insights.</p>
+                        <h3 className="text-3xl font-black text-neutral-900 dark:text-white tracking-tight">No stories yet</h3>
+                        <p className="text-xl text-neutral-500 dark:text-neutral-400 mt-2 font-medium">Check back soon for new updates and insights.</p>
                         <Button
                             className="mt-10 bg-brand-500 text-black hover:bg-brand-600 px-10 py-7 rounded-2xl font-black text-lg"
                             onClick={() => navigate("/")}
@@ -113,7 +89,7 @@ const Blogs = () => {
                                 className="group cursor-pointer"
                                 onClick={() => navigate(`/blogs/${post.slug}`)}
                             >
-                                <div className="relative h-80 rounded-[2.5rem] overflow-hidden mb-8 shadow-sm group-hover:shadow-2xl transition-all duration-700 group-hover:-translate-y-2">
+                                <div className="relative h-80 rounded-[2.5rem] overflow-hidden mb-8 shadow-sm dark:shadow-neutral-950/50 group-hover:shadow-2xl transition-all duration-700 group-hover:-translate-y-2">
                                     {post.featured_image ? (
                                         <img
                                             src={post.featured_image}
@@ -121,8 +97,8 @@ const Blogs = () => {
                                             className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110"
                                         />
                                     ) : (
-                                        <div className="w-full h-full bg-brand-50 flex items-center justify-center">
-                                            <img src="/mulika-logo.png" className="w-24 opacity-30 grayscale" alt="" />
+                                        <div className="w-full h-full bg-brand-50 dark:bg-neutral-800 flex items-center justify-center">
+                                            <img src="/mulika-logo.png" className="w-24 opacity-30 grayscale dark:invert" alt="" />
                                         </div>
                                     )}
                                     <div className="absolute inset-x-4 bottom-4 glass-dark p-4 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 flex justify-between items-center text-white">
@@ -131,15 +107,15 @@ const Blogs = () => {
                                     </div>
                                 </div>
                                 <div className="space-y-4 px-2">
-                                    <div className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-neutral-400">
+                                    <div className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
                                         <span className="text-brand-600">Growth</span>
                                         <span>•</span>
                                         <span>{format(new Date(post.published_at || post.created_at), "MMM d, yyyy")}</span>
                                     </div>
-                                    <h2 className="text-3xl font-black text-neutral-900 leading-tight group-hover:text-brand-600 transition-colors tracking-tight">
+                                    <h2 className="text-3xl font-black text-neutral-900 dark:text-white leading-tight group-hover:text-brand-600 transition-colors tracking-tight">
                                         {post.title}
                                     </h2>
-                                    <p className="text-neutral-600 line-clamp-2 text-lg font-medium leading-relaxed">
+                                    <p className="text-neutral-600 dark:text-neutral-400 line-clamp-2 text-lg font-medium leading-relaxed">
                                         {post.excerpt || "Click to read more about this story and stay updated with the latest YEE initiatives."}
                                     </p>
                                 </div>

@@ -13,47 +13,50 @@ const data = [
 
 export function MembershipTrends() {
   return (
-    <Card className="border-neutral-200">
+    <Card className="border-neutral-200 dark:border-stone-800 bg-white dark:bg-stone-900 shadow-sm overflow-hidden">
       <CardHeader>
-        <CardTitle className="text-neutral-900">Membership Growth Trends</CardTitle>
-        <p className="text-sm text-neutral-600">Monthly membership statistics over time</p>
+        <CardTitle className="text-neutral-900 dark:text-white font-black uppercase tracking-tight">Membership Growth Trends</CardTitle>
+        <p className="text-sm text-neutral-600 dark:text-stone-400 font-medium">Monthly membership statistics over time</p>
       </CardHeader>
       <CardContent>
         <div className="h-80">
           <ResponsiveContainer width="100%" height="100%">
             <LineChart data={data}>
-              <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" />
-              <XAxis 
-                dataKey="month" 
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5e5e5" className="dark:stroke-stone-800" />
+              <XAxis
+                dataKey="month"
                 axisLine={false}
                 tickLine={false}
-                className="text-neutral-600"
+                className="text-neutral-600 dark:text-stone-500 text-xs font-bold"
               />
-              <YAxis 
+              <YAxis
                 axisLine={false}
                 tickLine={false}
-                className="text-neutral-600"
+                className="text-neutral-600 dark:text-stone-500 text-xs font-bold"
               />
-              <Tooltip 
-                contentStyle={{ 
-                  backgroundColor: '#fff', 
-                  border: '1px solid #e5e5e5',
-                  borderRadius: '8px'
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: 'var(--card)',
+                  border: '1px solid var(--border)',
+                  borderRadius: '12px',
+                  color: 'var(--foreground)'
                 }}
+                itemStyle={{ color: 'inherit' }}
+                labelStyle={{ fontWeight: '800', marginBottom: '4px', color: 'var(--foreground)' }}
               />
-              <Line 
-                type="monotone" 
-                dataKey="members" 
-                stroke="#FBD500" 
-                strokeWidth={3}
+              <Line
+                type="monotone"
+                dataKey="members"
+                stroke="#FBD500"
+                strokeWidth={4}
                 dot={{ fill: '#FBD500', strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, stroke: '#FBD500', strokeWidth: 2 }}
+                activeDot={{ r: 8, stroke: '#FBD500', strokeWidth: 4 }}
                 name="Total Members"
               />
-              <Line 
-                type="monotone" 
-                dataKey="newMembers" 
-                stroke="#737373" 
+              <Line
+                type="monotone"
+                dataKey="newMembers"
+                stroke="#737373"
                 strokeWidth={2}
                 dot={{ fill: '#737373', strokeWidth: 2, r: 3 }}
                 name="New Members"

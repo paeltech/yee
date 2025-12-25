@@ -9,55 +9,16 @@ import { useNavigate } from "react-router-dom";
 import { LandingRedirect } from "@/components/LandingRedirect";
 import { LatestPosts } from "@/components/landing/LatestPosts";
 import { useEffect, useState } from "react";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { TopNavbar } from "@/components/TopNavbar";
 
 export default function Landing() {
   const navigate = useNavigate();
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   return (
     <div className="min-h-screen bg-white selection:bg-brand-200 selection:text-black">
       <LandingRedirect />
-      {/* Header */}
-      <header className={`fixed top-0 z-50 w-full transition-all duration-500 py-6 ${isScrolled ? "bg-white/80 backdrop-blur-xl border-b border-neutral-100 py-4 shadow-sm" : "bg-transparent"}`}>
-        <div className="container mx-auto flex h-16 items-center justify-between px-6 lg:px-12 mt-0">
-          <div className="flex items-center">
-            <a href="/" className="hover:scale-105 transition-transform">
-              <img src="/mulika-logo.png" className="w-32 md:w-40" alt="YEE Platform" />
-            </a>
-          </div>
-          <div className="hidden md:flex items-center gap-8">
-            <button onClick={() => navigate('/blogs')} className="text-neutral-600 hover:text-brand-600 font-black uppercase tracking-widest text-sm transition-colors">
-              Stories
-            </button>
-            <button onClick={() => navigate('/groups/public')} className="text-neutral-600 hover:text-brand-600 font-black uppercase tracking-widest text-sm transition-colors">
-              Groups
-            </button>
-            <Button
-              onClick={() => navigate('/login')}
-              className="bg-brand-500 text-black hover:bg-brand-600 px-8 py-6 rounded-2xl font-black uppercase tracking-widest text-sm shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
-            >
-              <LogIn className="mr-2 h-4 w-4" />
-              Sign In
-            </Button>
-          </div>
-          <div className="md:hidden">
-            <Button
-              onClick={() => navigate('/login')}
-              className="bg-brand-500 text-black hover:bg-brand-600 p-3 rounded-xl"
-            >
-              <LogIn className="h-5 w-5" />
-            </Button>
-          </div>
-        </div>
-      </header>
+      <TopNavbar />
 
       {/* Main Content */}
       <main className="relative">

@@ -15,7 +15,7 @@ export function Layout({ children }: LayoutProps) {
 
   return (
     <SidebarProvider>
-      <div className="min-h-screen flex w-full bg-neutral-50">
+      <div className="min-h-screen flex w-full bg-neutral-50 dark:bg-stone-950 transition-colors duration-500">
         {user && <AppSidebar />}
         <main className="flex-1 p-6 overflow-auto">
           {children}

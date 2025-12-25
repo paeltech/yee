@@ -13,7 +13,7 @@ export function DashboardStats() {
         .from('members')
         .select('id')
         .eq('membership_status', 'active');
-      
+
       if (membersError) throw membersError;
 
       // Get total groups
@@ -21,7 +21,7 @@ export function DashboardStats() {
         .from('groups')
         .select('id')
         .eq('status', 'active');
-      
+
       if (groupsError) throw groupsError;
 
       // Get this month's activities
@@ -35,7 +35,7 @@ export function DashboardStats() {
         .select('id')
         .gte('activity_date', thisMonth.toISOString().split('T')[0])
         .lt('activity_date', nextMonth.toISOString().split('T')[0]);
-      
+
       if (activitiesError) throw activitiesError;
 
       return {
@@ -84,29 +84,28 @@ export function DashboardStats() {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
       {stats.map((stat, index) => (
-        <Card 
-          key={stat.title} 
-          className="border-neutral-200 hover:shadow-xl hover:border-brand-300 transition-all duration-300 hover:-translate-y-1 group cursor-pointer bg-gradient-to-br from-white to-brand-50/30"
+        <Card
+          key={stat.title}
+          className="border-neutral-200 dark:border-stone-800 hover:shadow-xl hover:border-brand-500 transition-all duration-300 hover:-translate-y-1 group cursor-pointer bg-white dark:bg-stone-900 shadow-sm"
         >
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium text-neutral-600 group-hover:text-neutral-900 transition-colors">
+            <CardTitle className="text-sm font-black uppercase tracking-widest text-neutral-500 dark:text-stone-400 group-hover:text-brand-600 transition-colors">
               {stat.title}
             </CardTitle>
-            <div className="p-2 rounded-lg bg-brand-100 group-hover:bg-brand-200 transition-colors">
-              <stat.icon className="h-5 w-5 text-brand-600 group-hover:text-brand-700 transition-colors" />
+            <div className="p-2.5 rounded-xl bg-brand-50 dark:bg-stone-800 group-hover:bg-brand-500 transition-colors duration-500">
+              <stat.icon className="h-5 w-5 text-brand-600 dark:text-brand-500 group-hover:text-black transition-colors" />
             </div>
           </CardHeader>
           <CardContent>
-            <div className="text-3xl font-bold text-neutral-900 mb-2">{stat.value}</div>
+            <div className="text-3xl font-black text-neutral-900 dark:text-white mb-2">{stat.value}</div>
             <div className="flex items-center space-x-1 mt-1">
-              <span className={`text-sm font-semibold ${
-                stat.changeType === 'positive' ? 'text-green-600' : 'text-red-600'
-              }`}>
+              <span className={`text-sm font-black ${stat.changeType === 'positive' ? 'text-green-600 dark:text-green-500' : 'text-red-600 dark:text-red-500'
+                }`}>
                 {stat.change}
               </span>
-              <span className="text-sm text-neutral-500">from last month</span>
+              <span className="text-xs font-medium text-neutral-500 dark:text-stone-500">from last month</span>
             </div>
-            <p className="text-xs text-neutral-500 mt-2">{stat.description}</p>
+            <p className="text-xs font-medium text-neutral-500 dark:text-stone-400 mt-4 border-t border-neutral-50 dark:border-stone-800 pt-4">{stat.description}</p>
           </CardContent>
         </Card>
       ))}

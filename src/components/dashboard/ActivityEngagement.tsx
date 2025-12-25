@@ -11,26 +11,25 @@ const activities = [
 
 export function ActivityEngagement() {
   return (
-    <Card className="border-neutral-200">
+    <Card className="border-neutral-200 dark:border-stone-800 bg-white dark:bg-stone-900 shadow-sm overflow-hidden h-full">
       <CardHeader>
-        <CardTitle className="text-neutral-900 text-lg">Activity Engagement</CardTitle>
-        <p className="text-sm text-neutral-600">Participation by activity type</p>
+        <CardTitle className="text-neutral-900 dark:text-white text-lg font-black uppercase tracking-tight">Activity Engagement</CardTitle>
+        <p className="text-sm text-neutral-600 dark:text-stone-400 font-medium">Participation by activity type</p>
       </CardHeader>
       <CardContent>
-        <div className="space-y-4">
+        <div className="space-y-6">
           {activities.map((activity) => (
-            <div key={activity.name} className="space-y-2">
+            <div key={activity.name} className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-sm font-medium text-neutral-700">{activity.name}</span>
-                <span className="text-sm text-neutral-600">{activity.engagement}%</span>
+                <span className="text-xs font-black uppercase tracking-widest text-neutral-500 dark:text-stone-400">{activity.name}</span>
+                <span className="text-sm font-black text-neutral-900 dark:text-white">{activity.engagement}%</span>
               </div>
-              <Progress 
-                value={activity.engagement} 
-                className="h-2"
-                style={{
-                  backgroundColor: '#f5f5f5'
-                }}
-              />
+              <div className="h-2 w-full bg-neutral-100 dark:bg-stone-800 rounded-full overflow-hidden">
+                <div
+                  className="h-full bg-brand-500 transition-all duration-1000"
+                  style={{ width: `${activity.engagement}%` }}
+                />
+              </div>
             </div>
           ))}
         </div>

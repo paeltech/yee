@@ -6,6 +6,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
+import { ThemeProvider } from "@/components/ThemeProvider";
 import Index from "./pages/Index";
 import Councils from "./pages/Councils";
 import Wards from "./pages/Wards";
@@ -33,106 +34,108 @@ const queryClient = new QueryClient();
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <AuthProvider>
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/landing" element={<Landing />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={
-              <ProtectedRoute>
-                <Index />
-              </ProtectedRoute>
-            } />
-            <Route path="/" element={<Landing />} />
-            <Route path="/councils" element={
-              <ProtectedRoute requiredRoles={['admin']}>
-                <Councils />
-              </ProtectedRoute>
-            } />
-            <Route path="/wards" element={
-              <ProtectedRoute requiredRoles={['admin']}>
-                <Wards />
-              </ProtectedRoute>
-            } />
-            <Route path="/groups/public" element={<PublicGroups />} />
-            <Route path="/groups" element={
-              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
-                <Groups />
-              </ProtectedRoute>
-            } />
-            <Route path="/groups/:id" element={
-              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
-                <GroupDetail />
-              </ProtectedRoute>
-            } />
-            <Route path="/members" element={
-              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
-                <Members />
-              </ProtectedRoute>
-            } />
-            <Route path="/members/:id" element={
-              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
-                <MemberDetail />
-              </ProtectedRoute>
-            } />
-            <Route path="/activities" element={
-              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
-                <Activities />
-              </ProtectedRoute>
-            } />
-            <Route path="/analytics" element={
-              <ProtectedRoute requiredRoles={['admin']}>
-                <Analytics />
-              </ProtectedRoute>
-            } />
-            <Route path="/locations" element={
-              <ProtectedRoute requiredRoles={['admin']}>
-                <Locations />
-              </ProtectedRoute>
-            } />
-            <Route path="/settings" element={
-              <ProtectedRoute requiredRoles={['admin']}>
-                <Settings />
-              </ProtectedRoute>
-            } />
-            <Route path="/documents" element={
-              <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
-                <Documents />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/users" element={
-              <ProtectedRoute requiredRoles={['admin']}>
-                <AdminUsers />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/feedback" element={
-              <ProtectedRoute requiredRoles={['admin']}>
-                <AdminFeedback />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/blogs" element={
-              <ProtectedRoute requiredRoles={['admin']}>
-                <AdminBlogs />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/blogs/new" element={
-              <ProtectedRoute requiredRoles={['admin']}>
-                <AdminBlogEditor />
-              </ProtectedRoute>
-            } />
-            <Route path="/admin/blogs/edit/:id" element={
-              <ProtectedRoute requiredRoles={['admin']}>
-                <AdminBlogEditor />
-              </ProtectedRoute>
-            } />
-            <Route path="/blogs" element={<Blogs />} />
-            <Route path="/blogs/:slug" element={<BlogDetail />} />
-            <Route path="*" element={<Navigate to="/landing" replace />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
+      <ThemeProvider defaultTheme="light" storageKey="vite-ui-theme">
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <BrowserRouter>
+            <Routes>
+              <Route path="/landing" element={<Landing />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/dashboard" element={
+                <ProtectedRoute>
+                  <Index />
+                </ProtectedRoute>
+              } />
+              <Route path="/" element={<Landing />} />
+              <Route path="/councils" element={
+                <ProtectedRoute requiredRoles={['admin']}>
+                  <Councils />
+                </ProtectedRoute>
+              } />
+              <Route path="/wards" element={
+                <ProtectedRoute requiredRoles={['admin']}>
+                  <Wards />
+                </ProtectedRoute>
+              } />
+              <Route path="/groups/public" element={<PublicGroups />} />
+              <Route path="/groups" element={
+                <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                  <Groups />
+                </ProtectedRoute>
+              } />
+              <Route path="/groups/:id" element={
+                <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                  <GroupDetail />
+                </ProtectedRoute>
+              } />
+              <Route path="/members" element={
+                <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                  <Members />
+                </ProtectedRoute>
+              } />
+              <Route path="/members/:id" element={
+                <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                  <MemberDetail />
+                </ProtectedRoute>
+              } />
+              <Route path="/activities" element={
+                <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                  <Activities />
+                </ProtectedRoute>
+              } />
+              <Route path="/analytics" element={
+                <ProtectedRoute requiredRoles={['admin']}>
+                  <Analytics />
+                </ProtectedRoute>
+              } />
+              <Route path="/locations" element={
+                <ProtectedRoute requiredRoles={['admin']}>
+                  <Locations />
+                </ProtectedRoute>
+              } />
+              <Route path="/settings" element={
+                <ProtectedRoute requiredRoles={['admin']}>
+                  <Settings />
+                </ProtectedRoute>
+              } />
+              <Route path="/documents" element={
+                <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
+                  <Documents />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/users" element={
+                <ProtectedRoute requiredRoles={['admin']}>
+                  <AdminUsers />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/feedback" element={
+                <ProtectedRoute requiredRoles={['admin']}>
+                  <AdminFeedback />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/blogs" element={
+                <ProtectedRoute requiredRoles={['admin']}>
+                  <AdminBlogs />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/blogs/new" element={
+                <ProtectedRoute requiredRoles={['admin']}>
+                  <AdminBlogEditor />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/blogs/edit/:id" element={
+                <ProtectedRoute requiredRoles={['admin']}>
+                  <AdminBlogEditor />
+                </ProtectedRoute>
+              } />
+              <Route path="/blogs" element={<Blogs />} />
+              <Route path="/blogs/:slug" element={<BlogDetail />} />
+              <Route path="*" element={<Navigate to="/landing" replace />} />
+            </Routes>
+          </BrowserRouter>
+        </TooltipProvider>
+      </ThemeProvider>
     </AuthProvider>
   </QueryClientProvider>
 );

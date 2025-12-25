@@ -14,6 +14,38 @@ export type Database = {
   }
   public: {
     Tables: {
+      activity_photos: {
+        Row: {
+          id: string
+          activity_id: number
+          photo_url: string
+          photo_path: string
+          uploaded_at: string
+        }
+        Insert: {
+          id?: string
+          activity_id: number
+          photo_url: string
+          photo_path: string
+          uploaded_at?: string
+        }
+        Update: {
+          id?: string
+          activity_id?: number
+          photo_url?: string
+          photo_path?: string
+          uploaded_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "activity_photos_activity_id_fkey"
+            columns: ["activity_id"]
+            isOneToOne: false
+            referencedRelation: "group_activities"
+            referencedColumns: ["id"]
+          }
+        ]
+      }
       blog_posts: {
         Row: {
           id: string

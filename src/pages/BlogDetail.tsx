@@ -31,15 +31,15 @@ const BlogDetail = () => {
 
     if (loading) {
         return (
-            <div className="min-h-screen bg-white flex flex-col items-center justify-center p-4">
+            <div className="min-h-screen bg-white dark:bg-neutral-950 flex flex-col items-center justify-center p-4">
                 <div className="w-full max-w-3xl space-y-8 animate-pulse">
-                    <div className="h-10 bg-neutral-100 w-3/4 rounded mx-auto" />
-                    <div className="h-4 bg-neutral-100 w-1/4 rounded mx-auto" />
-                    <div className="h-[400px] bg-neutral-100 w-full rounded-2xl" />
+                    <div className="h-10 bg-neutral-100 dark:bg-neutral-800 w-3/4 rounded mx-auto" />
+                    <div className="h-4 bg-neutral-100 dark:bg-neutral-800 w-1/4 rounded mx-auto" />
+                    <div className="h-[400px] bg-neutral-100 dark:bg-neutral-800 w-full rounded-2xl" />
                     <div className="space-y-4">
-                        <div className="h-4 bg-neutral-100 w-full rounded" />
-                        <div className="h-4 bg-neutral-100 w-full rounded" />
-                        <div className="h-4 bg-neutral-100 w-5/6 rounded" />
+                        <div className="h-4 bg-neutral-100 dark:bg-neutral-800 w-full rounded" />
+                        <div className="h-4 bg-neutral-100 dark:bg-neutral-800 w-full rounded" />
+                        <div className="h-4 bg-neutral-100 dark:bg-neutral-800 w-5/6 rounded" />
                     </div>
                 </div>
             </div>
@@ -51,11 +51,11 @@ const BlogDetail = () => {
     const shareUrl = window.location.href;
 
     return (
-        <div className="min-h-screen bg-white">
+        <div className="min-h-screen bg-white dark:bg-neutral-950 transition-colors duration-500">
             {/* Reading Progress Header (Optional, simplified here) */}
-            <header className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-neutral-100 h-16 flex items-center px-4">
+            <header className="fixed top-0 left-0 right-0 bg-white/80 dark:bg-neutral-950/80 backdrop-blur-md z-50 border-b border-neutral-100 dark:border-neutral-800 h-16 flex items-center px-4">
                 <div className="container mx-auto max-w-4xl flex justify-between items-center">
-                    <Button variant="ghost" size="sm" onClick={() => navigate("/blogs")} className="text-neutral-500 hover:text-neutral-900">
+                    <Button variant="ghost" size="sm" onClick={() => navigate("/blogs")} className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white">
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         All Stories
                     </Button>
@@ -74,7 +74,7 @@ const BlogDetail = () => {
                 <article className="container mx-auto max-w-3xl">
                     {/* Header */}
                     <header className="mb-12 text-center">
-                        <div className="flex justify-center gap-4 text-sm text-neutral-500 mb-6 font-medium uppercase tracking-wider">
+                        <div className="flex justify-center gap-4 text-sm text-neutral-500 dark:text-neutral-400 mb-6 font-medium uppercase tracking-wider">
                             <span className="flex items-center gap-1.5">
                                 <Calendar className="h-4 w-4" />
                                 {format(new Date(post.published_at || post.created_at), "MMMM d, yyyy")}
@@ -84,11 +84,11 @@ const BlogDetail = () => {
                                 6 min read
                             </span>
                         </div>
-                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-900 leading-tight mb-8">
+                        <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-900 dark:text-white leading-tight mb-8">
                             {post.title}
                         </h1>
                         {post.excerpt && (
-                            <p className="text-xl md:text-2xl text-neutral-500 font-medium leading-relaxed max-w-2xl mx-auto italic">
+                            <p className="text-xl md:text-2xl text-neutral-500 dark:text-neutral-400 font-medium leading-relaxed max-w-2xl mx-auto italic">
                                 "{post.excerpt}"
                             </p>
                         )}
@@ -106,24 +106,24 @@ const BlogDetail = () => {
                     )}
 
                     {/* Content */}
-                    <div className="prose prose-lg prose-neutral max-w-none md:prose-xl prose-headings:font-bold prose-headings:text-neutral-900 prose-p:text-neutral-700 prose-p:leading-relaxed prose-a:text-brand-600 prose-img:rounded-xl prose-img:shadow-lg">
+                    <div className="prose prose-lg prose-neutral dark:prose-invert max-w-none md:prose-xl prose-headings:font-bold prose-headings:text-neutral-900 dark:prose-headings:text-white prose-p:text-neutral-700 dark:prose-p:text-neutral-300 prose-p:leading-relaxed prose-a:text-brand-600 prose-img:rounded-xl prose-img:shadow-lg">
                         <div dangerouslySetInnerHTML={{ __html: post.content }} />
                     </div>
 
                     {/* Footer of Article */}
-                    <footer className="mt-20 pt-10 border-t border-neutral-100">
-                        <div className="flex flex-col md:flex-row items-center justify-between gap-8 py-8 bg-neutral-50 rounded-2xl px-10">
+                    <footer className="mt-20 pt-10 border-t border-neutral-100 dark:border-neutral-800">
+                        <div className="flex flex-col md:flex-row items-center justify-between gap-8 py-8 bg-neutral-50 dark:bg-neutral-900 rounded-2xl px-10">
                             <div className="flex items-center gap-4">
                                 <div className="h-14 w-14 bg-brand-500 rounded-full flex items-center justify-center text-black font-bold text-xl">
                                     Y
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-neutral-900">YEE Editorial</h4>
-                                    <p className="text-sm text-neutral-500">Official voice of Youth Economic Empowerment.</p>
+                                    <h4 className="font-bold text-neutral-900 dark:text-white">YEE Editorial</h4>
+                                    <p className="text-sm text-neutral-500 dark:text-neutral-400">Official voice of Youth Economic Empowerment.</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">
-                                <Button variant="outline" className="rounded-full px-6 flex items-center gap-2" onClick={() => {
+                                <Button variant="outline" className="rounded-full px-6 flex items-center gap-2 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800" onClick={() => {
                                     navigator.clipboard.writeText(shareUrl);
                                     toast.success("Link copied to clipboard");
                                 }}>

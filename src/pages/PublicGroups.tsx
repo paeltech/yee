@@ -12,6 +12,8 @@ import { useToast } from "@/hooks/use-toast";
 import { DocumentViewer } from "@/components/DocumentViewer";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { TopNavbar } from "@/components/TopNavbar";
 
 export default function PublicGroups() {
   const navigate = useNavigate();
@@ -21,16 +23,7 @@ export default function PublicGroups() {
   const [memberCountFilter, setMemberCountFilter] = useState<string>("all");
   const [genderFilter, setGenderFilter] = useState<string>("all");
   const [viewingCertificate, setViewingCertificate] = useState<any | null>(null);
-  const [isScrolled, setIsScrolled] = useState(false);
   const { toast } = useToast();
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
 
   const { data: groups, isLoading, error: groupsError } = useQuery({
     queryKey: ['public-groups'],
@@ -149,34 +142,8 @@ export default function PublicGroups() {
   }) || [];
 
   return (
-    <div className="min-h-screen bg-white selection:bg-brand-200 selection:text-black">
-      {/* Header */}
-      <header className={`fixed top-0 z-50 w-full transition-all duration-500 py-6 ${isScrolled ? "bg-white/80 backdrop-blur-xl border-b border-neutral-100 py-4 shadow-sm" : "bg-transparent"}`}>
-        <div className="container mx-auto flex h-16 items-center justify-between px-6 lg:px-12">
-          <div className="flex items-center">
-            <a href="/" className="hover:scale-105 transition-transform">
-              <img src="/mulika-logo.png" className="w-32 md:w-40" alt="YEE Platform" />
-            </a>
-          </div>
-          <div className="hidden md:flex items-center gap-8 font-black uppercase tracking-widest text-sm">
-            <button onClick={() => navigate('/')} className="text-neutral-600 hover:text-brand-600 transition-colors">Home</button>
-            <button onClick={() => navigate('/blogs')} className="text-neutral-600 hover:text-brand-600 transition-colors">Stories</button>
-            <button className="text-brand-600">Groups</button>
-            <Button
-              onClick={() => navigate('/login')}
-              className="bg-brand-500 text-black hover:bg-brand-600 px-8 py-6 rounded-2xl font-black shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
-            >
-              <LogIn className="mr-2 h-4 w-4" />
-              Sign In
-            </Button>
-          </div>
-          <div className="md:hidden">
-            <Button onClick={() => navigate('/login')} className="bg-brand-500 text-black p-3 rounded-xl">
-              <LogIn className="h-5 w-5" />
-            </Button>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-white dark:bg-neutral-950 selection:bg-brand-200 selection:text-black transition-colors duration-500">
+      <TopNavbar />
 
       {/* Main Content */}
       <main className="py-32 px-6 lg:px-12">
@@ -186,10 +153,10 @@ export default function PublicGroups() {
             animate={{ opacity: 1, y: 0 }}
             className="mb-20 mt-12 text-center md:text-left"
           >
-            <h1 className="text-5xl md:text-8xl font-black text-neutral-900 mb-6 tracking-tighter leading-none">
+            <h1 className="text-5xl md:text-8xl font-black text-neutral-900 dark:text-white mb-6 tracking-tighter leading-none">
               Youth <span className="text-brand-600">Groups</span>
             </h1>
-            <p className="text-xl md:text-2xl text-neutral-600 font-medium max-w-3xl">
+            <p className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 font-medium max-w-3xl">
               Discover and connect with active youth-led groups across Tanzania making a difference in their communities.
             </p>
           </motion.div>
@@ -197,10 +164,10 @@ export default function PublicGroups() {
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
             {/* Filters Sidebar */}
             <aside className="lg:col-span-1">
-              <Card className="border-none shadow-2xl rounded-[2.5rem] bg-neutral-50 p-6 sticky top-28 overflow-hidden">
+              <Card className="border-none shadow-2xl rounded-[2.5rem] bg-neutral-50 dark:bg-neutral-900 p-6 sticky top-28 overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-brand-200 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2" />
                 <CardHeader className="px-0 pb-6">
-                  <CardTitle className="text-xl font-black uppercase tracking-widest text-neutral-900 leading-none">Filters</CardTitle>
+                  <CardTitle className="text-xl font-black uppercase tracking-widest text-neutral-900 dark:text-white leading-none">Filters</CardTitle>
                 </CardHeader>
                 <CardContent className="px-0 space-y-6">
                   <div className="space-y-2">
@@ -211,16 +178,16 @@ export default function PublicGroups() {
                         placeholder="Search groups..."
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
-                        className="h-14 pl-12 rounded-2xl border-neutral-200 focus:ring-brand-500 font-medium"
+                        className="h-14 pl-12 rounded-2xl border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 focus:ring-brand-500 font-medium dark:text-white"
                       />
                     </div>
                   </div>
 
-                  <div className="space-y-4 pt-2 border-t border-neutral-200/50">
+                  <div className="space-y-4 pt-2 border-t border-neutral-200/50 dark:border-neutral-800">
                     <div className="space-y-2">
                       <label className="text-xs font-black uppercase tracking-widest text-neutral-400">Council</label>
                       <Select value={councilFilter} onValueChange={setCouncilFilter}>
-                        <SelectTrigger className="h-14 rounded-2xl border-neutral-200 font-medium">
+                        <SelectTrigger className="h-14 rounded-2xl border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 font-medium dark:text-white">
                           <SelectValue placeholder="All Councils" />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-neutral-200">
@@ -235,7 +202,7 @@ export default function PublicGroups() {
                     <div className="space-y-2">
                       <label className="text-xs font-black uppercase tracking-widest text-neutral-400">Ward</label>
                       <Select value={wardFilter} onValueChange={setWardFilter}>
-                        <SelectTrigger className="h-14 rounded-2xl border-neutral-200 font-medium">
+                        <SelectTrigger className="h-14 rounded-2xl border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 font-medium dark:text-white">
                           <SelectValue placeholder="All Wards" />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-neutral-200">
@@ -250,7 +217,7 @@ export default function PublicGroups() {
                     <div className="space-y-2">
                       <label className="text-xs font-black uppercase tracking-widest text-neutral-400">Size</label>
                       <Select value={memberCountFilter} onValueChange={setMemberCountFilter}>
-                        <SelectTrigger className="h-14 rounded-2xl border-neutral-200 font-medium">
+                        <SelectTrigger className="h-14 rounded-2xl border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 font-medium dark:text-white">
                           <SelectValue placeholder="All Sizes" />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-neutral-200">
@@ -306,42 +273,42 @@ export default function PublicGroups() {
                           exit={{ opacity: 0, scale: 0.9 }}
                           transition={{ duration: 0.5, delay: idx * 0.05 }}
                         >
-                          <Card className="group border border-neutral-100 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-8 h-full bg-white shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 flex flex-col">
+                          <Card className="group border border-neutral-100 dark:border-neutral-800 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-8 h-full bg-white dark:bg-neutral-900 shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 flex flex-col">
                             <div className="flex items-center gap-5 mb-8">
-                              <Avatar className="w-16 h-16 rounded-2xl shadow-lg border-2 border-brand-50 group-hover:border-brand-500 transition-colors">
+                              <Avatar className="w-16 h-16 rounded-2xl shadow-lg border-2 border-brand-50 dark:border-neutral-800 group-hover:border-brand-500 transition-colors">
                                 <AvatarImage src={group.photo_url || undefined} className="object-cover" />
-                                <AvatarFallback className="bg-brand-50 text-brand-600">
+                                <AvatarFallback className="bg-brand-50 dark:bg-neutral-800 text-brand-600">
                                   <Users className="w-8 h-8" />
                                 </AvatarFallback>
                               </Avatar>
                               <div>
-                                <h3 className="text-lg md:text-xl font-black text-neutral-900 group-hover:text-brand-600 transition-colors tracking-tight line-clamp-1">{group.name}</h3>
+                                <h3 className="text-lg md:text-xl font-black text-neutral-900 dark:text-white group-hover:text-brand-600 transition-colors tracking-tight line-clamp-1">{group.name}</h3>
                                 <p className="text-[10px] md:text-xs font-black uppercase tracking-widest text-neutral-400 mt-0.5">{group.group_number || 'YEE Group'}</p>
                               </div>
                             </div>
 
                             <div className="space-y-6 flex-grow">
                               <div className="space-y-4">
-                                <div className="flex items-center text-neutral-600 font-medium">
+                                <div className="flex items-center text-neutral-600 dark:text-neutral-400 font-medium">
                                   <MapPin className="w-5 h-5 mr-3 text-brand-600" />
                                   <span>{group.wards?.name}, {group.wards?.councils?.name}</span>
                                 </div>
 
                                 {stats && (
-                                  <div className="p-5 rounded-3xl bg-neutral-50 space-y-3 group-hover:bg-brand-50 transition-colors">
+                                  <div className="p-5 rounded-3xl bg-neutral-50 dark:bg-neutral-800 space-y-3 group-hover:bg-brand-50 dark:group-hover:bg-neutral-800 transition-colors border border-transparent dark:border-neutral-700">
                                     <div className="flex items-center justify-between">
                                       <div className="flex items-center text-sm font-black uppercase tracking-widest text-neutral-500">
                                         <Users className="w-4 h-4 mr-2" />
                                         Membership
                                       </div>
-                                      <span className="text-xl font-black text-neutral-900">{stats.total}</span>
+                                      <span className="text-xl font-black text-neutral-900 dark:text-white">{stats.total}</span>
                                     </div>
                                     <div className="flex gap-4">
-                                      <div className="flex items-center gap-2 px-2 md:px-3 py-1.5 rounded-xl bg-white text-[10px] md:text-xs font-bold text-neutral-600 border border-neutral-100">
-                                        <span>Male:</span> <span className="text-neutral-900">{stats.male}</span>
+                                      <div className="flex items-center gap-2 px-2 md:px-3 py-1.5 rounded-xl bg-white dark:bg-neutral-900 text-[10px] md:text-xs font-bold text-neutral-600 dark:text-neutral-400 border border-neutral-100 dark:border-neutral-800">
+                                        <span>Male:</span> <span className="text-neutral-900 dark:text-white">{stats.male}</span>
                                       </div>
-                                      <div className="flex items-center gap-2 px-2 md:px-3 py-1.5 rounded-xl bg-white text-[10px] md:text-xs font-bold text-neutral-600 border border-neutral-100">
-                                        <span>Female:</span> <span className="text-neutral-900">{stats.female}</span>
+                                      <div className="flex items-center gap-2 px-2 md:px-3 py-1.5 rounded-xl bg-white dark:bg-neutral-900 text-[10px] md:text-xs font-bold text-neutral-600 dark:text-neutral-400 border border-neutral-100 dark:border-neutral-800">
+                                        <span>Female:</span> <span className="text-neutral-900 dark:text-white">{stats.female}</span>
                                       </div>
                                     </div>
                                   </div>
@@ -349,20 +316,20 @@ export default function PublicGroups() {
                               </div>
 
                               {hasReg && (
-                                <div className="pt-6 border-t border-neutral-100 space-y-4">
+                                <div className="pt-6 border-t border-neutral-100 dark:border-neutral-800 space-y-4">
                                   {group.registration_number && (
                                     <div className="flex items-center justify-between text-sm px-2">
                                       <span className="text-neutral-400 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
                                         <Award className="w-4 h-4" /> Registration
                                       </span>
-                                      <span className="font-black text-neutral-900">{group.registration_number}</span>
+                                      <span className="font-black text-neutral-900 dark:text-white">{group.registration_number}</span>
                                     </div>
                                   )}
                                   {certificates.map((cert: any) => (
                                     <Button
                                       key={cert.file_path}
                                       variant="outline"
-                                      className="w-full h-12 rounded-2xl font-black uppercase tracking-widest text-[10px] border-neutral-200 hover:bg-neutral-50 group-hover:border-brand-300 transition-all"
+                                      className="w-full h-12 rounded-2xl font-black uppercase tracking-widest text-[10px] border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 group-hover:border-brand-300 transition-all dark:text-neutral-400"
                                       onClick={() => setViewingCertificate({ ...cert, bucket: 'group-documents' })}
                                     >
                                       <FileText className="w-4 h-4 mr-2 text-brand-600" />

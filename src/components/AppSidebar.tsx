@@ -108,13 +108,13 @@ export function AppSidebar() {
   const getRoleColor = (role: string) => {
     switch (role) {
       case 'admin':
-        return 'bg-red-100 text-red-800';
+        return 'bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-400';
       case 'chairperson':
-        return 'bg-blue-100 text-blue-800';
+        return 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400';
       case 'secretary':
-        return 'bg-green-100 text-green-800';
+        return 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400';
       default:
-        return 'bg-gray-100 text-gray-800';
+        return 'bg-gray-100 text-gray-800 dark:bg-neutral-800 dark:text-neutral-400';
     }
   };
 
@@ -123,21 +123,21 @@ export function AppSidebar() {
   );
 
   return (
-    <Sidebar className="border-r border-neutral-200">
-      <SidebarHeader className="p-6 border-b border-neutral-200">
+    <Sidebar className="border-r border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-950 transition-colors duration-500">
+      <SidebarHeader className="p-6 border-b border-neutral-200 dark:border-neutral-800">
         <YEELogo size="md" showText={true} />
 
         {user && (
-          <div className="mt-4 p-3 bg-neutral-50 rounded-lg">
+          <div className="mt-4 p-3 bg-neutral-50 dark:bg-neutral-900 rounded-lg">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm font-medium text-neutral-900">
+              <span className="text-sm font-medium text-neutral-900 dark:text-white">
                 {user.first_name} {user.last_name}
               </span>
               <Badge className={getRoleColor(user.role)}>
                 {user.role}
               </Badge>
             </div>
-            <p className="text-xs text-neutral-600 mb-3">{user.email}</p>
+            <p className="text-xs text-neutral-600 dark:text-neutral-400 mb-3">{user.email}</p>
             <Button
               variant="outline"
               size="sm"
@@ -150,9 +150,9 @@ export function AppSidebar() {
           </div>
         )}
       </SidebarHeader>
-      <SidebarContent>
+      <SidebarContent className="bg-white dark:bg-neutral-950 transition-colors">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-neutral-700 font-medium px-3 py-2">
+          <SidebarGroupLabel className="text-neutral-700 dark:text-neutral-400 font-medium px-3 py-2">
             Navigation
           </SidebarGroupLabel>
           <SidebarGroupContent>
@@ -161,7 +161,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton
                     asChild
-                    className="w-full text-neutral-700 hover:bg-brand-50 hover:text-brand-700 data-[active=true]:bg-brand-100 data-[active=true]:text-brand-900 data-[active=true]:font-semibold transition-colors"
+                    className="w-full text-neutral-700 dark:text-neutral-300 hover:bg-brand-50 dark:hover:bg-neutral-900 hover:text-brand-700 dark:hover:text-brand-500 data-[active=true]:bg-brand-100 dark:data-[active=true]:bg-neutral-800 data-[active=true]:text-brand-900 dark:data-[active=true]:text-brand-500 data-[active=true]:font-semibold transition-colors"
                   >
                     <a href={item.url} className="flex items-center space-x-3 px-3 py-2">
                       <item.icon className="w-5 h-5 flex-shrink-0" />

@@ -55,9 +55,19 @@ const MemberDetail = () => {
   if (isLoading) {
     return (
       <Layout>
-        <div className="animate-pulse space-y-6">
-          <div className="h-8 bg-neutral-200 rounded w-1/3"></div>
-          <div className="h-64 bg-neutral-200 rounded"></div>
+        <div className="animate-pulse space-y-8">
+          <div className="flex items-center space-x-6">
+            <div className="h-10 bg-neutral-100 dark:bg-stone-800 rounded-lg w-20"></div>
+            <div className="w-16 h-16 bg-neutral-100 dark:bg-stone-800 rounded-full"></div>
+            <div className="space-y-2">
+              <div className="h-8 bg-neutral-100 dark:bg-stone-800 rounded w-64"></div>
+              <div className="h-4 bg-neutral-100 dark:bg-stone-800 rounded w-32"></div>
+            </div>
+          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 h-96 bg-neutral-100 dark:bg-stone-800 rounded-3xl"></div>
+            <div className="h-96 bg-neutral-100 dark:bg-stone-800 rounded-3xl"></div>
+          </div>
         </div>
       </Layout>
     );
@@ -81,19 +91,19 @@ const MemberDetail = () => {
 
   return (
     <Layout>
-      <div className="space-y-6">
+      <div className="space-y-8 min-h-screen">
         <div className="flex items-center justify-between">
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-6">
             <Link to="/members">
-              <Button variant="outline" size="sm">
-                <ArrowLeft className="w-4 h-4 mr-2" />
+              <Button variant="outline" size="sm" className="border-neutral-200 dark:border-stone-800 dark:text-stone-400 font-black uppercase tracking-widest text-[10px] h-10 px-4 hover:bg-brand-500 hover:text-black hover:border-brand-500 transition-all">
+                <ArrowLeft className="w-3 h-3 mr-2" />
                 Back
               </Button>
             </Link>
             <div className="relative group">
-              <Avatar className="w-16 h-16 border-2 border-brand-500">
+              <Avatar className="w-20 h-20 border-2 border-brand-500 shadow-xl shadow-brand-500/20">
                 <AvatarImage src={member.photo_url || undefined} alt={`${member.first_name} ${member.last_name}`} />
-                <AvatarFallback className="text-xl bg-brand-100 text-brand-600">
+                <AvatarFallback className="text-2xl font-black bg-brand-50 dark:bg-stone-800 text-brand-600 dark:text-brand-500 uppercase tracking-widest">
                   {member.first_name[0]}{member.last_name[0]}
                 </AvatarFallback>
               </Avatar>
@@ -103,18 +113,18 @@ const MemberDetail = () => {
                   memberName={`${member.first_name} ${member.last_name}`}
                   currentPhotoUrl={member.photo_url}
                   trigger={
-                    <Button size="icon" variant="secondary" className="h-6 w-6 rounded-full p-0 shadow-sm border border-neutral-200">
-                      <Edit className="w-3 h-3" />
+                    <Button size="icon" variant="secondary" className="h-8 w-8 rounded-full p-0 shadow-xl bg-white dark:bg-stone-800 border border-neutral-200 dark:border-stone-700 hover:bg-brand-500 hover:text-black transition-colors">
+                      <Edit className="w-4 h-4" />
                     </Button>
                   }
                 />
               </div>
             </div>
             <div>
-              <h1 className="text-3xl font-bold text-neutral-900">
+              <h1 className="text-3xl font-black text-neutral-900 dark:text-white uppercase tracking-tight leading-none">
                 {member.first_name} {member.middle_name} {member.last_name}
               </h1>
-              <p className="text-neutral-600">{member.groups?.name}</p>
+              <p className="text-xs font-black text-neutral-400 dark:text-stone-500 uppercase tracking-widest mt-2">{member.groups?.name}</p>
             </div>
           </div>
           <div className="flex items-center space-x-2">
@@ -123,82 +133,82 @@ const MemberDetail = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <User className="w-5 h-5 mr-2" />
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="lg:col-span-2 space-y-8">
+            <Card className="bg-white dark:bg-stone-900 border-neutral-200 dark:border-stone-800 overflow-hidden shadow-sm">
+              <CardHeader className="border-b border-neutral-50 dark:border-stone-800 pb-4">
+                <CardTitle className="flex items-center text-lg font-black text-neutral-900 dark:text-white uppercase tracking-tight">
+                  <User className="w-5 h-5 mr-3 text-brand-500" />
                   Personal Information
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm font-medium text-neutral-600">Full Name</label>
-                    <p className="text-neutral-900">{member.first_name} {member.middle_name} {member.last_name}</p>
+              <CardContent className="pt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Full Name</label>
+                    <p className="text-sm font-black text-neutral-900 dark:text-white leading-tight">{member.first_name} {member.middle_name} {member.last_name}</p>
                   </div>
-                  <div>
-                    <label className="text-sm font-medium text-neutral-600">Gender</label>
-                    <p className="text-neutral-900">{member.gender}</p>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Gender</label>
+                    <p className="text-sm font-black text-neutral-900 dark:text-white">{member.gender}</p>
                   </div>
                   {member.date_of_birth && (
-                    <div>
-                      <label className="text-sm font-medium text-neutral-600">Age</label>
-                      <p className="text-neutral-900">{getAge(member.date_of_birth)} years old</p>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Age</label>
+                      <p className="text-sm font-black text-neutral-900 dark:text-white">{getAge(member.date_of_birth)} years old</p>
                     </div>
                   )}
                   {member.national_id && (
-                    <div>
-                      <label className="text-sm font-medium text-neutral-600">National ID</label>
-                      <p className="text-neutral-900">{member.national_id}</p>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">National ID</label>
+                      <p className="text-sm font-black text-neutral-900 dark:text-white">{member.national_id}</p>
                     </div>
                   )}
                   {member.education_level && (
-                    <div>
-                      <label className="text-sm font-medium text-neutral-600">Education Level</label>
-                      <p className="text-neutral-900">{member.education_level}</p>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Education Level</label>
+                      <p className="text-sm font-black text-neutral-900 dark:text-white">{member.education_level}</p>
                     </div>
                   )}
                   {member.occupation && (
-                    <div>
-                      <label className="text-sm font-medium text-neutral-600">Occupation</label>
-                      <p className="text-neutral-900">{member.occupation}</p>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Occupation</label>
+                      <p className="text-sm font-black text-neutral-900 dark:text-white">{member.occupation}</p>
                     </div>
                   )}
                 </div>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Phone className="w-5 h-5 mr-2" />
+            <Card className="bg-white dark:bg-stone-900 border-neutral-200 dark:border-stone-800 overflow-hidden shadow-sm">
+              <CardHeader className="border-b border-neutral-50 dark:border-stone-800 pb-4">
+                <CardTitle className="flex items-center text-lg font-black text-neutral-900 dark:text-white uppercase tracking-tight">
+                  <Phone className="w-5 h-5 mr-3 text-brand-500" />
                   Contact Information
                 </CardTitle>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="text-sm font-medium text-neutral-600">Mobile Number</label>
-                    <p className="text-neutral-900">{member.mobile_number}</p>
+              <CardContent className="pt-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Mobile Number</label>
+                    <p className="text-sm font-black text-neutral-900 dark:text-white">{member.mobile_number}</p>
                   </div>
                   {member.alternative_phone && (
-                    <div>
-                      <label className="text-sm font-medium text-neutral-600">Alternative Phone</label>
-                      <p className="text-neutral-900">{member.alternative_phone}</p>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Alternative Phone</label>
+                      <p className="text-sm font-black text-neutral-900 dark:text-white">{member.alternative_phone}</p>
                     </div>
                   )}
                   {member.email_address && (
-                    <div>
-                      <label className="text-sm font-medium text-neutral-600">Email</label>
-                      <p className="text-neutral-900">{member.email_address}</p>
+                    <div className="space-y-1">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Email</label>
+                      <p className="text-sm font-black text-neutral-900 dark:text-white break-all">{member.email_address}</p>
                     </div>
                   )}
                   {member.residential_address && (
-                    <div className="md:col-span-2">
-                      <label className="text-sm font-medium text-neutral-600">Residential Address</label>
-                      <p className="text-neutral-900">{member.residential_address}</p>
+                    <div className="md:col-span-2 space-y-1">
+                      <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Residential Address</label>
+                      <p className="text-sm font-black text-neutral-900 dark:text-white leading-relaxed">{member.residential_address}</p>
                     </div>
                   )}
                 </div>
@@ -206,75 +216,78 @@ const MemberDetail = () => {
             </Card>
           </div>
 
-          <div className="space-y-6">
-            <Card>
-              <CardHeader>
-                <CardTitle>Status & Role</CardTitle>
+          <div className="space-y-8">
+            <Card className="bg-white dark:bg-stone-900 border-neutral-200 dark:border-stone-800 overflow-hidden shadow-sm">
+              <CardHeader className="border-b border-neutral-50 dark:border-stone-800 pb-4">
+                <CardTitle className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-tight">Status & Role</CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium text-neutral-600">Membership Status</label>
-                  <div className="mt-1">
-                    <Badge variant={member.membership_status === 'active' ? 'default' : 'secondary'}>
+              <CardContent className="pt-6 space-y-6">
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Membership Status</label>
+                  <div className="mt-2">
+                    <span className={`text-[10px] font-black uppercase tracking-widest px-4 py-1.5 rounded-full inline-block ${member.membership_status === 'active'
+                        ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
+                        : 'bg-neutral-100 text-neutral-600 dark:bg-stone-800 dark:text-stone-400'
+                      }`}>
                       {member.membership_status}
-                    </Badge>
+                    </span>
                   </div>
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-neutral-600">Role</label>
-                  <p className="text-neutral-900">{member.member_role}</p>
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Role</label>
+                  <p className="text-sm font-black text-neutral-900 dark:text-white uppercase tracking-widest">{member.member_role}</p>
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-neutral-600">Member Number</label>
-                  <p className="text-neutral-900">{member.member_number || 'Not assigned'}</p>
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Member Number</label>
+                  <p className="text-sm font-black text-neutral-900 dark:text-white">{member.member_number || 'Not assigned'}</p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <Calendar className="w-5 h-5 mr-2" />
-                  Membership Timeline
+            <Card className="bg-white dark:bg-stone-900 border-neutral-200 dark:border-stone-800 overflow-hidden shadow-sm">
+              <CardHeader className="border-b border-neutral-50 dark:border-stone-800 pb-4">
+                <CardTitle className="flex items-center text-sm font-black text-neutral-900 dark:text-white uppercase tracking-tight">
+                  <Calendar className="w-4 h-4 mr-3 text-brand-500" />
+                  Timeline
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium text-neutral-600">Join Date</label>
-                  <p className="text-neutral-900">{new Date(member.join_date).toLocaleDateString()}</p>
+              <CardContent className="pt-6 space-y-6">
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Join Date</label>
+                  <p className="text-sm font-black text-neutral-900 dark:text-white">{new Date(member.join_date).toLocaleDateString()}</p>
                 </div>
                 {member.exit_date && (
-                  <div>
-                    <label className="text-sm font-medium text-neutral-600">Exit Date</label>
-                    <p className="text-neutral-900">{new Date(member.exit_date).toLocaleDateString()}</p>
+                  <div className="space-y-1">
+                    <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Exit Date</label>
+                    <p className="text-sm font-black text-neutral-900 dark:text-white">{new Date(member.exit_date).toLocaleDateString()}</p>
                   </div>
                 )}
               </CardContent>
             </Card>
 
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center">
-                  <MapPin className="w-5 h-5 mr-2" />
+            <Card className="bg-white dark:bg-stone-900 border-neutral-200 dark:border-stone-800 overflow-hidden shadow-sm">
+              <CardHeader className="border-b border-neutral-50 dark:border-stone-800 pb-4">
+                <CardTitle className="flex items-center text-sm font-black text-neutral-900 dark:text-white uppercase tracking-tight">
+                  <MapPin className="w-4 h-4 mr-3 text-brand-500" />
                   Group Information
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-4">
-                <div>
-                  <label className="text-sm font-medium text-neutral-600">Group</label>
-                  <p className="text-neutral-900">{member.groups?.name}</p>
+              <CardContent className="pt-6 space-y-6">
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Group</label>
+                  <p className="text-sm font-black text-neutral-900 dark:text-white leading-tight">{member.groups?.name}</p>
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-neutral-600">Group Number</label>
-                  <p className="text-neutral-900">{member.groups?.group_number}</p>
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Group Number</label>
+                  <p className="text-sm font-black text-neutral-900 dark:text-white leading-tight">{member.groups?.group_number}</p>
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-neutral-600">Ward</label>
-                  <p className="text-neutral-900">{member.groups?.wards?.name}</p>
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Ward</label>
+                  <p className="text-sm font-black text-neutral-900 dark:text-white leading-tight">{member.groups?.wards?.name}</p>
                 </div>
-                <div>
-                  <label className="text-sm font-medium text-neutral-600">Council</label>
-                  <p className="text-neutral-900">{member.groups?.wards?.councils?.name}</p>
+                <div className="space-y-1">
+                  <label className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Council</label>
+                  <p className="text-sm font-black text-neutral-900 dark:text-white leading-tight">{member.groups?.wards?.councils?.name}</p>
                 </div>
               </CardContent>
             </Card>

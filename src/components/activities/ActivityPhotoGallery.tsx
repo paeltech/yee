@@ -34,7 +34,7 @@ export function ActivityPhotoGallery({ activityId, canManage = false }: Activity
         .select('*')
         .eq('activity_id', activityId)
         .order('uploaded_at', { ascending: false });
-      
+
       if (error) throw error;
       return data as ActivityPhoto[];
     },
@@ -46,7 +46,7 @@ export function ActivityPhotoGallery({ activityId, canManage = false }: Activity
       const { error: storageError } = await supabase.storage
         .from('photos')
         .remove([photo.photo_path]);
-      
+
       if (storageError) throw storageError;
 
       // Delete from database
@@ -54,7 +54,7 @@ export function ActivityPhotoGallery({ activityId, canManage = false }: Activity
         .from('activity_photos')
         .delete()
         .eq('id', photo.id);
-      
+
       if (dbError) throw dbError;
     },
     onSuccess: () => {
@@ -146,7 +146,7 @@ export function ActivityPhotoGallery({ activityId, canManage = false }: Activity
 
   if (isLoading) {
     return (
-      <div className="text-center py-4 text-neutral-500">
+      <div className="text-center py-4 text-neutral-500 dark:text-stone-500 font-black uppercase tracking-widest text-[10px]">
         Loading photos...
       </div>
     );
@@ -162,10 +162,10 @@ export function ActivityPhotoGallery({ activityId, canManage = false }: Activity
               size="sm"
               asChild
               disabled={uploading}
-              className="w-full"
+              className="w-full dark:border-stone-800 dark:text-stone-400 dark:hover:bg-stone-800 font-extrabold uppercase tracking-widest text-[10px] h-10"
             >
               <span>
-                <Plus className="w-4 h-4 mr-2" />
+                <Plus className="w-4 h-4 mr-2 text-brand-500" />
                 {uploading ? "Uploading..." : "Add Photo"}
               </span>
             </Button>
@@ -183,7 +183,7 @@ export function ActivityPhotoGallery({ activityId, canManage = false }: Activity
       {photos && photos.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
           {photos.map((photo) => (
-            <Card key={photo.id} className="relative group overflow-hidden">
+            <Card key={photo.id} className="relative group overflow-hidden dark:bg-stone-900 dark:border-stone-800 shadow-sm transition-all duration-300 hover:shadow-xl dark:hover:shadow-brand-500/5">
               <CardContent className="p-0">
                 <div
                   className="aspect-square cursor-pointer"
@@ -213,17 +213,17 @@ export function ActivityPhotoGallery({ activityId, canManage = false }: Activity
           ))}
         </div>
       ) : (
-        <div className="text-center py-8 text-neutral-500 border border-dashed rounded-lg">
-          <ImageIcon className="w-12 h-12 mx-auto mb-3 text-neutral-300" />
-          <p>No photos uploaded yet</p>
+        <div className="text-center py-10 text-neutral-500 dark:text-stone-600 border border-dashed rounded-xl dark:bg-stone-950/30 dark:border-stone-800/50 transition-colors">
+          <ImageIcon className="w-10 h-10 mx-auto mb-3 text-neutral-300 dark:text-stone-700" />
+          <p className="font-black uppercase tracking-widest text-[10px]">No photos uploaded yet</p>
           {canManage && (
-            <p className="text-sm mt-2">Click "Add Photo" to upload images</p>
+            <p className="text-[10px] mt-2 opacity-60">Click "Add Photo" to upload images</p>
           )}
         </div>
       )}
 
       <Dialog open={!!selectedPhoto} onOpenChange={(open) => !open && setSelectedPhoto(null)}>
-        <DialogContent className="max-w-4xl">
+        <DialogContent className="max-w-4xl dark:bg-stone-900 dark:border-stone-800 p-2">
           {selectedPhoto && (
             <img
               src={selectedPhoto}
