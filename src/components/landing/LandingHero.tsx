@@ -80,7 +80,7 @@ export function LandingHero() {
             transition={{ duration: 0.8, ease: "easeOut" }}
             className="space-y-6"
           >
-            <h1 className="text-6xl md:text-8xl font-black text-neutral-900 tracking-tighter leading-none">
+            <h1 className="text-5xl md:text-8xl font-black text-neutral-900 tracking-tighter leading-none">
               Empowering <span className="text-brand-600">Youth</span>
             </h1>
             <p className="text-xl md:text-3xl text-neutral-600 max-w-3xl mx-auto font-medium leading-relaxed">
@@ -97,7 +97,7 @@ export function LandingHero() {
           >
             <Button
               size="lg"
-              className="bg-brand-500 text-black hover:bg-brand-600 px-10 py-7 text-lg font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+              className="bg-brand-500 text-black hover:bg-brand-600 px-8 md:px-10 py-6 md:py-7 text-base md:text-lg font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
               onClick={() => document.getElementById('project-details')?.scrollIntoView({ behavior: 'smooth' })}
             >
               Learn more
@@ -106,7 +106,7 @@ export function LandingHero() {
             <Button
               size="lg"
               variant="outline"
-              className="bg-white/50 backdrop-blur-sm border-neutral-200 hover:bg-white px-10 py-7 text-lg font-bold rounded-2xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
+              className="bg-white/50 backdrop-blur-sm border-neutral-200 hover:bg-white px-8 md:px-10 py-6 md:py-7 text-base md:text-lg font-bold rounded-2xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
               onClick={() => navigate('/groups/public')}
             >
               View Groups
@@ -121,9 +121,9 @@ export function LandingHero() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: 0.4 + idx * 0.1 }}
-                className="glass p-8 rounded-3xl text-center group hover:bg-white transition-colors duration-300"
+                className="glass p-6 md:p-8 rounded-3xl text-center group hover:bg-white transition-colors duration-300"
               >
-                <div className="text-4xl md:text-5xl font-black text-neutral-900 mb-2 group-hover:text-brand-600 transition-colors">
+                <div className="text-3xl md:text-5xl font-black text-neutral-900 mb-2 group-hover:text-brand-600 transition-colors">
                   {stat.value}
                 </div>
                 <div className="text-sm font-bold text-neutral-500 uppercase tracking-widest leading-none">

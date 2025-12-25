@@ -306,7 +306,7 @@ export default function PublicGroups() {
                           exit={{ opacity: 0, scale: 0.9 }}
                           transition={{ duration: 0.5, delay: idx * 0.05 }}
                         >
-                          <Card className="group border border-neutral-100 rounded-[3rem] p-8 h-full bg-white shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 flex flex-col">
+                          <Card className="group border border-neutral-100 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-8 h-full bg-white shadow-sm hover:shadow-2xl transition-all duration-700 hover:-translate-y-2 flex flex-col">
                             <div className="flex items-center gap-5 mb-8">
                               <Avatar className="w-16 h-16 rounded-2xl shadow-lg border-2 border-brand-50 group-hover:border-brand-500 transition-colors">
                                 <AvatarImage src={group.photo_url || undefined} className="object-cover" />
@@ -315,8 +315,8 @@ export default function PublicGroups() {
                                 </AvatarFallback>
                               </Avatar>
                               <div>
-                                <h3 className="text-xl font-black text-neutral-900 group-hover:text-brand-600 transition-colors tracking-tight">{group.name}</h3>
-                                <p className="text-xs font-black uppercase tracking-widest text-neutral-400 mt-0.5">{group.group_number || 'YEE Group'}</p>
+                                <h3 className="text-lg md:text-xl font-black text-neutral-900 group-hover:text-brand-600 transition-colors tracking-tight line-clamp-1">{group.name}</h3>
+                                <p className="text-[10px] md:text-xs font-black uppercase tracking-widest text-neutral-400 mt-0.5">{group.group_number || 'YEE Group'}</p>
                               </div>
                             </div>
 
@@ -337,10 +337,10 @@ export default function PublicGroups() {
                                       <span className="text-xl font-black text-neutral-900">{stats.total}</span>
                                     </div>
                                     <div className="flex gap-4">
-                                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white text-xs font-bold text-neutral-600 border border-neutral-100">
+                                      <div className="flex items-center gap-2 px-2 md:px-3 py-1.5 rounded-xl bg-white text-[10px] md:text-xs font-bold text-neutral-600 border border-neutral-100">
                                         <span>Male:</span> <span className="text-neutral-900">{stats.male}</span>
                                       </div>
-                                      <div className="flex items-center gap-2 px-3 py-1.5 rounded-xl bg-white text-xs font-bold text-neutral-600 border border-neutral-100">
+                                      <div className="flex items-center gap-2 px-2 md:px-3 py-1.5 rounded-xl bg-white text-[10px] md:text-xs font-bold text-neutral-600 border border-neutral-100">
                                         <span>Female:</span> <span className="text-neutral-900">{stats.female}</span>
                                       </div>
                                     </div>
@@ -374,7 +374,7 @@ export default function PublicGroups() {
                             </div>
 
                             <Button
-                              className="w-full h-16 rounded-[1.5rem] bg-brand-500 text-black hover:bg-brand-600 font-black uppercase tracking-widest text-xs mt-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
+                              className="w-full h-auto min-h-[3.5rem] md:h-16 py-4 rounded-[1.5rem] bg-brand-500 text-black hover:bg-brand-600 font-black uppercase tracking-tight md:tracking-widest text-[10px] md:text-xs mt-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 leading-tight"
                               onClick={() => handleWhatsAppRequest(group)}
                             >
                               <MessageCircle className="w-5 h-5 mr-3" />

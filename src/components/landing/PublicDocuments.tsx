@@ -92,7 +92,7 @@ export function PublicDocuments() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="group p-8 rounded-[2.5rem] border border-neutral-100 bg-white shadow-xl hover:shadow-2xl hover:border-brand-200 transition-all duration-500 hover:-translate-y-2"
+              className="group p-6 md:p-8 rounded-[2.5rem] border border-neutral-100 bg-white shadow-xl hover:shadow-2xl hover:border-brand-200 transition-all duration-500 hover:-translate-y-2"
             >
               <div className="flex items-start gap-5 mb-6">
                 <div className="w-14 h-14 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center flex-shrink-0 group-hover:bg-brand-500 group-hover:text-black transition-colors duration-500">
