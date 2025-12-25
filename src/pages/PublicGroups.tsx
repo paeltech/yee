@@ -149,7 +149,7 @@ export default function PublicGroups() {
 
   const handleWhatsAppRequest = (group: any) => {
     // Get contact number from group or use default admin contact
-    const phoneNumber = group.primary_contact_phone?.replace(/\D/g, '') || "255XXXXXXXXX"; // Replace with actual admin phone number
+    const phoneNumber = group.primary_contact_phone?.replace(/\D/g, '') || "255758335223"; // Replace with actual admin phone number
     const message = `Hello, I would like to request more information about the ${group.name} youth group (${group.group_number || 'Group ID: ' + group.id}).`;
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappUrl, '_blank');

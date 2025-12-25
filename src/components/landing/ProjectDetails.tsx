@@ -6,32 +6,32 @@ export function ProjectDetails() {
     {
       icon: Lightbulb,
       title: "Program Overview",
-      description: "Comprehensive initiative designed to empower young people through economic opportunities, skills development, and community engagement."
+      description: "YEE project is implemented by Mulika Tanzania with support from UNFPA Tanzania to equip youths with skills, resources, and collective support to build sustainable livelihoods and financial independence. "
     },
     {
       icon: Target,
       title: "Objectives",
-      description: "Creating sustainable economic opportunities, building entrepreneurial skills, and promoting financial independence among youth."
+      description: "The program focuses on building entrepreneurship skills, improving financial literacy, and enabling youths to create stable income opportunities that strengthen their families and communities."
     },
     {
       icon: Users,
       title: "Implementation",
-      description: "Implemented under Mulika Tanzania, providing training, resources, and support to help young people achieve their economic goals."
+      description: "YEE is delivered through structured training, group formation, mentorship, and access to financial opportunities. Participants are supported to register groups, engage local systems, and grow viable enterprises."
     },
     {
       icon: Award,
       title: "Key Benefits",
-      description: "Access to training programs, mentorship opportunities, networking events, and financial resources."
+      description: "Through the program, youths gain access to business training, financial resources, mentorship, peer networks, and digital tools that support long-term economic growth."
     },
     {
       icon: Handshake,
       title: "Community Impact",
-      description: "Strengthening local communities by creating jobs, supporting local businesses, and developing economically empowered leaders."
+      description: "By empowering youths economically, the program strengthens local economies, supports job creation, and nurtures confident community leaders."
     },
     {
       icon: TrendingUp,
       title: "Success Metrics",
-      description: "Tracking member engagement, business growth, employment rates, and community development indicators."
+      description: "Impact is measured through participation levels, group formation and registration, enterprise growth, access to finance, and improved economic outcomes."
     }
   ];
 
@@ -49,7 +49,7 @@ export function ProjectDetails() {
             About the Program
           </h2>
           <p className="text-lg text-neutral-600 max-w-2xl mx-auto">
-            Empowering Tanzania's youth through economic opportunities
+            Empowering youth with sustainable economic opportunities
           </p>
         </motion.div>
 

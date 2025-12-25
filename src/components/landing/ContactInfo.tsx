@@ -9,19 +9,19 @@ export function ContactInfo({ variant = "default" }: ContactInfoProps) {
     {
       icon: Mail,
       label: "Email",
-      value: "info@yeeportal.tz",
-      link: "mailto:info@yeeportal.tz"
+      value: "info@mulika.or.tz",
+      link: "mailto:info@mulika.or.tz"
     },
     {
       icon: Phone,
       label: "Phone",
-      value: "+255 XXX XXX XXX",
-      link: "tel:+255XXXXXXXXX"
+      value: "+255(0) 758 335 223",
+      link: "tel:+255758335223"
     },
     {
       icon: MapPin,
       label: "Location",
-      value: "Dar es Salaam, Tanzania",
+      value: "Delta House 1 floor,Donga St,Kinondoni, Dar es Salaam",
       link: null
     },
     {
