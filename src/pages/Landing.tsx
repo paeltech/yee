@@ -7,6 +7,8 @@ import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import { LandingRedirect } from "@/components/LandingRedirect";
+import { LatestPosts } from "@/components/landing/LatestPosts";
+import { BookOpen } from "lucide-react";
 
 export default function Landing() {
   const navigate = useNavigate();
@@ -24,7 +26,15 @@ export default function Landing() {
           </div>
           <div className="flex gap-2">
             <Button
-              size="lg"
+              variant="ghost"
+              className="text-neutral-600 hover:text-neutral-900"
+              onClick={() => navigate('/blogs')}
+            >
+
+              Stories & updates
+            </Button>
+            <Button
+
               variant="outline"
               className="border-neutral-300 hover:bg-neutral-50 px-8"
               onClick={() => navigate('/groups/public')}
@@ -46,6 +56,7 @@ export default function Landing() {
       <main>
         <LandingHero />
         <ProjectDetails />
+        <LatestPosts />
         <PublicDocuments />
         <TestimonialsSlider />
         <ContactInfo />

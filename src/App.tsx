@@ -23,6 +23,10 @@ import AdminUsers from "./pages/AdminUsers";
 import AdminFeedback from "./pages/AdminFeedback";
 import Landing from "./pages/Landing";
 import PublicGroups from "./pages/PublicGroups";
+import AdminBlogs from "./pages/AdminBlogs";
+import AdminBlogEditor from "./pages/AdminBlogEditor";
+import Blogs from "./pages/Blogs";
+import BlogDetail from "./pages/BlogDetail";
 
 const queryClient = new QueryClient();
 
@@ -108,6 +112,23 @@ const App = () => (
                 <AdminFeedback />
               </ProtectedRoute>
             } />
+            <Route path="/admin/blogs" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <AdminBlogs />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blogs/new" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <AdminBlogEditor />
+              </ProtectedRoute>
+            } />
+            <Route path="/admin/blogs/edit/:id" element={
+              <ProtectedRoute requiredRoles={['admin']}>
+                <AdminBlogEditor />
+              </ProtectedRoute>
+            } />
+            <Route path="/blogs" element={<Blogs />} />
+            <Route path="/blogs/:slug" element={<BlogDetail />} />
             <Route path="*" element={<Navigate to="/landing" replace />} />
           </Routes>
         </BrowserRouter>

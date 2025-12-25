@@ -16,7 +16,7 @@ export function DashboardHeader() {
     <div className="flex items-center justify-between">
       <div className="flex items-center space-x-4">
         <div>
-          <h1 className="text-3xl font-bold text-neutral-900">YEE Portal Dashboard</h1>
+          <h1 className="text-3xl font-bold text-neutral-900">YOUTH ECONOMIC EMPOWERMENT PORTAL</h1>
           <div className="flex items-center space-x-2 mt-2 text-neutral-600">
             <CalendarIcon className="w-4 h-4" />
             <span className="text-sm">{currentDate}</span>

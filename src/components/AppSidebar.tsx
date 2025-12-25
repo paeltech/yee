@@ -84,6 +84,12 @@ const menuItems = [
     roles: ['admin'],
   },
   {
+    title: "Manage Blogs",
+    url: "/admin/blogs",
+    icon: FileText,
+    roles: ['admin'],
+  },
+  {
     title: "Settings",
     url: "/settings",
     icon: Settings,
@@ -112,7 +118,7 @@ export function AppSidebar() {
     }
   };
 
-  const filteredMenuItems = menuItems.filter(item => 
+  const filteredMenuItems = menuItems.filter(item =>
     !item.roles || item.roles.includes(user?.role || '')
   );
 
@@ -120,7 +126,7 @@ export function AppSidebar() {
     <Sidebar className="border-r border-neutral-200">
       <SidebarHeader className="p-6 border-b border-neutral-200">
         <YEELogo size="md" showText={true} />
-        
+
         {user && (
           <div className="mt-4 p-3 bg-neutral-50 rounded-lg">
             <div className="flex items-center justify-between mb-2">
@@ -153,7 +159,7 @@ export function AppSidebar() {
             <SidebarMenu>
               {filteredMenuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton 
+                  <SidebarMenuButton
                     asChild
                     className="w-full text-neutral-700 hover:bg-brand-50 hover:text-brand-700 data-[active=true]:bg-brand-100 data-[active=true]:text-brand-900 data-[active=true]:font-semibold transition-colors"
                   >

@@ -92,10 +92,10 @@ export function LandingHero() {
           >
             <Button
               size="lg"
-              className="bg-brand-500 text-black hover:bg-brand-600 text-black px-8"
-              onClick={() => navigate('/login')}
+              className="bg-brand-500 text-black hover:bg-brand-600 px-8"
+              onClick={() => document.getElementById('project-details')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Get Started
+              Learn more
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
             <Button
