@@ -86,14 +86,14 @@ export function DashboardStats() {
       {stats.map((stat, index) => (
         <Card 
           key={stat.title} 
-          className="border-neutral-200 hover:shadow-xl hover:border-amber-300 transition-all duration-300 hover:-translate-y-1 group cursor-pointer bg-gradient-to-br from-white to-amber-50/30"
+          className="border-neutral-200 hover:shadow-xl hover:border-brand-300 transition-all duration-300 hover:-translate-y-1 group cursor-pointer bg-gradient-to-br from-white to-brand-50/30"
         >
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium text-neutral-600 group-hover:text-neutral-900 transition-colors">
               {stat.title}
             </CardTitle>
-            <div className="p-2 rounded-lg bg-amber-100 group-hover:bg-amber-200 transition-colors">
-              <stat.icon className="h-5 w-5 text-amber-600 group-hover:text-amber-700 transition-colors" />
+            <div className="p-2 rounded-lg bg-brand-100 group-hover:bg-brand-200 transition-colors">
+              <stat.icon className="h-5 w-5 text-brand-600 group-hover:text-brand-700 transition-colors" />
             </div>
           </CardHeader>
           <CardContent>

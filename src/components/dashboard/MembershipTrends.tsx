@@ -44,10 +44,10 @@ export function MembershipTrends() {
               <Line 
                 type="monotone" 
                 dataKey="members" 
-                stroke="#f59e0b" 
+                stroke="#FBD500" 
                 strokeWidth={3}
-                dot={{ fill: '#f59e0b', strokeWidth: 2, r: 4 }}
-                activeDot={{ r: 6, stroke: '#f59e0b', strokeWidth: 2 }}
+                dot={{ fill: '#FBD500', strokeWidth: 2, r: 4 }}
+                activeDot={{ r: 6, stroke: '#FBD500', strokeWidth: 2 }}
                 name="Total Members"
               />
               <Line 

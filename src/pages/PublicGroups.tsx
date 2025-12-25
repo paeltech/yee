@@ -219,11 +219,12 @@ export default function PublicGroups() {
     <div className="min-h-screen bg-white">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/60">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 mt-8">
 
           <div className="flex items-center space-x-2">
-            <img src="/mulika-logo.png" className="w-32" alt="" />
-            <span className="text-lg font-bold text-neutral-900">YEE Portal</span>
+            <a href="/">
+              <img src="/mulika-logo.png" className="w-32" alt="" />
+            </a>
           </div>
           <div className="flex gap-2">
             <Button
@@ -234,7 +235,7 @@ export default function PublicGroups() {
             </Button>
             <Button
               onClick={() => window.location.href = '/login'}
-              className="bg-amber-500 hover:bg-amber-600"
+              className="bg-brand-500 text-black hover:bg-brand-600"
             >
               Sign In
             </Button>
@@ -417,7 +418,7 @@ export default function PublicGroups() {
                             <div className="flex items-start gap-3">
                               <Avatar className="w-12 h-12">
                                 <AvatarImage src={group.photo_url || undefined} alt={group.name} />
-                                <AvatarFallback className="bg-amber-100 text-amber-600">
+                                <AvatarFallback className="bg-brand-100 text-brand-600">
                                   <Users className="w-6 h-6" />
                                 </AvatarFallback>
                               </Avatar>
@@ -489,7 +490,7 @@ export default function PublicGroups() {
                               )}
 
                               <Button
-                                className="w-full bg-amber-500 hover:bg-amber-600 mt-4"
+                                className="w-full bg-brand-500 text-black hover:bg-brand-600 mt-4"
                                 onClick={() => handleWhatsAppRequest(group)}
                               >
                                 <MessageCircle className="w-4 h-4 mr-2" />

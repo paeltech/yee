@@ -2,6 +2,7 @@ import { LandingHero } from "@/components/landing/LandingHero";
 import { ProjectDetails } from "@/components/landing/ProjectDetails";
 import { ContactInfo } from "@/components/landing/ContactInfo";
 import { PublicDocuments } from "@/components/landing/PublicDocuments";
+import { TestimonialsSlider } from "@/components/landing/TestimonialsSlider";
 import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 import { useNavigate } from "react-router-dom";
@@ -15,10 +16,11 @@ export default function Landing() {
       <LandingRedirect />
       {/* Header */}
       <header className="sticky top-0 z-50 w-full bg-white/95 backdrop-blur">
-        <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <div className="container mx-auto flex h-16 items-center justify-between px-4 mt-8">
           <div className="flex items-center">
-            <img src="mulika-logo.png" className="w-32" alt="" />
-            <span className="text-lg font-bold text-neutral-900">YEE Portal</span>
+            <a href="/">
+              <img src="mulika-logo.png" className="w-32" alt="" />
+            </a>
           </div>
           <div className="flex gap-2">
             <Button
@@ -31,7 +33,7 @@ export default function Landing() {
             </Button>
             <Button
               onClick={() => navigate('/login')}
-              className="bg-amber-500 hover:bg-amber-600"
+              className="bg-brand-500 text-black hover:bg-brand-600"
             >
               <LogIn className="mr-2 h-4 w-4" />
               Sign In
@@ -45,6 +47,7 @@ export default function Landing() {
         <LandingHero />
         <ProjectDetails />
         <PublicDocuments />
+        <TestimonialsSlider />
         <ContactInfo />
       </main>
 

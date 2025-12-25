@@ -20,8 +20,8 @@ export function GeographicDistribution() {
           {locations.map((location) => (
             <div key={location.council} className="p-4 border border-neutral-200 rounded-lg hover:shadow-md transition-shadow">
               <div className="flex items-center space-x-3 mb-3">
-                <div className="w-10 h-10 bg-amber-100 rounded-full flex items-center justify-center">
-                  <MapPin className="w-5 h-5 text-amber-600" />
+                <div className="w-10 h-10 bg-brand-100 rounded-full flex items-center justify-center">
+                  <MapPin className="w-5 h-5 text-brand-600" />
                 </div>
                 <div>
                   <h3 className="font-medium text-neutral-900">{location.council}</h3>

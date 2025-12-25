@@ -39,7 +39,7 @@ export function AgeDistribution() {
                   borderRadius: '8px'
                 }}
               />
-              <Bar dataKey="count" fill="#f59e0b" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="count" fill="#FBD500" radius={[4, 4, 0, 0]} />
             </BarChart>
           </ResponsiveContainer>
         </div>

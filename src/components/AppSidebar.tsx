@@ -155,7 +155,7 @@ export function AppSidebar() {
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton 
                     asChild
-                    className="w-full text-neutral-700 hover:bg-amber-50 hover:text-amber-700 data-[active=true]:bg-amber-100 data-[active=true]:text-amber-900 data-[active=true]:font-semibold transition-colors"
+                    className="w-full text-neutral-700 hover:bg-brand-50 hover:text-brand-700 data-[active=true]:bg-brand-100 data-[active=true]:text-brand-900 data-[active=true]:font-semibold transition-colors"
                   >
                     <a href={item.url} className="flex items-center space-x-3 px-3 py-2">
                       <item.icon className="w-5 h-5 flex-shrink-0" />

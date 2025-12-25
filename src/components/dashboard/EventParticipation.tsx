@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip, Legend } from "recharts";
 
 const data = [
-  { name: "High Participation", value: 45, color: "#f59e0b" },
+  { name: "High Participation", value: 45, color: "#FBD500" },
   { name: "Medium Participation", value: 35, color: "#a3a3a3" },
   { name: "Low Participation", value: 20, color: "#e5e5e5" },
 ];

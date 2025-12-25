@@ -62,7 +62,7 @@ export function GroupsPage() {
           <p className="text-neutral-600 mt-2">Manage youth groups and their activities</p>
         </div>
         {user?.role === 'admin' && (
-          <GroupDialog mode="add" trigger={<Button className="bg-amber-500 hover:bg-amber-600 text-white">Add Group</Button>} />
+          <GroupDialog mode="add" trigger={<Button className="bg-brand-500 text-black hover:bg-brand-600 text-black">Add Group</Button>} />
         )}
       </div>
 
@@ -99,7 +99,7 @@ export function GroupsPage() {
                   <div className="relative">
                     <Avatar className="w-12 h-12">
                       <AvatarImage src={group.photo_url || undefined} alt={group.name} />
-                      <AvatarFallback className="bg-amber-100 text-amber-600">
+                      <AvatarFallback className="bg-brand-100 text-brand-600">
                         <Users className="w-6 h-6" />
                       </AvatarFallback>
                     </Avatar>

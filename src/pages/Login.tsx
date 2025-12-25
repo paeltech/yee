@@ -110,7 +110,7 @@ export default function Login() {
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
           <div className="flex justify-center mb-4">
-            <div className="w-16 h-16 bg-amber-500 rounded-xl flex items-center justify-center">
+            <div className="w-16 h-16 bg-brand-500 text-black rounded-xl flex items-center justify-center">
               <Users className="w-8 h-8 text-white" />
             </div>
           </div>
@@ -124,7 +124,7 @@ export default function Login() {
             <Button
               variant="link"
               onClick={() => navigate('/landing')}
-              className="text-sm text-amber-600 hover:text-amber-700"
+              className="text-sm text-brand-600 hover:text-brand-700"
             >
               Learn more about YEE Program
             </Button>
@@ -182,7 +182,7 @@ export default function Login() {
             
             <Button
               type="submit"
-              className="w-full bg-amber-500 hover:bg-amber-600"
+              className="w-full bg-brand-500 text-black hover:bg-brand-600"
               disabled={loading}
             >
               {loading ? 'Signing in...' : 'Sign In'}
@@ -193,7 +193,7 @@ export default function Login() {
             <Button
               variant="link"
               onClick={openResetDialog}
-              className="text-sm text-neutral-600 hover:text-amber-600"
+              className="text-sm text-neutral-600 hover:text-brand-600"
               disabled={loading}
             >
               <KeyRound className="w-4 h-4 mr-2" />
@@ -209,7 +209,7 @@ export default function Login() {
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
-              <KeyRound className="w-5 h-5 text-amber-500" />
+              <KeyRound className="w-5 h-5 text-brand-500" />
               Reset Password
             </DialogTitle>
             <DialogDescription>
@@ -320,7 +320,7 @@ export default function Login() {
                 </Button>
                 <Button
                   type="submit"
-                  className="bg-amber-500 hover:bg-amber-600"
+                  className="bg-brand-500 text-black hover:bg-brand-600"
                   disabled={resetLoading}
                 >
                   {resetLoading ? 'Resetting...' : 'Reset Password'}

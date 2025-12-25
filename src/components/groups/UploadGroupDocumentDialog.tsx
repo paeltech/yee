@@ -152,7 +152,7 @@ export function UploadGroupDocumentDialog({ groupId, groupName, trigger }: Uploa
             <Button 
               type="submit" 
               disabled={!file || isUploading}
-              className="bg-amber-500 hover:bg-amber-600"
+              className="bg-brand-500 text-black hover:bg-brand-600"
             >
               {isUploading ? (
                 <>

@@ -88,10 +88,10 @@ export function PublicDocuments() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: idx * 0.1 }}
-              className="border border-neutral-200 rounded-lg p-6 hover:border-amber-300 transition-colors"
+              className="border border-neutral-200 rounded-lg p-6 hover:border-brand-300 transition-colors"
             >
               <div className="flex items-start gap-3 mb-4">
-                <FileText className="w-6 h-6 text-amber-600 flex-shrink-0 mt-1" />
+                <FileText className="w-6 h-6 text-brand-600 flex-shrink-0 mt-1" />
                 <h3 className="text-lg font-semibold text-neutral-900 line-clamp-2">{doc.file_name}</h3>
               </div>
 

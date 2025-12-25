@@ -120,7 +120,7 @@ export function AddActivityDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-amber-500 hover:bg-amber-600 text-white">
+        <Button className="bg-brand-500 text-black hover:bg-brand-600 text-black">
           <Plus className="w-4 h-4 mr-2" />
           Add Activity
         </Button>
@@ -241,7 +241,7 @@ export function AddActivityDialog() {
             </Button>
             <Button 
               type="submit" 
-              className="bg-amber-500 hover:bg-amber-600"
+              className="bg-brand-500 text-black hover:bg-brand-600"
               disabled={addActivityMutation.isPending}
             >
               {addActivityMutation.isPending ? "Adding..." : "Add Activity"}

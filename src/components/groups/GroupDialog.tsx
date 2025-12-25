@@ -346,7 +346,7 @@ export function GroupDialog({
             </div>
           </div>
           <div className="flex justify-end">
-            <Button type="submit" className="bg-amber-500 hover:bg-amber-600 text-white">
+            <Button type="submit" className="bg-brand-500 text-black hover:bg-brand-600 text-black">
               {mode === "add" ? "Add Group" : "Save Changes"}
             </Button>
           </div>

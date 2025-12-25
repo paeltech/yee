@@ -211,7 +211,7 @@ export function UploadMemberPhotoDialog({
             <Button
               onClick={handleSave}
               disabled={!selectedFile || isUploading}
-              className="bg-amber-500 hover:bg-amber-600"
+              className="bg-brand-500 text-black hover:bg-brand-600"
             >
               {isUploading ? "Uploading..." : "Upload Photo"}
             </Button>

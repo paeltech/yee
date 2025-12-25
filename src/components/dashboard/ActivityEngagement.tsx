@@ -3,9 +3,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
 
 const activities = [
-  { name: "Training Sessions", engagement: 92, color: "bg-amber-500" },
+  { name: "Training Sessions", engagement: 92, color: "bg-brand-500 text-black" },
   { name: "Community Projects", engagement: 78, color: "bg-neutral-400" },
-  { name: "Social Events", engagement: 85, color: "bg-amber-400" },
+  { name: "Social Events", engagement: 85, color: "bg-brand-400" },
   { name: "Skill Development", engagement: 67, color: "bg-neutral-500" },
 ];
 

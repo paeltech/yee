@@ -25,7 +25,7 @@ export function ResourceUtilization() {
               </div>
               <div className="w-full bg-neutral-200 rounded-full h-3">
                 <div 
-                  className="bg-amber-500 h-3 rounded-full transition-all duration-300"
+                  className="bg-brand-500 text-black h-3 rounded-full transition-all duration-300"
                   style={{ width: `${resource.utilization}%` }}
                 />
               </div>

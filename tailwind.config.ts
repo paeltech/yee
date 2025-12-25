@@ -61,12 +61,23 @@ export default {
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
 				},
-				// YEE Brand Colors
+				brand: {
+					50: '#FFFBEB',
+					100: '#FEF3C7',
+					200: '#FDE68A',
+					300: '#FCD34D',
+					400: '#FBBF24',
+					500: '#FBD500', // Main brand color
+					600: '#D4B100',
+					700: '#AD9100',
+					800: '#877100',
+					900: '#615100',
+				},
 				yee: {
-					gold: '#F59E0B', // amber-500
-					'gold-light': '#FCD34D', // amber-300
-					'gold-dark': '#D97706', // amber-600
-					'gold-hover': '#FBBF24', // amber-400
+					gold: '#FBD500',
+					'gold-light': '#FEF3C7',
+					'gold-dark': '#D4B100',
+					'gold-hover': '#FBBF24',
 				}
 			},
 			borderRadius: {

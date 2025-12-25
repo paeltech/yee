@@ -63,7 +63,7 @@ export function ProjectDetails() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="space-y-3"
             >
-              <feature.icon className="h-8 w-8 text-amber-600" />
+              <feature.icon className="h-8 w-8 text-brand-600" />
               <h3 className="text-xl font-semibold text-neutral-900">{feature.title}</h3>
               <p className="text-neutral-600 leading-relaxed">
                 {feature.description}

@@ -153,7 +153,7 @@ export function FeedbackDialog() {
             <Button
               type="submit"
               disabled={feedbackMutation.isPending}
-              className="bg-amber-500 hover:bg-amber-600"
+              className="bg-brand-500 text-black hover:bg-brand-600"
             >
               {feedbackMutation.isPending ? (
                 "Submitting..."

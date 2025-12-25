@@ -87,7 +87,7 @@ export function HelpDesk() {
     <>
       <Button
         onClick={() => setOpen(true)}
-        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-amber-500 hover:bg-amber-600 text-white shadow-lg z-50"
+        className="fixed bottom-6 right-6 h-14 w-14 rounded-full bg-brand-500 text-black hover:bg-brand-600 text-black shadow-lg z-50"
         size="icon"
         aria-label="Open help desk"
       >
@@ -134,7 +134,7 @@ export function HelpDesk() {
                       <CardContent>
                         <div className="space-y-4">
                           {category.questions.map((item, index) => (
-                            <div key={index} className="border-l-4 border-amber-500 pl-4">
+                            <div key={index} className="border-l-4 border-brand-500 pl-4">
                               <h4 className="font-semibold text-neutral-900 mb-2">{item.q}</h4>
                               <p className="text-sm text-neutral-600">{item.a}</p>
                             </div>

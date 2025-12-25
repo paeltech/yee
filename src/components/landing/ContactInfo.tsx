@@ -38,7 +38,7 @@ export function ContactInfo({ variant = "default" }: ContactInfoProps) {
         <h3 className="text-lg font-semibold text-neutral-900">Contact</h3>
         {contacts.map((contact, index) => (
           <div key={index} className="flex items-start gap-3">
-            <contact.icon className="h-5 w-5 text-amber-600 mt-0.5 flex-shrink-0" />
+            <contact.icon className="h-5 w-5 text-brand-600 mt-0.5 flex-shrink-0" />
             <div>
               <div className="text-sm font-medium text-neutral-700">{contact.label}</div>
               {contact.link ? (
@@ -73,7 +73,7 @@ export function ContactInfo({ variant = "default" }: ContactInfoProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {contacts.map((contact, index) => (
             <div key={index} className="text-center space-y-3">
-              <contact.icon className="h-8 w-8 text-amber-600 mx-auto" />
+              <contact.icon className="h-8 w-8 text-brand-600 mx-auto" />
               <h3 className="text-lg font-semibold text-neutral-900">{contact.label}</h3>
               {contact.link ? (
                 <a

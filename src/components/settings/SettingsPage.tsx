@@ -60,8 +60,8 @@ export function SettingsPage() {
         <Card className="border-neutral-200">
           <CardHeader>
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-amber-100 rounded-lg flex items-center justify-center">
-                <Settings className="w-5 h-5 text-amber-600" />
+              <div className="w-10 h-10 bg-brand-100 rounded-lg flex items-center justify-center">
+                <Settings className="w-5 h-5 text-brand-600" />
               </div>
               <div>
                 <CardTitle className="text-neutral-900">General Settings</CardTitle>
@@ -78,7 +78,7 @@ export function SettingsPage() {
               <Label htmlFor="timezone">Timezone</Label>
               <Input id="timezone" defaultValue="Africa/Dar_es_Salaam" />
             </div>
-            <Button className="bg-amber-500 hover:bg-amber-600" onClick={handleSaveGeneral}>Save Changes</Button>
+            <Button className="bg-brand-500 text-black hover:bg-brand-600" onClick={handleSaveGeneral}>Save Changes</Button>
           </CardContent>
         </Card>
 
@@ -135,7 +135,7 @@ export function SettingsPage() {
                 </label>
               </div>
             </div>
-            <Button className="bg-amber-500 hover:bg-amber-600" onClick={handleUpdateUserSettings}>Update Settings</Button>
+            <Button className="bg-brand-500 text-black hover:bg-brand-600" onClick={handleUpdateUserSettings}>Update Settings</Button>
           </CardContent>
         </Card>
 

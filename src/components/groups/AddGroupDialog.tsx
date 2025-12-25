@@ -152,7 +152,7 @@ export function AddGroupDialog() {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="bg-amber-500 hover:bg-amber-600 text-white">
+        <Button className="bg-brand-500 text-black hover:bg-brand-600 text-black">
           <Plus className="w-4 h-4 mr-2" />
           Add Group
         </Button>
@@ -306,7 +306,7 @@ export function AddGroupDialog() {
             </Button>
             <Button 
               type="submit" 
-              className="bg-amber-500 hover:bg-amber-600"
+              className="bg-brand-500 text-black hover:bg-brand-600"
               disabled={addGroupMutation.isPending}
             >
               {addGroupMutation.isPending ? "Adding..." : "Add Group"}

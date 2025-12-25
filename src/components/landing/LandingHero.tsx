@@ -92,7 +92,7 @@ export function LandingHero() {
           >
             <Button
               size="lg"
-              className="bg-amber-500 hover:bg-amber-600 text-white px-8"
+              className="bg-brand-500 text-black hover:bg-brand-600 text-black px-8"
               onClick={() => navigate('/login')}
             >
               Get Started
