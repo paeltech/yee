@@ -1,0 +1,220 @@
+{
+  "translation": {
+    "nav": {
+      "home": "Mwanzo",
+      "stories": "Hadithi",
+      "groups": "Vikundi",
+      "signIn": "Ingia"
+    },
+    "landing": {
+      "heroTitle": "Kuwezesha Taarifa za Vijana",
+      "hero": {
+        "title1": "Kuwezesha",
+        "title2": "Vijana",
+        "subtitle": "Unganishwa na fursa, jenga ujuzi, na ukuze mustakabali wako kupitia mfumo wa Programu ya YEE.",
+        "btnLearnMore": "Jifunze zaidi",
+        "btnViewGroups": "Tazama Vikundi",
+        "statMembers": "Wanachama Hai",
+        "statGroups": "Vikundi vya Vijana",
+        "statWards": "Kata"
+      },
+      "contact": {
+        "title": "Wasiliana Nasi",
+        "title1": "Kuwa",
+        "title2": "Karibu",
+        "subtitle": "Je, una maswali au unataka kushirikiana nasi? Tuko hapa kusaidia kujenga mustakabali pamoja.",
+        "lblEmail": "Barua Pepe",
+        "lblPhone": "Simu",
+        "lblLocation": "Mahali",
+        "lblWorkingHours": "Saa za Kazi"
+      },
+      "posts": {
+        "title1": "Hadithi &",
+        "title2": "Sasisho",
+        "subtitle": "Pata taarifa za hivi punde, hadithi za mafanikio, na maarifa kutoka kwenye jamii ya YEE.",
+        "btnSeeAll": "Tazama hadithi zote",
+        "readArticle": "Soma Makala",
+        "tagUpdates": "Sasisho",
+        "fallbackExcerpt": "Gundua jinsi vijana wanavyotumia fursa katika mfumo wa YEE..."
+      },
+      "project": {
+        "title": "Kuhusu Programu",
+        "subtitle": "Kuwezesha vijana na fursa endelevu za kiuchumi kupitia ubunifu na ushirikiano.",
+        "features": {
+          "overview": {
+            "title": "Muhtasari wa Programu",
+            "description": "Mradi wa YEE unatekelezwa na Mulika Tanzania kwa msaada kutoka UNFPA Tanzania kuwapa vijana ujuzi, rasilimali, na msaada wa pamoja ili kujenga maisha endelevu na uhuru wa kifedha."
+          },
+          "objectives": {
+            "title": "Malengo",
+            "description": "Programu inalenga kujenga ujuzi wa ujasiriamali, kuboresha elimu ya fedha, na kuwawezesha vijana kuunda fursa thabiti za mapato zinazoimarisha familia zao na jamii."
+          },
+          "implementation": {
+            "title": "Utekelezaji",
+            "description": "YEE inatolewa kupitia mafunzo rasmi, uundaji wa vikundi, ushauri, na upatikanaji wa fursa za kifedha. Washiriki wanawezeshwa kusajili vikundi, kushirikisha mifumo ya ndani, na kukuza biashara zinazokua."
+          },
+          "benefits": {
+            "title": "Faida Kuu",
+            "description": "Kupitia programu hii, vijana wanapata mafunzo ya biashara, rasilimali za kifedha, ushauri, mitandao ya rika, na zana za kidijitali zinazosaidia ukuaji wa kiuchumi wa muda mrefu."
+          },
+          "impact": {
+            "title": "Athari kwa Jamii",
+            "description": "Kwa kuwezesha vijana kiuchumi, programu inaimarisha chumi za ndani, inasaidia uundaji wa ajira, na inakuza viongozi wa jamii wenye ujasiri."
+          },
+          "metrics": {
+            "title": "Vipimo vya Mafanikio",
+            "description": "Athari hupimwa kupitia viwango vya ushiriki, uundaji na usajili wa vikundi, ukuaji wa biashara, upatikanaji wa fedha, na matokeo bora ya kiuchumi."
+          }
+        }
+      },
+      "documents": {
+        "title1": "Maktaba &",
+        "title2": "Rasilimali",
+        "subtitle": "Pata nyaraka muhimu, miongozo, na taarifa za kusaidia safari yako katika Programu ya YEE.",
+        "btnViewDocument": "Tazama Waraka",
+        "loading": "Rasilimali"
+      },
+      "testimonials": {
+        "title1": "Hadithi za",
+        "title2": "Mafanikio",
+        "subtitle": "Sikiliza kutoka kwa wasichana wa ajabu ambao wamebadili maisha yao na jamii zao kupitia Programu ya YEE.",
+        "yearsOld": "MIAKA"
+      },
+      "login": {
+        "welcome": "Karibu Tena",
+        "subtitle": "Ingia kwenye akaunti yako ya Yee Portal",
+        "learnMore": "Jifunze zaidi kuhusu Programu ya YEE",
+        "email": "Barua pepe",
+        "emailPlaceholder": "Weka barua pepe yako",
+        "password": "Nenosiri",
+        "passwordPlaceholder": "Weka nenosiri lako",
+        "btnSigningIn": "Inaingia...",
+        "btnSignIn": "Ingia",
+        "forgotPassword": "Umesahau Nenosiri?",
+        "resetTitle": "Weka Upya Nenosiri",
+        "resetSubtitle": "Weka barua pepe yako na uchague nenosiri jipya ili kuweka upya akaunti yako.",
+        "resetSuccessTitle": "Nenosiri Limewekwa Upya Kikamilifu!",
+        "resetSuccessMsg": "Nenosiri lako limesasishwa. Sasa unaweza kuingia na nenosiri lako jipya.",
+        "newPassword": "Nenosiri Jipya",
+        "newPasswordPlaceholder": "Weka nenosiri jipya",
+        "passwordRules": "Nenosiri lazima liwe na herufi 8 zilizo na herufi kubwa, ndogo, na namba.",
+        "confirmPassword": "Thibitisha Nenosiri Jipya",
+        "confirmPasswordPlaceholder": "Thibitisha nenosiri jipya",
+        "btnCancel": "Ghairi",
+        "btnResetting": "Inaweka upya...",
+        "btnResetPassword": "Weka Upya Nenosiri",
+        "errEmailRequired": "Barua pepe inahitajika",
+        "errNewPasswordRequired": "Nenosiri jipya linahitajika",
+        "errPasswordRules": "Nenosiri lazima liwe na herufi 8",
+        "errPasswordsMismatch": "Manenosiri hayafanani"
+      },
+      "blogs": {
+        "title1": "Jarida la",
+        "title2": "YEE",
+        "subtitle": "Kugundua hadithi za athari, uwezeshaji wa vijana, na mabadiliko ya kiuchumi kwenye jamii za Tanzania.",
+        "noStories": "Hakuna hadithi bado",
+        "checkBack": "Rudi tena hivi karibuni kwa sasisho mpya na maarifa.",
+        "btnGoHome": "Nenda Mwanzo",
+        "readStory": "Soma Hadithi",
+        "tagGrowth": "Ukuaji",
+        "fallbackExcerpt": "Bofya kusoma zaidi kuhusu hadithi hii na upate taarifa za mipango mipya ya YEE."
+      },
+      "blogDetail": {
+        "notFound": "Hadithi haikupatikana",
+        "allStories": "Hadithi Zote",
+        "minRead": "Soma kwa dakika 6",
+        "editorial": "Uhariri wa YEE",
+        "editorialSubtitle": "Sauti rasmi ya Uwezeshaji wa Kiuchumi wa Vijana.",
+        "copyLink": "Nakili Kiungo",
+        "linkCopied": "Kiungo kimenakiliwa"
+      },
+      "publicGroups": {
+        "title1": "Vikundi vya",
+        "title2": "Vijana",
+        "subtitle": "Gundua na ungana na vikundi vinavyoongozwa na vijana kote Tanzania vinavyoleta mabadiliko katika jamii zao.",
+        "filters": "Vichujio",
+        "search": "Tafuta",
+        "searchPlaceholder": "Tafuta vikundi...",
+        "council": "Halmashauri",
+        "allCouncils": "Halmashauri Zote",
+        "ward": "Kata",
+        "allWards": "Kata Zote",
+        "size": "Ukubwa",
+        "allSizes": "Ukubwa Wote",
+        "size0_10": "Wanachama 0-10",
+        "size11_20": "Wanachama 11-20",
+        "size21_30": "Wanachama 21-30",
+        "size31Plus": "Wanachama 31+",
+        "clearAll": "Futa Zote",
+        "defaultGroup": "Kikundi cha YEE",
+        "membership": "Uanachama",
+        "male": "Wanaume:",
+        "female": "Wanawake:",
+        "registration": "Usajili",
+        "view": "Tazama",
+        "viewMoreInfo": "Tazama habari zaidi",
+        "noGroups": "Hakuna vikundi vilivyopatikana",
+        "adjustSearch": "Jaribu kurekebisha utafutaji wako au vichujio."
+      },
+      "publicGroupDetails": {
+        "notFound": "Kikundi hakikupatikana",
+        "backToGroups": "Rudi kwenye Vikundi",
+        "back": "Rudi",
+        "groupInfo": "Taarifa za Kikundi",
+        "groupName": "Jina la Kikundi",
+        "registrationDate": "Tarehe ya Usajili",
+        "registrationNumber": "Namba ya Usajili",
+        "notAssigned": "Haijapangiwa",
+        "description": "Maelezo",
+        "meetingInfo": "Taarifa za Mkutano",
+        "meetingDay": "Siku ya Mkutano",
+        "meetingTime": "Muda wa Mkutano",
+        "meetingLocation": "Eneo la Mkutano",
+        "members": "Wanachama",
+        "noMembers": "Hakuna wanachama hai waliopatikana",
+        "location": "Eneo",
+        "ward": "Kata",
+        "council": "Halmashauri",
+        "contactInfo": "Taarifa za Mawasiliano",
+        "contactPerson": "Mtu wa Mawasiliano",
+        "phone": "Simu",
+        "email": "Barua pepe"
+      },
+      "sidebar": {
+        "navDashboard": "Dashibodi",
+        "navCouncils": "Halmashauri",
+        "navWards": "Kata",
+        "navGroups": "Vikundi",
+        "navMembers": "Wanachama",
+        "navActivities": "Shughuli",
+        "navAnalytics": "Takwimu",
+        "navLocations": "Maeneo",
+        "navDocuments": "Rasilimali",
+        "navUsers": "Usimamizi wa Watumiaji",
+        "navFeedback": "Maoni",
+        "navBlogs": "Dhibiti Hadithi",
+        "navSettings": "Mipangilio",
+        "signOut": "Toka",
+        "navigation": "Menyu"
+      },
+      "dashboard": {
+        "title": "Dashibodi",
+        "notifications": "Arifa",
+        "locale": "sw-TZ"
+      },
+      "footer": {
+        "description": "Kuwezesha kizazi kijacho cha wajasiriamali wa Kitanzania kupitia teknolojia na usaidizi wa jamii.",
+        "platform": "Jukwaa",
+        "aboutUs": "Kuhusu Sisi",
+        "latestStories": "Hadithi Mpya",
+        "groupsPortal": "Vikundi",
+        "resources": "Rasilimali",
+        "support": "Msaada",
+        "contact": "Mawasiliano",
+        "privacyPolicy": "Sera ya Faragha",
+        "termsOfService": "Vigezo na Masharti",
+        "helpCenter": "Kituo cha Msaada"
+      }
+    }
+  }
+}

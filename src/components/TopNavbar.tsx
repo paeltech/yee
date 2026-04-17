@@ -3,8 +3,11 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { LogIn } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
+import { LanguageSelector } from "@/components/LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 export function TopNavbar() {
+    const { t } = useTranslation();
     const navigate = useNavigate();
     const location = useLocation();
     const [isScrolled, setIsScrolled] = useState(false);
@@ -44,15 +47,15 @@ export function TopNavbar() {
                 <div className="hidden md:flex items-center gap-8">
                     {location.pathname !== '/' && (
                         <button onClick={() => navigate('/')} className={linkClass('/')}>
-                            Home
+                            {t('nav.home')}
                         </button>
                     )}
 
                     <button onClick={() => navigate('/blogs')} className={linkClass('/blogs')}>
-                        Stories
+                        {t('nav.stories')}
                     </button>
                     <button onClick={() => navigate('/groups/public')} className={linkClass('/groups/public')}>
-                        Groups
+                        {t('nav.groups')}
                     </button>
 
 
@@ -62,13 +65,15 @@ export function TopNavbar() {
                         className="bg-brand-500 text-black hover:bg-brand-600 px-8 py-6 rounded-2xl font-black uppercase tracking-widest text-sm shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
                     >
                         <LogIn className="mr-2 h-4 w-4" />
-                        Sign In
+                        {t('nav.signIn')}
                     </Button>
+                    <LanguageSelector />
                     <ThemeToggle />
                 </div>
 
                 {/* Mobile Nav */}
                 <div className="md:hidden flex items-center gap-3">
+                    <LanguageSelector />
                     <ThemeToggle />
                     <Button
                         onClick={() => navigate('/login')}

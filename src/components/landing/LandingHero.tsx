@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export function LandingHero() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   // Fetch active members count
   const { data: membersCount } = useQuery({
@@ -52,15 +54,15 @@ export function LandingHero() {
   const stats = [
     {
       value: membersCount ? `${membersCount.toLocaleString()}+` : "...",
-      label: "Active Members"
+      label: t('landing.hero.statMembers')
     },
     {
       value: groupsCount ? `${groupsCount}+` : "...",
-      label: "Youth Groups"
+      label: t('landing.hero.statGroups')
     },
     {
       value: wardsCount ? `${wardsCount}+` : "...",
-      label: "Wards"
+      label: t('landing.hero.statWards')
     },
   ];
 
@@ -81,10 +83,10 @@ export function LandingHero() {
             className="space-y-6"
           >
             <h1 className="text-5xl md:text-8xl font-black text-neutral-900 dark:text-white tracking-tighter leading-none">
-              Empowering <span className="text-brand-600">Youth</span>
+              {t('landing.hero.title1')} <span className="text-brand-600">{t('landing.hero.title2')}</span>
             </h1>
             <p className="text-xl md:text-3xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto font-medium leading-relaxed">
-              Connect with opportunities, build skills, and grow your future through the YEE Program ecosystem.
+              {t('landing.hero.subtitle')}
             </p>
           </motion.div>
 
@@ -100,7 +102,7 @@ export function LandingHero() {
               className="bg-brand-500 text-black hover:bg-brand-600 px-8 md:px-10 py-6 md:py-7 text-base md:text-lg font-bold rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-1"
               onClick={() => document.getElementById('project-details')?.scrollIntoView({ behavior: 'smooth' })}
             >
-              Learn more
+              {t('landing.hero.btnLearnMore')}
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button
@@ -109,7 +111,7 @@ export function LandingHero() {
               className="bg-white/50 dark:bg-neutral-900/50 backdrop-blur-sm border-neutral-200 dark:border-neutral-800 hover:bg-white dark:hover:bg-neutral-800 dark:text-white px-8 md:px-10 py-6 md:py-7 text-base md:text-lg font-bold rounded-2xl shadow-sm hover:shadow-md transition-all hover:-translate-y-1"
               onClick={() => navigate('/groups/public')}
             >
-              View Groups
+              {t('landing.hero.btnViewGroups')}
             </Button>
           </motion.div>
 

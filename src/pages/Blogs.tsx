@@ -10,8 +10,10 @@ import { ArrowLeft, Clock, User, ChevronRight, LogIn } from "lucide-react";
 import { motion } from "framer-motion";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { TopNavbar } from "@/components/TopNavbar";
+import { useTranslation } from "react-i18next";
 
 const Blogs = () => {
+    const { t } = useTranslation();
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
@@ -43,10 +45,10 @@ const Blogs = () => {
                             animate={{ opacity: 1, x: 0 }}
                             className="text-5xl md:text-8xl font-black text-neutral-900 dark:text-white mb-6 tracking-tighter leading-none"
                         >
-                            The YEE <span className="text-brand-600">Journal</span>
+                            {t('landing.blogs.title1')} <span className="text-brand-600">{t('landing.blogs.title2')}</span>
                         </motion.h1>
                         <p className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 font-medium leading-relaxed">
-                            Exploring stories of impact, youth empowerment, and economic transformation across the vibrant communities of Tanzania.
+                            {t('landing.blogs.subtitle')}
                         </p>
                     </div>
                 </div>
@@ -69,13 +71,13 @@ const Blogs = () => {
                         <div className="mb-6 text-neutral-200">
                             <Clock className="w-20 h-20 mx-auto" />
                         </div>
-                        <h3 className="text-3xl font-black text-neutral-900 dark:text-white tracking-tight">No stories yet</h3>
-                        <p className="text-xl text-neutral-500 dark:text-neutral-400 mt-2 font-medium">Check back soon for new updates and insights.</p>
+                        <h3 className="text-3xl font-black text-neutral-900 dark:text-white tracking-tight">{t('landing.blogs.noStories')}</h3>
+                        <p className="text-xl text-neutral-500 dark:text-neutral-400 mt-2 font-medium">{t('landing.blogs.checkBack')}</p>
                         <Button
                             className="mt-10 bg-brand-500 text-black hover:bg-brand-600 px-10 py-7 rounded-2xl font-black text-lg"
                             onClick={() => navigate("/")}
                         >
-                            Go Home
+                            {t('landing.blogs.btnGoHome')}
                         </Button>
                     </div>
                 ) : (
@@ -102,13 +104,13 @@ const Blogs = () => {
                                         </div>
                                     )}
                                     <div className="absolute inset-x-4 bottom-4 glass-dark p-4 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 flex justify-between items-center text-white">
-                                        <span className="font-bold">Read Story</span>
+                                        <span className="font-bold">{t('landing.blogs.readStory')}</span>
                                         <ChevronRight className="h-5 w-5" />
                                     </div>
                                 </div>
                                 <div className="space-y-4 px-2">
                                     <div className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
-                                        <span className="text-brand-600">Growth</span>
+                                        <span className="text-brand-600">{t('landing.blogs.tagGrowth')}</span>
                                         <span>•</span>
                                         <span>{format(new Date(post.published_at || post.created_at), "MMM d, yyyy")}</span>
                                     </div>
@@ -116,7 +118,7 @@ const Blogs = () => {
                                         {post.title}
                                     </h2>
                                     <p className="text-neutral-600 dark:text-neutral-400 line-clamp-2 text-lg font-medium leading-relaxed">
-                                        {post.excerpt || "Click to read more about this story and stay updated with the latest YEE initiatives."}
+                                        {post.excerpt || t('landing.blogs.fallbackExcerpt')}
                                     </p>
                                 </div>
                             </motion.div>
@@ -132,23 +134,23 @@ const Blogs = () => {
                         <div className="col-span-1 md:col-span-2 space-y-8">
                             <img src="/mulika-logo.png" className="w-48" alt="YEE Platform" />
                             <p className="text-neutral-400 text-xl max-w-md leading-relaxed">
-                                Empowering the next generation of Tanzanian entrepreneurs through technology and community support.
+                                {t('landing.footer.description')}
                             </p>
                         </div>
                         <div>
-                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">Explore</h4>
+                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">{t('landing.footer.platform')}</h4>
                             <ul className="space-y-4 text-neutral-400 font-medium">
-                                <li><a href="#" onClick={() => navigate('/')} className="hover:text-brand-500 transition-colors">Home</a></li>
-                                <li><a href="#" onClick={() => navigate('/blogs')} className="hover:text-brand-500 transition-colors">Latest Stories</a></li>
-                                <li><a href="#" onClick={() => navigate('/groups/public')} className="hover:text-brand-500 transition-colors">Groups Portal</a></li>
+                                <li><a href="#" onClick={() => navigate('/')} className="hover:text-brand-500 transition-colors">{t('nav.home')}</a></li>
+                                <li><a href="#" onClick={() => navigate('/blogs')} className="hover:text-brand-500 transition-colors">{t('landing.footer.latestStories')}</a></li>
+                                <li><a href="#" onClick={() => navigate('/groups/public')} className="hover:text-brand-500 transition-colors">{t('landing.footer.groupsPortal')}</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">Connect</h4>
+                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">{t('landing.footer.support')}</h4>
                             <ul className="space-y-4 text-neutral-400 font-medium">
                                 <li><a href="mailto:info@mulika.or.tz" className="hover:text-brand-500 transition-colors">info@mulika.or.tz</a></li>
-                                <li><a href="#" className="hover:text-brand-500 transition-colors">Privacy Policy</a></li>
-                                <li><a href="#" className="hover:text-brand-500 transition-colors">Terms</a></li>
+                                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.privacyPolicy')}</a></li>
+                                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.termsOfService')}</a></li>
                             </ul>
                         </div>
                     </div>

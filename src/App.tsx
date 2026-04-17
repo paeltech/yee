@@ -24,6 +24,7 @@ import AdminUsers from "./pages/AdminUsers";
 import AdminFeedback from "./pages/AdminFeedback";
 import Landing from "./pages/Landing";
 import PublicGroups from "./pages/PublicGroups";
+import PublicGroupDetails from "./pages/PublicGroupDetails";
 import AdminBlogs from "./pages/AdminBlogs";
 import AdminBlogEditor from "./pages/AdminBlogEditor";
 import Blogs from "./pages/Blogs";
@@ -59,6 +60,7 @@ const App = () => (
                 </ProtectedRoute>
               } />
               <Route path="/groups/public" element={<PublicGroups />} />
+              <Route path="/groups/public/:id" element={<PublicGroupDetails />} />
               <Route path="/groups" element={
                 <ProtectedRoute requiredRoles={['admin', 'chairperson', 'secretary']}>
                   <Groups />

@@ -1,37 +1,39 @@
 import { Lightbulb, Users, Target, Award, Handshake, TrendingUp } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export function ProjectDetails() {
+  const { t } = useTranslation();
   const features = [
     {
       icon: Lightbulb,
-      title: "Program Overview",
-      description: "YEE project is implemented by Mulika Tanzania with support from UNFPA Tanzania to equip youths with skills, resources, and collective support to build sustainable livelihoods and financial independence. "
+      title: t('landing.project.features.overview.title'),
+      description: t('landing.project.features.overview.description')
     },
     {
       icon: Target,
-      title: "Objectives",
-      description: "The program focuses on building entrepreneurship skills, improving financial literacy, and enabling youths to create stable income opportunities that strengthen their families and communities."
+      title: t('landing.project.features.objectives.title'),
+      description: t('landing.project.features.objectives.description')
     },
     {
       icon: Users,
-      title: "Implementation",
-      description: "YEE is delivered through structured training, group formation, mentorship, and access to financial opportunities. Participants are supported to register groups, engage local systems, and grow viable enterprises."
+      title: t('landing.project.features.implementation.title'),
+      description: t('landing.project.features.implementation.description')
     },
     {
       icon: Award,
-      title: "Key Benefits",
-      description: "Through the program, youths gain access to business training, financial resources, mentorship, peer networks, and digital tools that support long-term economic growth."
+      title: t('landing.project.features.benefits.title'),
+      description: t('landing.project.features.benefits.description')
     },
     {
       icon: Handshake,
-      title: "Community Impact",
-      description: "By empowering youths economically, the program strengthens local economies, supports job creation, and nurtures confident community leaders."
+      title: t('landing.project.features.impact.title'),
+      description: t('landing.project.features.impact.description')
     },
     {
       icon: TrendingUp,
-      title: "Success Metrics",
-      description: "Impact is measured through participation levels, group formation and registration, enterprise growth, access to finance, and improved economic outcomes."
+      title: t('landing.project.features.metrics.title'),
+      description: t('landing.project.features.metrics.description')
     }
   ];
 
@@ -50,10 +52,10 @@ export function ProjectDetails() {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-6xl font-black text-neutral-900 dark:text-white mb-6 tracking-tight">
-            About the Program
+            {t('landing.project.title')}
           </h2>
           <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto font-medium">
-            Empowering youth with sustainable economic opportunities through innovation and collaboration.
+            {t('landing.project.subtitle')}
           </p>
         </motion.div>
 

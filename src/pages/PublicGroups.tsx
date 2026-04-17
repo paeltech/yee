@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Search, Users, MapPin, Calendar, Award, MessageCircle, FileText, LogIn } from "lucide-react";
+import { Search, Users, MapPin, Calendar, Award, MessageCircle, FileText, LogIn, Eye } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useToast } from "@/hooks/use-toast";
 import { DocumentViewer } from "@/components/DocumentViewer";
@@ -14,8 +14,10 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { TopNavbar } from "@/components/TopNavbar";
+import { useTranslation } from "react-i18next";
 
 export default function PublicGroups() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchTerm, setSearchTerm] = useState("");
   const [wardFilter, setWardFilter] = useState<string>("all");
@@ -154,10 +156,10 @@ export default function PublicGroups() {
             className="mb-20 mt-12 text-center md:text-left"
           >
             <h1 className="text-5xl md:text-8xl font-black text-neutral-900 dark:text-white mb-6 tracking-tighter leading-none">
-              Youth <span className="text-brand-600">Groups</span>
+              {t('landing.publicGroups.title1')} <span className="text-brand-600">{t('landing.publicGroups.title2')}</span>
             </h1>
             <p className="text-xl md:text-2xl text-neutral-600 dark:text-neutral-400 font-medium max-w-3xl">
-              Discover and connect with active youth-led groups across Tanzania making a difference in their communities.
+              {t('landing.publicGroups.subtitle')}
             </p>
           </motion.div>
 
@@ -167,15 +169,15 @@ export default function PublicGroups() {
               <Card className="border-none shadow-2xl rounded-[2.5rem] bg-neutral-50 dark:bg-neutral-900 p-6 sticky top-28 overflow-hidden">
                 <div className="absolute top-0 right-0 w-32 h-32 bg-brand-200 rounded-full blur-3xl opacity-20 -translate-y-1/2 translate-x-1/2" />
                 <CardHeader className="px-0 pb-6">
-                  <CardTitle className="text-xl font-black uppercase tracking-widest text-neutral-900 dark:text-white leading-none">Filters</CardTitle>
+                  <CardTitle className="text-xl font-black uppercase tracking-widest text-neutral-900 dark:text-white leading-none">{t('landing.publicGroups.filters')}</CardTitle>
                 </CardHeader>
                 <CardContent className="px-0 space-y-6">
                   <div className="space-y-2">
-                    <label className="text-xs font-black uppercase tracking-widest text-neutral-400">Search</label>
+                    <label className="text-xs font-black uppercase tracking-widest text-neutral-400">{t('landing.publicGroups.search')}</label>
                     <div className="relative">
                       <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-5 w-5 text-neutral-400" />
                       <Input
-                        placeholder="Search groups..."
+                        placeholder={t('landing.publicGroups.searchPlaceholder')}
                         value={searchTerm}
                         onChange={(e) => setSearchTerm(e.target.value)}
                         className="h-14 pl-12 rounded-2xl border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 focus:ring-brand-500 font-medium dark:text-white"
@@ -185,13 +187,13 @@ export default function PublicGroups() {
 
                   <div className="space-y-4 pt-2 border-t border-neutral-200/50 dark:border-neutral-800">
                     <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-neutral-400">Council</label>
+                      <label className="text-xs font-black uppercase tracking-widest text-neutral-400">{t('landing.publicGroups.council')}</label>
                       <Select value={councilFilter} onValueChange={setCouncilFilter}>
                         <SelectTrigger className="h-14 rounded-2xl border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 font-medium dark:text-white">
-                          <SelectValue placeholder="All Councils" />
+                          <SelectValue placeholder={t('landing.publicGroups.allCouncils')} />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-neutral-200">
-                          <SelectItem value="all">All Councils</SelectItem>
+                          <SelectItem value="all">{t('landing.publicGroups.allCouncils')}</SelectItem>
                           {uniqueCouncils.map(council => (
                             <SelectItem key={council} value={council}>{council}</SelectItem>
                           ))}
@@ -200,13 +202,13 @@ export default function PublicGroups() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-neutral-400">Ward</label>
+                      <label className="text-xs font-black uppercase tracking-widest text-neutral-400">{t('landing.publicGroups.ward')}</label>
                       <Select value={wardFilter} onValueChange={setWardFilter}>
                         <SelectTrigger className="h-14 rounded-2xl border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 font-medium dark:text-white">
-                          <SelectValue placeholder="All Wards" />
+                          <SelectValue placeholder={t('landing.publicGroups.allWards')} />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-neutral-200">
-                          <SelectItem value="all">All Wards</SelectItem>
+                          <SelectItem value="all">{t('landing.publicGroups.allWards')}</SelectItem>
                           {uniqueWards.map(ward => (
                             <SelectItem key={ward} value={ward}>{ward}</SelectItem>
                           ))}
@@ -215,17 +217,17 @@ export default function PublicGroups() {
                     </div>
 
                     <div className="space-y-2">
-                      <label className="text-xs font-black uppercase tracking-widest text-neutral-400">Size</label>
+                      <label className="text-xs font-black uppercase tracking-widest text-neutral-400">{t('landing.publicGroups.size')}</label>
                       <Select value={memberCountFilter} onValueChange={setMemberCountFilter}>
                         <SelectTrigger className="h-14 rounded-2xl border-neutral-200 dark:border-neutral-800 bg-white dark:bg-neutral-800 font-medium dark:text-white">
-                          <SelectValue placeholder="All Sizes" />
+                          <SelectValue placeholder={t('landing.publicGroups.allSizes')} />
                         </SelectTrigger>
                         <SelectContent className="rounded-2xl border-neutral-200">
-                          <SelectItem value="all">All Sizes</SelectItem>
-                          <SelectItem value="0-10">0-10 members</SelectItem>
-                          <SelectItem value="11-20">11-20 members</SelectItem>
-                          <SelectItem value="21-30">21-30 members</SelectItem>
-                          <SelectItem value="31+">31+ members</SelectItem>
+                          <SelectItem value="all">{t('landing.publicGroups.allSizes')}</SelectItem>
+                          <SelectItem value="0-10">{t('landing.publicGroups.size0_10')}</SelectItem>
+                          <SelectItem value="11-20">{t('landing.publicGroups.size11_20')}</SelectItem>
+                          <SelectItem value="21-30">{t('landing.publicGroups.size21_30')}</SelectItem>
+                          <SelectItem value="31+">{t('landing.publicGroups.size31Plus')}</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -242,7 +244,7 @@ export default function PublicGroups() {
                       setGenderFilter("all");
                     }}
                   >
-                    Clear All
+                    {t('landing.publicGroups.clearAll')}
                   </Button>
                 </CardContent>
               </Card>
@@ -283,7 +285,7 @@ export default function PublicGroups() {
                               </Avatar>
                               <div>
                                 <h3 className="text-lg md:text-xl font-black text-neutral-900 dark:text-white group-hover:text-brand-600 transition-colors tracking-tight line-clamp-1">{group.name}</h3>
-                                <p className="text-[10px] md:text-xs font-black uppercase tracking-widest text-neutral-400 mt-0.5">{group.group_number || 'YEE Group'}</p>
+                                <p className="text-[10px] md:text-xs font-black uppercase tracking-widest text-neutral-400 mt-0.5">{group.group_number || t('landing.publicGroups.defaultGroup')}</p>
                               </div>
                             </div>
 
@@ -299,16 +301,16 @@ export default function PublicGroups() {
                                     <div className="flex items-center justify-between">
                                       <div className="flex items-center text-sm font-black uppercase tracking-widest text-neutral-500">
                                         <Users className="w-4 h-4 mr-2" />
-                                        Membership
+                                        {t('landing.publicGroups.membership')}
                                       </div>
                                       <span className="text-xl font-black text-neutral-900 dark:text-white">{stats.total}</span>
                                     </div>
                                     <div className="flex gap-4">
                                       <div className="flex items-center gap-2 px-2 md:px-3 py-1.5 rounded-xl bg-white dark:bg-neutral-900 text-[10px] md:text-xs font-bold text-neutral-600 dark:text-neutral-400 border border-neutral-100 dark:border-neutral-800">
-                                        <span>Male:</span> <span className="text-neutral-900 dark:text-white">{stats.male}</span>
+                                        <span>{t('landing.publicGroups.male')}</span> <span className="text-neutral-900 dark:text-white">{stats.male}</span>
                                       </div>
                                       <div className="flex items-center gap-2 px-2 md:px-3 py-1.5 rounded-xl bg-white dark:bg-neutral-900 text-[10px] md:text-xs font-bold text-neutral-600 dark:text-neutral-400 border border-neutral-100 dark:border-neutral-800">
-                                        <span>Female:</span> <span className="text-neutral-900 dark:text-white">{stats.female}</span>
+                                        <span>{t('landing.publicGroups.female')}</span> <span className="text-neutral-900 dark:text-white">{stats.female}</span>
                                       </div>
                                     </div>
                                   </div>
@@ -320,7 +322,7 @@ export default function PublicGroups() {
                                   {group.registration_number && (
                                     <div className="flex items-center justify-between text-sm px-2">
                                       <span className="text-neutral-400 font-bold uppercase tracking-widest text-xs flex items-center gap-2">
-                                        <Award className="w-4 h-4" /> Registration
+                                        <Award className="w-4 h-4" /> {t('landing.publicGroups.registration')}
                                       </span>
                                       <span className="font-black text-neutral-900 dark:text-white">{group.registration_number}</span>
                                     </div>
@@ -333,7 +335,7 @@ export default function PublicGroups() {
                                       onClick={() => setViewingCertificate({ ...cert, bucket: 'group-documents' })}
                                     >
                                       <FileText className="w-4 h-4 mr-2 text-brand-600" />
-                                      View {cert.file_name}
+                                      {t('landing.publicGroups.view')} {cert.file_name}
                                     </Button>
                                   ))}
                                 </div>
@@ -342,10 +344,10 @@ export default function PublicGroups() {
 
                             <Button
                               className="w-full h-auto min-h-[3.5rem] md:h-16 py-4 rounded-[1.5rem] bg-brand-500 text-black hover:bg-brand-600 font-black uppercase tracking-tight md:tracking-widest text-[10px] md:text-xs mt-8 shadow-lg hover:shadow-xl transition-all hover:-translate-y-1 leading-tight"
-                              onClick={() => handleWhatsAppRequest(group)}
+                              onClick={() => navigate(`/groups/public/${group.id}`)}
                             >
-                              <MessageCircle className="w-5 h-5 mr-3" />
-                              Request more information
+                              <Eye className="w-5 h-5 mr-3" />
+                              {t('landing.publicGroups.viewMoreInfo')}
                             </Button>
                           </Card>
                         </motion.div>
@@ -358,8 +360,8 @@ export default function PublicGroups() {
                   <motion.div initial={{ scale: 0.8 }} animate={{ scale: 1 }} className="inline-flex p-8 rounded-full bg-white mb-6 shadow-sm">
                     <Users className="w-16 h-16 text-neutral-200" />
                   </motion.div>
-                  <h3 className="text-3xl font-black text-neutral-900 tracking-tight">No groups found</h3>
-                  <p className="text-xl text-neutral-500 font-medium mt-2">Try adjusting your search or filters.</p>
+                  <h3 className="text-3xl font-black text-neutral-900 tracking-tight">{t('landing.publicGroups.noGroups')}</h3>
+                  <p className="text-xl text-neutral-500 font-medium mt-2">{t('landing.publicGroups.adjustSearch')}</p>
                 </div>
               )}
             </div>
@@ -374,23 +376,23 @@ export default function PublicGroups() {
             <div className="col-span-1 md:col-span-2 space-y-8">
               <img src="/mulika-logo.png" className="w-48" alt="YEE Platform" />
               <p className="text-neutral-400 text-xl max-w-md leading-relaxed">
-                Empowering the next generation of Tanzanian entrepreneurs through technology and community support.
+                {t('landing.footer.description')}
               </p>
             </div>
             <div>
-              <h4 className="text-lg font-black uppercase tracking-widest mb-6">Explore</h4>
+              <h4 className="text-lg font-black uppercase tracking-widest mb-6">{t('landing.footer.platform')}</h4>
               <ul className="space-y-4 text-neutral-400 font-medium">
-                <li><a href="#" onClick={() => navigate('/')} className="hover:text-brand-500 transition-colors">Home</a></li>
-                <li><a href="#" onClick={() => navigate('/blogs')} className="hover:text-brand-500 transition-colors">Latest Stories</a></li>
-                <li><a href="#" onClick={() => navigate('/groups/public')} className="hover:text-brand-500 transition-colors">Groups Portal</a></li>
+                <li><a href="#" onClick={() => navigate('/')} className="hover:text-brand-500 transition-colors">{t('nav.home')}</a></li>
+                <li><a href="#" onClick={() => navigate('/blogs')} className="hover:text-brand-500 transition-colors">{t('landing.footer.latestStories')}</a></li>
+                <li><a href="#" onClick={() => navigate('/groups/public')} className="hover:text-brand-500 transition-colors">{t('landing.footer.groupsPortal')}</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-lg font-black uppercase tracking-widest mb-6">Connect</h4>
+              <h4 className="text-lg font-black uppercase tracking-widest mb-6">{t('landing.footer.support')}</h4>
               <ul className="space-y-4 text-neutral-400 font-medium">
                 <li><a href="mailto:info@mulika.or.tz" className="hover:text-brand-500 transition-colors">info@mulika.or.tz</a></li>
-                <li><a href="#" className="hover:text-brand-500 transition-colors">Privacy</a></li>
-                <li><a href="#" className="hover:text-brand-500 transition-colors">Terms</a></li>
+                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.privacyPolicy')}</a></li>
+                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.termsOfService')}</a></li>
               </ul>
             </div>
           </div>

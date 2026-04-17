@@ -1,0 +1,220 @@
+{
+  "translation": {
+    "nav": {
+      "home": "Home",
+      "stories": "Stories",
+      "groups": "Groups",
+      "signIn": "Sign In"
+    },
+    "landing": {
+      "heroTitle": "Empowering Youth Data & Signals",
+      "hero": {
+        "title1": "Empowering",
+        "title2": "Youth",
+        "subtitle": "Connect with opportunities, build skills, and grow your future through the YEE Program ecosystem.",
+        "btnLearnMore": "Learn more",
+        "btnViewGroups": "View Groups",
+        "statMembers": "Active Members",
+        "statGroups": "Youth Groups",
+        "statWards": "Wards"
+      },
+      "contact": {
+        "title": "Contact Us",
+        "title1": "Get in",
+        "title2": "Touch",
+        "subtitle": "Have questions or want to partner with us? We're here to help build the future together.",
+        "lblEmail": "Email",
+        "lblPhone": "Phone",
+        "lblLocation": "Location",
+        "lblWorkingHours": "Working Hours"
+      },
+      "posts": {
+        "title1": "Stories &",
+        "title2": "Updates",
+        "subtitle": "Stay updated with the latest news, success stories, and insights from the YEE community ecosystem.",
+        "btnSeeAll": "See all stories",
+        "readArticle": "Read Article",
+        "tagUpdates": "Updates",
+        "fallbackExcerpt": "Discover how youth are leveraging opportunities in the YEE ecosystem..."
+      },
+      "project": {
+        "title": "About the Program",
+        "subtitle": "Empowering youth with sustainable economic opportunities through innovation and collaboration.",
+        "features": {
+          "overview": {
+            "title": "Program Overview",
+            "description": "YEE project is implemented by Mulika Tanzania with support from UNFPA Tanzania to equip youths with skills, resources, and collective support to build sustainable livelihoods and financial independence."
+          },
+          "objectives": {
+            "title": "Objectives",
+            "description": "The program focuses on building entrepreneurship skills, improving financial literacy, and enabling youths to create stable income opportunities that strengthen their families and communities."
+          },
+          "implementation": {
+            "title": "Implementation",
+            "description": "YEE is delivered through structured training, group formation, mentorship, and access to financial opportunities. Participants are supported to register groups, engage local systems, and grow viable enterprises."
+          },
+          "benefits": {
+            "title": "Key Benefits",
+            "description": "Through the program, youths gain access to business training, financial resources, mentorship, peer networks, and digital tools that support long-term economic growth."
+          },
+          "impact": {
+            "title": "Community Impact",
+            "description": "By empowering youths economically, the program strengthens local economies, supports job creation, and nurtures confident community leaders."
+          },
+          "metrics": {
+            "title": "Success Metrics",
+            "description": "Impact is measured through participation levels, group formation and registration, enterprise growth, access to finance, and improved economic outcomes."
+          }
+        }
+      },
+      "documents": {
+        "title1": "Library &",
+        "title2": "Resources",
+        "subtitle": "Access important documents, guides, and information to support your journey in the YEE Program.",
+        "btnViewDocument": "View Document",
+        "loading": "Resources"
+      },
+      "testimonials": {
+        "title1": "Success",
+        "title2": "Stories",
+        "subtitle": "Hear from the incredible young women who have transformed their lives and communities through the YEE Program.",
+        "yearsOld": "YEARS OLD"
+      },
+      "login": {
+        "welcome": "Welcome Back",
+        "subtitle": "Sign in to your Yee Portal account",
+        "learnMore": "Learn more about YEE Program",
+        "email": "Email",
+        "emailPlaceholder": "Enter your email",
+        "password": "Password",
+        "passwordPlaceholder": "Enter your password",
+        "btnSigningIn": "Signing in...",
+        "btnSignIn": "Sign In",
+        "forgotPassword": "Forgot Password?",
+        "resetTitle": "Reset Password",
+        "resetSubtitle": "Enter your email and choose a new password to reset your account.",
+        "resetSuccessTitle": "Password Reset Successfully!",
+        "resetSuccessMsg": "Your password has been updated. You can now log in with your new password.",
+        "newPassword": "New Password",
+        "newPasswordPlaceholder": "Enter new password",
+        "passwordRules": "Password must be at least 8 characters with uppercase, lowercase, and numbers.",
+        "confirmPassword": "Confirm New Password",
+        "confirmPasswordPlaceholder": "Confirm new password",
+        "btnCancel": "Cancel",
+        "btnResetting": "Resetting...",
+        "btnResetPassword": "Reset Password",
+        "errEmailRequired": "Email is required",
+        "errNewPasswordRequired": "New password is required",
+        "errPasswordRules": "Password must be at least 8 characters with uppercase, lowercase, and numbers",
+        "errPasswordsMismatch": "Passwords do not match"
+      },
+      "blogs": {
+        "title1": "The YEE",
+        "title2": "Journal",
+        "subtitle": "Exploring stories of impact, youth empowerment, and economic transformation across the vibrant communities of Tanzania.",
+        "noStories": "No stories yet",
+        "checkBack": "Check back soon for new updates and insights.",
+        "btnGoHome": "Go Home",
+        "readStory": "Read Story",
+        "tagGrowth": "Growth",
+        "fallbackExcerpt": "Click to read more about this story and stay updated with the latest YEE initiatives."
+      },
+      "blogDetail": {
+        "notFound": "Story not found",
+        "allStories": "All Stories",
+        "minRead": "6 min read",
+        "editorial": "YEE Editorial",
+        "editorialSubtitle": "Official voice of Youth Economic Empowerment.",
+        "copyLink": "Copy Link",
+        "linkCopied": "Link copied to clipboard"
+      },
+      "publicGroups": {
+        "title1": "Youth",
+        "title2": "Groups",
+        "subtitle": "Discover and connect with active youth-led groups across Tanzania making a difference in their communities.",
+        "filters": "Filters",
+        "search": "Search",
+        "searchPlaceholder": "Search groups...",
+        "council": "Council",
+        "allCouncils": "All Councils",
+        "ward": "Ward",
+        "allWards": "All Wards",
+        "size": "Size",
+        "allSizes": "All Sizes",
+        "size0_10": "0-10 members",
+        "size11_20": "11-20 members",
+        "size21_30": "21-30 members",
+        "size31Plus": "31+ members",
+        "clearAll": "Clear All",
+        "defaultGroup": "YEE Group",
+        "membership": "Membership",
+        "male": "Male:",
+        "female": "Female:",
+        "registration": "Registration",
+        "view": "View",
+        "viewMoreInfo": "View more information",
+        "noGroups": "No groups found",
+        "adjustSearch": "Try adjusting your search or filters."
+      },
+      "publicGroupDetails": {
+        "notFound": "Group not found",
+        "backToGroups": "Back to Groups",
+        "back": "Back",
+        "groupInfo": "Group Information",
+        "groupName": "Group Name",
+        "registrationDate": "Registration Date",
+        "registrationNumber": "Registration Number",
+        "notAssigned": "Not assigned",
+        "description": "Description",
+        "meetingInfo": "Meeting Information",
+        "meetingDay": "Meeting Day",
+        "meetingTime": "Meeting Time",
+        "meetingLocation": "Meeting Location",
+        "members": "Members",
+        "noMembers": "No active members found",
+        "location": "Location",
+        "ward": "Ward",
+        "council": "Council",
+        "contactInfo": "Contact Info",
+        "contactPerson": "Contact Person",
+        "phone": "Phone",
+        "email": "Email"
+      },
+      "sidebar": {
+        "navDashboard": "Dashboard",
+        "navCouncils": "Councils",
+        "navWards": "Wards",
+        "navGroups": "Groups",
+        "navMembers": "Members",
+        "navActivities": "Activities",
+        "navAnalytics": "Analytics",
+        "navLocations": "Locations",
+        "navDocuments": "Resource Center",
+        "navUsers": "User Management",
+        "navFeedback": "Feedback",
+        "navBlogs": "Manage Blogs",
+        "navSettings": "Settings",
+        "signOut": "Sign Out",
+        "navigation": "Navigation"
+      },
+      "dashboard": {
+        "title": "Dashboard",
+        "notifications": "Notifications",
+        "locale": "en-US"
+      },
+      "footer": {
+        "description": "Empowering the next generation of Tanzanian entrepreneurs through technology and community support.",
+        "platform": "Platform",
+        "aboutUs": "About Us",
+        "latestStories": "Latest Stories",
+        "groupsPortal": "Groups Portal",
+        "resources": "Resources",
+        "support": "Support",
+        "contact": "Contact",
+        "privacyPolicy": "Privacy Policy",
+        "termsOfService": "Terms of Service",
+        "helpCenter": "Help Center"
+      }
+    }
+  }
+}

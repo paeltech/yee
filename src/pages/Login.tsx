@@ -9,8 +9,10 @@ import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, D
 import { Users, Eye, EyeOff, KeyRound } from 'lucide-react';
 import { useAuth } from '@/contexts/AuthContext';
 import { isPasswordStrong } from '@/lib/auth';
+import { useTranslation } from 'react-i18next';
 
 export default function Login() {
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -54,25 +56,25 @@ export default function Login() {
 
     // Validation
     if (!resetEmail) {
-      setResetError('Email is required');
+      setResetError(t('landing.login.errEmailRequired'));
       setResetLoading(false);
       return;
     }
 
     if (!newPassword) {
-      setResetError('New password is required');
+      setResetError(t('landing.login.errNewPasswordRequired'));
       setResetLoading(false);
       return;
     }
 
     if (!isPasswordStrong(newPassword)) {
-      setResetError('Password must be at least 8 characters with uppercase, lowercase, and numbers');
+      setResetError(t('landing.login.errPasswordRules'));
       setResetLoading(false);
       return;
     }
 
     if (newPassword !== confirmPassword) {
-      setResetError('Passwords do not match');
+      setResetError(t('landing.login.errPasswordsMismatch'));
       setResetLoading(false);
       return;
     }
@@ -115,10 +117,10 @@ export default function Login() {
             </div>
           </div>
           <CardTitle className="text-2xl font-bold text-neutral-900 dark:text-white">
-            Welcome Back
+            {t('landing.login.welcome')}
           </CardTitle>
           <CardDescription className="text-neutral-600 dark:text-stone-400">
-            Sign in to your Yee Portal account
+            {t('landing.login.subtitle')}
           </CardDescription>
           <div className="mt-4">
             <Button
@@ -126,7 +128,7 @@ export default function Login() {
               onClick={() => navigate('/landing')}
               className="text-sm text-brand-600 hover:text-brand-700"
             >
-              Learn more about YEE Program
+              {t('landing.login.learnMore')}
             </Button>
           </div>
         </CardHeader>
@@ -139,11 +141,11 @@ export default function Login() {
             )}
 
             <div className="space-y-2">
-              <Label htmlFor="email" className="dark:text-stone-300">Email</Label>
+              <Label htmlFor="email" className="dark:text-stone-300">{t('landing.login.email')}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t('landing.login.emailPlaceholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -153,12 +155,12 @@ export default function Login() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="password" className="dark:text-stone-300">Password</Label>
+              <Label htmlFor="password" className="dark:text-stone-300">{t('landing.login.password')}</Label>
               <div className="relative">
                 <Input
                   id="password"
                   type={showPassword ? 'text' : 'password'}
-                  placeholder="Enter your password"
+                  placeholder={t('landing.login.passwordPlaceholder')}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   required
@@ -187,7 +189,7 @@ export default function Login() {
               className="w-full bg-brand-500 text-black hover:bg-brand-600"
               disabled={loading}
             >
-              {loading ? 'Signing in...' : 'Sign In'}
+              {loading ? t('landing.login.btnSigningIn') : t('landing.login.btnSignIn')}
             </Button>
           </form>
 
@@ -199,7 +201,7 @@ export default function Login() {
               disabled={loading}
             >
               <KeyRound className="w-4 h-4 mr-2" />
-              Forgot Password?
+              {t('landing.login.forgotPassword')}
             </Button>
           </div>
 
@@ -212,10 +214,10 @@ export default function Login() {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <KeyRound className="w-5 h-5 text-brand-500" />
-              Reset Password
+              {t('landing.login.resetTitle')}
             </DialogTitle>
             <DialogDescription>
-              Enter your email and choose a new password to reset your account.
+              {t('landing.login.resetSubtitle')}
             </DialogDescription>
           </DialogHeader>
 
@@ -226,8 +228,8 @@ export default function Login() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
               </div>
-              <h3 className="text-lg font-semibold text-green-800 mb-2">Password Reset Successfully!</h3>
-              <p className="text-sm text-green-600">Your password has been updated. You can now log in with your new password.</p>
+              <h3 className="text-lg font-semibold text-green-800 mb-2">{t('landing.login.resetSuccessTitle')}</h3>
+              <p className="text-sm text-green-600">{t('landing.login.resetSuccessMsg')}</p>
             </div>
           ) : (
             <form onSubmit={handleResetPassword} className="space-y-4">
@@ -238,11 +240,11 @@ export default function Login() {
               )}
 
               <div className="space-y-2">
-                <Label htmlFor="resetEmail">Email</Label>
+                <Label htmlFor="resetEmail">{t('landing.login.email')}</Label>
                 <Input
                   id="resetEmail"
                   type="email"
-                  placeholder="Enter your email"
+                  placeholder={t('landing.login.emailPlaceholder')}
                   value={resetEmail}
                   onChange={(e) => setResetEmail(e.target.value)}
                   required
@@ -251,12 +253,12 @@ export default function Login() {
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="newPassword">New Password</Label>
+                <Label htmlFor="newPassword">{t('landing.login.newPassword')}</Label>
                 <div className="relative">
                   <Input
                     id="newPassword"
                     type={showNewPassword ? 'text' : 'password'}
-                    placeholder="Enter new password"
+                    placeholder={t('landing.login.newPasswordPlaceholder')}
                     value={newPassword}
                     onChange={(e) => setNewPassword(e.target.value)}
                     required
@@ -278,17 +280,17 @@ export default function Login() {
                   </Button>
                 </div>
                 <p className="text-xs text-neutral-500">
-                  Password must be at least 8 characters with uppercase, lowercase, and numbers.
+                  {t('landing.login.passwordRules')}
                 </p>
               </div>
 
               <div className="space-y-2">
-                <Label htmlFor="confirmPassword">Confirm New Password</Label>
+                <Label htmlFor="confirmPassword">{t('landing.login.confirmPassword')}</Label>
                 <div className="relative">
                   <Input
                     id="confirmPassword"
                     type={showConfirmPassword ? 'text' : 'password'}
-                    placeholder="Confirm new password"
+                    placeholder={t('landing.login.confirmPasswordPlaceholder')}
                     value={confirmPassword}
                     onChange={(e) => setConfirmPassword(e.target.value)}
                     required
@@ -318,14 +320,14 @@ export default function Login() {
                   onClick={() => setShowResetDialog(false)}
                   disabled={resetLoading}
                 >
-                  Cancel
+                  {t('landing.login.btnCancel')}
                 </Button>
                 <Button
                   type="submit"
                   className="bg-brand-500 text-black hover:bg-brand-600"
                   disabled={resetLoading}
                 >
-                  {resetLoading ? 'Resetting...' : 'Reset Password'}
+                  {resetLoading ? t('landing.login.btnResetting') : t('landing.login.btnResetPassword')}
                 </Button>
               </DialogFooter>
             </form>

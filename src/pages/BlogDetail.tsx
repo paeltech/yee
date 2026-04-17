@@ -5,8 +5,10 @@ import { format } from "date-fns";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, Clock, Calendar, Share2, Facebook, Twitter, Linkedin } from "lucide-react";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 const BlogDetail = () => {
+    const { t } = useTranslation();
     const { slug } = useParams<{ slug: string }>();
     const [post, setPost] = useState<BlogPost | null>(null);
     const [loading, setLoading] = useState(true);
@@ -20,7 +22,7 @@ const BlogDetail = () => {
                 setPost(data);
             } catch (error) {
                 console.error("Error loading post:", error);
-                toast.error("Story not found");
+                toast.error(t('landing.blogDetail.notFound'));
                 navigate("/blogs");
             } finally {
                 setLoading(false);
@@ -57,7 +59,7 @@ const BlogDetail = () => {
                 <div className="container mx-auto max-w-4xl flex justify-between items-center">
                     <Button variant="ghost" size="sm" onClick={() => navigate("/blogs")} className="text-neutral-500 dark:text-neutral-400 hover:text-neutral-900 dark:hover:text-white">
                         <ArrowLeft className="mr-2 h-4 w-4" />
-                        All Stories
+                        {t('landing.blogDetail.allStories')}
                     </Button>
                     <div className="flex gap-2">
                         <Button variant="ghost" size="icon" onClick={() => window.open(`https://twitter.com/intent/tweet?url=${shareUrl}`, '_blank')} className="rounded-full h-8 w-8">
@@ -81,7 +83,7 @@ const BlogDetail = () => {
                             </span>
                             <span className="flex items-center gap-1.5">
                                 <Clock className="h-4 w-4" />
-                                6 min read
+                                {t('landing.blogDetail.minRead')}
                             </span>
                         </div>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-neutral-900 dark:text-white leading-tight mb-8">
@@ -118,17 +120,17 @@ const BlogDetail = () => {
                                     Y
                                 </div>
                                 <div>
-                                    <h4 className="font-bold text-neutral-900 dark:text-white">YEE Editorial</h4>
-                                    <p className="text-sm text-neutral-500 dark:text-neutral-400">Official voice of Youth Economic Empowerment.</p>
+                                    <h4 className="font-bold text-neutral-900 dark:text-white">{t('landing.blogDetail.editorial')}</h4>
+                                    <p className="text-sm text-neutral-500 dark:text-neutral-400">{t('landing.blogDetail.editorialSubtitle')}</p>
                                 </div>
                             </div>
                             <div className="flex gap-4">
                                 <Button variant="outline" className="rounded-full px-6 flex items-center gap-2 dark:border-neutral-800 dark:text-white dark:hover:bg-neutral-800" onClick={() => {
                                     navigator.clipboard.writeText(shareUrl);
-                                    toast.success("Link copied to clipboard");
+                                    toast.success(t('landing.blogDetail.linkCopied'));
                                 }}>
                                     <Share2 className="h-4 w-4" />
-                                    Copy Link
+                                    {t('landing.blogDetail.copyLink')}
                                 </Button>
                             </div>
                         </div>
@@ -143,23 +145,23 @@ const BlogDetail = () => {
                         <div className="col-span-1 md:col-span-2 space-y-8">
                             <img src="/mulika-logo.png" className="w-48" alt="YEE Platform" />
                             <p className="text-neutral-400 text-xl max-w-md leading-relaxed">
-                                Empowering the next generation of Tanzanian entrepreneurs through technology and community support.
+                                {t('landing.footer.description')}
                             </p>
                         </div>
                         <div>
-                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">Explore</h4>
+                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">{t('landing.footer.platform')}</h4>
                             <ul className="space-y-4 text-neutral-400 font-medium">
-                                <li><a href="#" onClick={() => navigate('/')} className="hover:text-brand-500 transition-colors">Home</a></li>
-                                <li><a href="#" onClick={() => navigate('/blogs')} className="hover:text-brand-500 transition-colors">Latest Stories</a></li>
-                                <li><a href="#" onClick={() => navigate('/groups/public')} className="hover:text-brand-500 transition-colors">Groups Portal</a></li>
+                                <li><a href="#" onClick={() => navigate('/')} className="hover:text-brand-500 transition-colors">{t('nav.home')}</a></li>
+                                <li><a href="#" onClick={() => navigate('/blogs')} className="hover:text-brand-500 transition-colors">{t('landing.footer.latestStories')}</a></li>
+                                <li><a href="#" onClick={() => navigate('/groups/public')} className="hover:text-brand-500 transition-colors">{t('landing.footer.groupsPortal')}</a></li>
                             </ul>
                         </div>
                         <div>
-                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">Connect</h4>
+                            <h4 className="text-lg font-black uppercase tracking-widest mb-6">{t('landing.footer.support')}</h4>
                             <ul className="space-y-4 text-neutral-400 font-medium">
                                 <li><a href="mailto:info@mulika.or.tz" className="hover:text-brand-500 transition-colors">info@mulika.or.tz</a></li>
-                                <li><a href="#" className="hover:text-brand-500 transition-colors">Privacy Policy</a></li>
-                                <li><a href="#" className="hover:text-brand-500 transition-colors">Terms</a></li>
+                                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.privacyPolicy')}</a></li>
+                                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.termsOfService')}</a></li>
                             </ul>
                         </div>
                     </div>

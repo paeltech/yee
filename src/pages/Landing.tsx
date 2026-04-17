@@ -11,9 +11,11 @@ import { LatestPosts } from "@/components/landing/LatestPosts";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { TopNavbar } from "@/components/TopNavbar";
+import { useTranslation } from "react-i18next";
 
 export default function Landing() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   return (
     <div className="min-h-screen bg-white selection:bg-brand-200 selection:text-black">
@@ -37,7 +39,7 @@ export default function Landing() {
             <div className="col-span-1 md:col-span-2 space-y-8">
               <img src="/mulika-logo.png" className="w-48" alt="YEE Platform" />
               <p className="text-neutral-400 text-xl max-w-md leading-relaxed">
-                Empowering the next generation of Tanzanian entrepreneurs through technology and community support.
+                {t('landing.footer.description')}
               </p>
               <div className="flex gap-4">
                 {[Twitter, Facebook, Linkedin, Github].map((Icon, i) => (
@@ -48,21 +50,21 @@ export default function Landing() {
               </div>
             </div>
             <div>
-              <h4 className="text-lg font-black uppercase tracking-widest mb-6">Platform</h4>
+              <h4 className="text-lg font-black uppercase tracking-widest mb-6">{t('landing.footer.platform')}</h4>
               <ul className="space-y-4 text-neutral-400 font-medium">
-                <li><a href="#" className="hover:text-brand-500 transition-colors">About Us</a></li>
-                <li><a href="#" className="hover:text-brand-500 transition-colors" onClick={() => navigate('/blogs')}>Latest Stories</a></li>
-                <li><a href="#" className="hover:text-brand-500 transition-colors" onClick={() => navigate('/groups/public')}>Groups Portal</a></li>
-                <li><a href="#" className="hover:text-brand-500 transition-colors">Resources</a></li>
+                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.aboutUs')}</a></li>
+                <li><a href="#" className="hover:text-brand-500 transition-colors" onClick={() => navigate('/blogs')}>{t('landing.footer.latestStories')}</a></li>
+                <li><a href="#" className="hover:text-brand-500 transition-colors" onClick={() => navigate('/groups/public')}>{t('landing.footer.groupsPortal')}</a></li>
+                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.resources')}</a></li>
               </ul>
             </div>
             <div>
-              <h4 className="text-lg font-black uppercase tracking-widest mb-6">Support</h4>
+              <h4 className="text-lg font-black uppercase tracking-widest mb-6">{t('landing.footer.support')}</h4>
               <ul className="space-y-4 text-neutral-400 font-medium">
-                <li><a href="#" className="hover:text-brand-500 transition-colors">Contact</a></li>
-                <li><a href="#" className="hover:text-brand-500 transition-colors">Privacy Policy</a></li>
-                <li><a href="#" className="hover:text-brand-500 transition-colors">Terms of Service</a></li>
-                <li><a href="#" className="hover:text-brand-500 transition-colors">Help Center</a></li>
+                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.contact')}</a></li>
+                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.privacyPolicy')}</a></li>
+                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.termsOfService')}</a></li>
+                <li><a href="#" className="hover:text-brand-500 transition-colors">{t('landing.footer.helpCenter')}</a></li>
               </ul>
             </div>
           </div>

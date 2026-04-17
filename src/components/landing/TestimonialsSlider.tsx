@@ -8,6 +8,7 @@ import {
 import { Card, CardContent } from "@/components/ui/card";
 import { motion } from "framer-motion";
 import { Quote } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const testimonials = [
     {
@@ -61,6 +62,7 @@ const testimonials = [
 ];
 
 export function TestimonialsSlider() {
+    const { t } = useTranslation();
     return (
         <section className="py-32 bg-neutral-50 dark:bg-neutral-950 px-4 overflow-hidden relative transition-colors duration-500">
             <div className="absolute top-0 left-0 w-full h-24 bg-gradient-to-b from-white dark:from-neutral-950 to-transparent" />
@@ -74,7 +76,7 @@ export function TestimonialsSlider() {
                         transition={{ duration: 0.6 }}
                         className="text-4xl md:text-6xl font-black text-neutral-900 dark:text-white tracking-tight"
                     >
-                        Success <span className="text-brand-600">Stories</span>
+                        {t('landing.testimonials.title1')} <span className="text-brand-600">{t('landing.testimonials.title2')}</span>
                     </motion.h2>
                     <motion.p
                         initial={{ opacity: 0, y: 20 }}
@@ -83,7 +85,7 @@ export function TestimonialsSlider() {
                         transition={{ duration: 0.6, delay: 0.1 }}
                         className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto font-medium"
                     >
-                        Hear from the incredible young women who have transformed their lives and communities through the YEE Program.
+                        {t('landing.testimonials.subtitle')}
                     </motion.p>
                 </div>
 
@@ -120,7 +122,7 @@ export function TestimonialsSlider() {
                                                         {testimonial.name}
                                                     </div>
                                                     <div className="flex items-center gap-2 mt-1">
-                                                        <span className="text-neutral-400 font-bold uppercase tracking-widest text-xs">{testimonial.age} YEARS OLD</span>
+                                                        <span className="text-neutral-400 font-bold uppercase tracking-widest text-xs">{testimonial.age} {t('landing.testimonials.yearsOld')}</span>
                                                         <span className="text-neutral-300">•</span>
                                                         <span className="text-brand-600 font-black uppercase tracking-widest text-xs">
                                                             {testimonial.location}

@@ -6,8 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { ArrowRight, Clock, ChevronRight } from "lucide-react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export const LatestPosts = () => {
+    const { t } = useTranslation();
     const [posts, setPosts] = useState<BlogPost[]>([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
@@ -39,10 +41,10 @@ export const LatestPosts = () => {
                             viewport={{ once: true }}
                             className="text-4xl md:text-6xl font-black text-neutral-900 dark:text-white mb-6 tracking-tight"
                         >
-                            Stories & <span className="text-brand-600">Updates</span>
+                            {t('landing.posts.title1')} <span className="text-brand-600">{t('landing.posts.title2')}</span>
                         </motion.h2>
                         <p className="text-xl text-neutral-600 dark:text-neutral-400 leading-relaxed font-medium">
-                            Stay updated with the latest news, success stories, and insights from the YEE community ecosystem.
+                            {t('landing.posts.subtitle')}
                         </p>
                     </div>
                     <Button
@@ -50,7 +52,7 @@ export const LatestPosts = () => {
                         onClick={() => navigate("/blogs")}
                         className="text-brand-600 hover:text-brand-700 hover:bg-brand-50 dark:hover:bg-brand-500/10 font-black text-lg p-0 h-auto self-start md:self-end group"
                     >
-                        See all stories <ArrowRight className="ml-2 h-6 w-6 transition-transform group-hover:translate-x-2" />
+                        {t('landing.posts.btnSeeAll')} <ArrowRight className="ml-2 h-6 w-6 transition-transform group-hover:translate-x-2" />
                     </Button>
                 </div>
 
@@ -90,14 +92,14 @@ export const LatestPosts = () => {
                                         </div>
                                     )}
                                     <div className="absolute inset-x-4 bottom-4 glass-dark p-4 rounded-2xl opacity-0 group-hover:opacity-100 transition-all duration-500 translate-y-4 group-hover:translate-y-0 flex justify-between items-center text-white">
-                                        <span className="font-bold">Read Article</span>
+                                        <span className="font-bold">{t('landing.posts.readArticle')}</span>
                                         <ChevronRight className="h-5 w-5" />
                                     </div>
                                 </div>
 
                                 <div className="space-y-4 px-2">
                                     <div className="flex items-center gap-3 text-sm font-black uppercase tracking-widest text-neutral-400 dark:text-neutral-500">
-                                        <span className="text-brand-600">Updates</span>
+                                        <span className="text-brand-600">{t('landing.posts.tagUpdates')}</span>
                                         <span>•</span>
                                         <span>{format(new Date(post.published_at || post.created_at), "MMM d, yyyy")}</span>
                                     </div>
@@ -105,7 +107,7 @@ export const LatestPosts = () => {
                                         {post.title}
                                     </h3>
                                     <p className="text-neutral-600 dark:text-neutral-400 line-clamp-2 leading-relaxed text-lg font-medium">
-                                        {post.excerpt || "Discover how youth are leveraging opportunities in the YEE ecosystem..."}
+                                        {post.excerpt || t('landing.posts.fallbackExcerpt')}
                                     </p>
                                 </div>
                             </motion.div>

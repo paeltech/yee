@@ -15,6 +15,7 @@ import { DocumentViewer } from "@/components/DocumentViewer";
 interface GroupDocumentsProps {
   groupId: number;
   groupName: string;
+  allowDownload?: boolean;
 }
 
 interface GroupDocument {
@@ -27,7 +28,7 @@ interface GroupDocument {
   description: string;
 }
 
-export function GroupDocuments({ groupId, groupName }: GroupDocumentsProps) {
+export function GroupDocuments({ groupId, groupName, allowDownload = true }: GroupDocumentsProps) {
   const { toast } = useToast();
   const { user, canManageGroup } = useAuth();
   const queryClient = useQueryClient();
@@ -244,15 +245,17 @@ export function GroupDocuments({ groupId, groupName }: GroupDocumentsProps) {
                       <Eye className="w-4 h-4 mr-1" />
                       View
                     </Button>
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      onClick={() => handleDownload(document)}
-                      title="Download"
-                    >
-                      <Download className="w-4 h-4 mr-1" />
-                      Download
-                    </Button>
+                    {allowDownload && (
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        onClick={() => handleDownload(document)}
+                        title="Download"
+                      >
+                        <Download className="w-4 h-4 mr-1" />
+                        Download
+                      </Button>
+                    )}
                     {canManage && (
                       <Button
                         variant="destructive"

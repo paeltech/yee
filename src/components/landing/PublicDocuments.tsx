@@ -6,8 +6,10 @@ import { format } from "date-fns";
 import { DocumentViewer } from "@/components/DocumentViewer";
 import { useState } from "react";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export function PublicDocuments() {
+  const { t } = useTranslation();
   const [viewingDocument, setViewingDocument] = useState<any | null>(null);
 
   const { data: documents, isLoading } = useQuery({
@@ -49,7 +51,7 @@ export function PublicDocuments() {
         <div className="container mx-auto max-w-6xl">
           <div className="text-center space-y-6">
             <h2 className="text-4xl md:text-6xl font-black text-neutral-900 dark:text-white tracking-tight">
-              Resources
+              {t('landing.documents.loading')}
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-16">
               {[1, 2, 3].map((i) => (
@@ -77,10 +79,10 @@ export function PublicDocuments() {
           className="text-center mb-20"
         >
           <h2 className="text-4xl md:text-6xl font-black text-neutral-900 dark:text-white mb-6 tracking-tight">
-            Library & <span className="text-brand-600">Resources</span>
+            {t('landing.documents.title1')} <span className="text-brand-600">{t('landing.documents.title2')}</span>
           </h2>
           <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-3xl mx-auto font-medium">
-            Access important documents, guides, and information to support your journey in the YEE Program.
+            {t('landing.documents.subtitle')}
           </p>
         </motion.div>
 
@@ -121,7 +123,7 @@ export function PublicDocuments() {
                   className="flex-1 h-14 rounded-2xl font-black uppercase tracking-widest text-xs border-neutral-200 dark:border-neutral-800 hover:bg-neutral-50 dark:hover:bg-neutral-800 dark:text-white"
                   onClick={() => setViewingDocument(doc)}
                 >
-                  View Document
+                  {t('landing.documents.btnViewDocument')}
                 </Button>
                 <Button
                   variant="outline"

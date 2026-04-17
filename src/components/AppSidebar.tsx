@@ -15,82 +15,83 @@ import { useAuth } from "@/contexts/AuthContext";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { YEELogo } from "@/components/YEELogo";
+import { useTranslation } from "react-i18next";
 
-const menuItems = [
+const getMenuItems = (t: any) => [
   {
-    title: "Dashboard",
+    title: t("landing.sidebar.navDashboard"),
     url: "/dashboard",
     icon: Home,
     roles: ['admin', 'chairperson', 'secretary'],
   },
   {
-    title: "Councils",
+    title: t("landing.sidebar.navCouncils"),
     url: "/councils",
     icon: Building2,
     roles: ['admin'],
   },
   {
-    title: "Wards",
+    title: t("landing.sidebar.navWards"),
     url: "/wards",
     icon: Layers3,
     roles: ['admin'],
   },
   {
-    title: "Groups",
+    title: t("landing.sidebar.navGroups"),
     url: "/groups",
     icon: Users,
     roles: ['admin', 'chairperson', 'secretary'],
   },
   {
-    title: "Members",
+    title: t("landing.sidebar.navMembers"),
     url: "/members",
     icon: Users,
     roles: ['admin', 'chairperson', 'secretary'],
   },
   {
-    title: "Activities",
+    title: t("landing.sidebar.navActivities"),
     url: "/activities",
     icon: Calendar,
     roles: ['admin', 'chairperson', 'secretary'],
   },
   {
-    title: "Analytics",
+    title: t("landing.sidebar.navAnalytics"),
     url: "/analytics",
     icon: BarChart3,
     roles: ['admin'],
   },
   {
-    title: "Locations",
+    title: t("landing.sidebar.navLocations"),
     url: "/locations",
     icon: MapPin,
     roles: ['admin'],
   },
   {
-    title: "Resource Center",
+    title: t("landing.sidebar.navDocuments"),
     url: "/documents",
     icon: FileText,
     roles: ['admin', 'chairperson', 'secretary'],
   },
   {
-    title: "User Management",
+    title: t("landing.sidebar.navUsers"),
     url: "/admin/users",
     icon: Shield,
     roles: ['admin'],
   },
   {
-    title: "Feedback",
+    title: t("landing.sidebar.navFeedback"),
     url: "/admin/feedback",
     icon: MessageSquare,
     roles: ['admin'],
   },
   {
-    title: "Manage Blogs",
+    title: t("landing.sidebar.navBlogs"),
     url: "/admin/blogs",
     icon: FileText,
     roles: ['admin'],
   },
   {
-    title: "Settings",
+    title: t("landing.sidebar.navSettings"),
     url: "/settings",
     icon: Settings,
     roles: ['admin'],
@@ -98,6 +99,7 @@ const menuItems = [
 ];
 
 export function AppSidebar() {
+  const { t } = useTranslation();
   const { user, logout, hasRole } = useAuth();
 
   const handleLogout = async () => {
@@ -118,7 +120,7 @@ export function AppSidebar() {
     }
   };
 
-  const filteredMenuItems = menuItems.filter(item =>
+  const filteredMenuItems = getMenuItems(t).filter(item =>
     !item.roles || item.roles.includes(user?.role || '')
   );
 
@@ -145,7 +147,7 @@ export function AppSidebar() {
               className="w-full"
             >
               <LogOut className="w-3 h-3 mr-2" />
-              Sign Out
+              {t("landing.sidebar.signOut")}
             </Button>
           </div>
         )}
@@ -153,7 +155,7 @@ export function AppSidebar() {
       <SidebarContent className="bg-white dark:bg-neutral-950 transition-colors">
         <SidebarGroup>
           <SidebarGroupLabel className="text-neutral-700 dark:text-neutral-400 font-medium px-3 py-2">
-            Navigation
+            {t("landing.sidebar.navigation")}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>

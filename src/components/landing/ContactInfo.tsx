@@ -1,32 +1,34 @@
 import { Mail, Phone, MapPin, Clock } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface ContactInfoProps {
   variant?: "default" | "compact";
 }
 
 export function ContactInfo({ variant = "default" }: ContactInfoProps) {
+  const { t } = useTranslation();
   const contacts = [
     {
       icon: Mail,
-      label: "Email",
+      label: t('landing.contact.lblEmail'),
       value: "info@mulika.or.tz",
       link: "mailto:info@mulika.or.tz"
     },
     {
       icon: Phone,
-      label: "Phone",
+      label: t('landing.contact.lblPhone'),
       value: "+255 758 335 223",
       link: "tel:+255758335223"
     },
     {
       icon: MapPin,
-      label: "Location",
+      label: t('landing.contact.lblLocation'),
       value: "Delta House 1 floor,Donga St,Kinondoni, Dar es Salaam",
       link: null
     },
     {
       icon: Clock,
-      label: "Working Hours",
+      label: t('landing.contact.lblWorkingHours'),
       value: "Mon - Fri: 8:00 AM - 5:00 PM",
       link: null
     }
@@ -35,7 +37,7 @@ export function ContactInfo({ variant = "default" }: ContactInfoProps) {
   if (variant === "compact") {
     return (
       <div className="space-y-6">
-        <h3 className="text-xl font-black uppercase tracking-widest text-neutral-900 dark:text-white leading-none">Contact Us</h3>
+        <h3 className="text-xl font-black uppercase tracking-widest text-neutral-900 dark:text-white leading-none">{t('landing.contact.title')}</h3>
         <div className="space-y-4">
           {contacts.map((contact, index) => (
             <div key={index} className="flex items-start gap-4 group">
@@ -67,10 +69,10 @@ export function ContactInfo({ variant = "default" }: ContactInfoProps) {
       <div className="container mx-auto max-w-6xl relative z-10">
         <div className="text-center mb-20">
           <h2 className="text-4xl md:text-6xl font-black text-neutral-900 dark:text-white mb-6 tracking-tight">
-            Get in <span className="text-brand-600">Touch</span>
+            {t('landing.contact.title1')} <span className="text-brand-600">{t('landing.contact.title2')}</span>
           </h2>
           <p className="text-xl text-neutral-600 dark:text-neutral-400 max-w-2xl mx-auto font-medium">
-            Have questions or want to partner with us? We're here to help build the future together.
+            {t('landing.contact.subtitle')}
           </p>
         </div>
 
