@@ -9,8 +9,10 @@ import { Search, Calendar, MapPin, Users, Eye } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 import { AddActivityDialog } from "./AddActivityDialog";
 import { ActivityDetailDialog } from "./ActivityDetailDialog";
+import { useTranslation } from "react-i18next";
 
 export function ActivitiesPage() {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
 
@@ -46,8 +48,8 @@ export function ActivitiesPage() {
 
   if (error) {
     toast({
-      title: "Error",
-      description: "Failed to load activities data",
+      title: t("landing.adminActivities.errorTitle"),
+      description: t("landing.adminActivities.errorDesc"),
       variant: "destructive",
     });
   }
@@ -66,8 +68,8 @@ export function ActivitiesPage() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-black text-neutral-900 dark:text-white uppercase tracking-tight">Activities</h1>
-          <p className="text-neutral-600 dark:text-stone-400 mt-2 font-medium">Manage group activities and events</p>
+          <h1 className="text-3xl font-black text-neutral-900 dark:text-white uppercase tracking-tight">{t("landing.adminActivities.title")}</h1>
+          <p className="text-neutral-600 dark:text-stone-400 mt-2 font-medium">{t("landing.adminActivities.subtitle")}</p>
         </div>
         <AddActivityDialog />
       </div>
@@ -76,7 +78,7 @@ export function ActivitiesPage() {
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400 dark:text-stone-500 w-4 h-4" />
           <Input
-            placeholder="Search activities..."
+            placeholder={t("landing.adminActivities.searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10 dark:bg-stone-900 dark:border-stone-800 dark:text-white placeholder:dark:text-stone-600 px-4 py-2"
@@ -128,7 +130,7 @@ export function ActivitiesPage() {
 
                     {activity.activity_type && (
                       <div className="text-[10px] flex items-center">
-                        <span className="text-neutral-500 dark:text-stone-500 font-black uppercase tracking-widest mr-2">Type:</span>
+                        <span className="text-neutral-500 dark:text-stone-500 font-black uppercase tracking-widest mr-2">{t("landing.adminActivities.type")}</span>
                         <span className="font-black text-neutral-900 dark:text-stone-300 uppercase tracking-widest">{activity.activity_type}</span>
                       </div>
                     )}
@@ -136,19 +138,19 @@ export function ActivitiesPage() {
                     {activity.attendees_count && (
                       <div className="flex items-center text-[10px]">
                         <Users className="w-4 h-4 mr-2 text-brand-500" />
-                        <span className="text-neutral-900 dark:text-stone-300 font-black uppercase tracking-widest">{activity.attendees_count} attendees</span>
+                        <span className="text-neutral-900 dark:text-stone-300 font-black uppercase tracking-widest">{activity.attendees_count} {t("landing.adminActivities.attendees")}</span>
                       </div>
                     )}
 
                     {activity.budget_allocated && (
                       <div className="text-[10px]">
-                        <span className="text-neutral-500 dark:text-stone-500 font-black uppercase tracking-widest mr-2">Budget:</span>
+                        <span className="text-neutral-500 dark:text-stone-500 font-black uppercase tracking-widest mr-2">{t("landing.adminActivities.budget")}</span>
                         <span className="font-black text-neutral-900 dark:text-brand-500 uppercase tracking-widest">
                           TSh {activity.budget_allocated.toLocaleString()}
                         </span>
                         {activity.budget_spent && (
                           <span className="text-neutral-500 dark:text-stone-600 ml-2 font-black uppercase tracking-widest">
-                            (Spent: TSh {activity.budget_spent.toLocaleString()})
+                            ({t("landing.adminActivities.spent")} TSh {activity.budget_spent.toLocaleString()})
                           </span>
                         )}
                       </div>
@@ -167,7 +169,7 @@ export function ActivitiesPage() {
                       trigger={
                         <Button variant="outline" size="sm" className="w-full dark:border-stone-800 dark:text-stone-400 dark:hover:bg-stone-800 font-black uppercase tracking-widest text-[10px] h-9">
                           <Eye className="w-4 h-4 mr-2" />
-                          View Details
+                          {t("landing.adminActivities.viewDetails")}
                         </Button>
                       }
                     />
@@ -182,9 +184,9 @@ export function ActivitiesPage() {
       {filteredActivities.length === 0 && !isLoading && (
         <div className="text-center py-12 dark:bg-stone-900 dark:border-stone-800 rounded-xl border border-dashed">
           <Calendar className="w-12 h-12 text-neutral-400 dark:text-stone-700 mx-auto mb-4" />
-          <h3 className="text-lg font-black text-neutral-900 dark:text-white mb-2 uppercase tracking-tight">No activities found</h3>
+          <h3 className="text-lg font-black text-neutral-900 dark:text-white mb-2 uppercase tracking-tight">{t("landing.adminActivities.noActivities")}</h3>
           <p className="text-neutral-600 dark:text-stone-400 font-medium">
-            {searchTerm ? 'Try adjusting your search terms.' : 'Get started by adding your first activity.'}
+            {searchTerm ? t("landing.adminActivities.adjustSearch") : t("landing.adminActivities.addFirstActivity")}
           </p>
         </div>
       )}

@@ -16,8 +16,10 @@ import { EditMemberDialog } from "./EditMemberDialog";
 import { DeleteMemberDialog } from "./DeleteMemberDialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export function MembersPage() {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const [viewMode, setViewMode] = useState<"cards" | "table">("cards");
   const { toast } = useToast();
@@ -57,8 +59,8 @@ export function MembersPage() {
 
   if (error) {
     toast({
-      title: "Error",
-      description: "Failed to load members data",
+      title: t("landing.adminMembers.errorTitle"),
+      description: t("landing.adminMembers.errorDesc"),
       variant: "destructive",
     });
   }
@@ -78,8 +80,8 @@ export function MembersPage() {
     <div className="space-y-8 min-h-screen">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-black text-neutral-900 dark:text-white tracking-tight uppercase">Members</h1>
-          <p className="text-neutral-600 dark:text-stone-400 mt-2 font-medium">Manage youth group members and their information</p>
+          <h1 className="text-3xl font-black text-neutral-900 dark:text-white tracking-tight uppercase">{t("landing.adminMembers.title")}</h1>
+          <p className="text-neutral-600 dark:text-stone-400 mt-2 font-medium">{t("landing.adminMembers.subtitle")}</p>
         </div>
         {(user?.role === 'admin' || user?.role === 'chairperson' || user?.role === 'secretary') && (
           <AddMemberDialog />
@@ -90,7 +92,7 @@ export function MembersPage() {
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400 dark:text-stone-500 w-4 h-4" />
           <Input
-            placeholder="Search members..."
+            placeholder={t("landing.adminMembers.searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10 bg-white dark:bg-stone-900 border-neutral-200 dark:border-stone-800 text-neutral-900 dark:text-white"
@@ -101,7 +103,7 @@ export function MembersPage() {
           <Toggle
             pressed={viewMode === "cards"}
             onPressedChange={(pressed) => setViewMode(pressed ? "cards" : "table")}
-            aria-label="Card view"
+            aria-label={t("landing.adminMembers.cardView")}
             size="sm"
             className="data-[state=on]:bg-white dark:data-[state=on]:bg-stone-800 data-[state=on]:text-brand-600 dark:text-stone-400"
           >
@@ -110,7 +112,7 @@ export function MembersPage() {
           <Toggle
             pressed={viewMode === "table"}
             onPressedChange={(pressed) => setViewMode(pressed ? "table" : "cards")}
-            aria-label="Table view"
+            aria-label={t("landing.adminMembers.tableView")}
             size="sm"
             className="data-[state=on]:bg-white dark:data-[state=on]:bg-stone-800 data-[state=on]:text-brand-600 dark:text-stone-400"
           >
@@ -182,12 +184,12 @@ export function MembersPage() {
 
                   <div className="grid grid-cols-2 gap-4 py-3 border-t border-neutral-50 dark:border-stone-800/50">
                     <div>
-                      <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500 block mb-1">Gender</span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500 block mb-1">{t("landing.adminMembers.gender")}</span>
                       <span className="text-sm font-black text-neutral-900 dark:text-white">{member.gender}</span>
                     </div>
                     {member.date_of_birth && (
                       <div>
-                        <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500 block mb-1">Age</span>
+                        <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500 block mb-1">{t("landing.adminMembers.age")}</span>
                         <span className="text-sm font-black text-neutral-900 dark:text-white">{getAge(member.date_of_birth)}</span>
                       </div>
                     )}
@@ -197,7 +199,7 @@ export function MembersPage() {
                     <Link to={`/members/${member.id}`} className="flex-1">
                       <Button variant="outline" size="sm" className="w-full border-neutral-200 dark:border-stone-800 dark:text-stone-300 font-extrabold uppercase tracking-widest text-[10px] h-10 hover:bg-brand-500 hover:text-black hover:border-brand-500 transition-all">
                         <Eye className="w-3 h-3 mr-2" />
-                        View
+                        {t("landing.adminMembers.view")}
                       </Button>
                     </Link>
                     <EditMemberDialog member={member} />
@@ -213,12 +215,12 @@ export function MembersPage() {
           <Table>
             <TableHeader className="bg-neutral-50 dark:bg-stone-950">
               <TableRow className="hover:bg-transparent dark:hover:bg-transparent border-neutral-100 dark:border-stone-800">
-                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">Name</TableHead>
-                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">Group</TableHead>
-                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">Contact</TableHead>
-                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">Status</TableHead>
-                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">Role</TableHead>
-                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">Actions</TableHead>
+                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">{t("landing.adminMembers.name")}</TableHead>
+                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">{t("landing.adminMembers.group")}</TableHead>
+                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">{t("landing.adminMembers.contact")}</TableHead>
+                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">{t("landing.adminMembers.status")}</TableHead>
+                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">{t("landing.adminMembers.role")}</TableHead>
+                <TableHead className="text-[10px] font-black uppercase tracking-widest text-neutral-500 dark:text-stone-500 py-4">{t("landing.adminMembers.actions")}</TableHead>
               </TableRow>
             </TableHeader>
             <TableBody>
@@ -234,7 +236,7 @@ export function MembersPage() {
                       </Avatar>
                       <div>
                         <span className="text-sm font-black text-neutral-900 dark:text-white block leading-tight">{member.first_name} {member.last_name}</span>
-                        <span className="text-[10px] font-medium text-neutral-500 dark:text-stone-500 uppercase tracking-widest">{member.gender}, {member.date_of_birth ? getAge(member.date_of_birth) : '-'} yrs</span>
+                        <span className="text-[10px] font-medium text-neutral-500 dark:text-stone-500 uppercase tracking-widest">{member.gender}, {member.date_of_birth ? getAge(member.date_of_birth) : '-'} {t("landing.adminMembers.yrs")}</span>
                       </div>
                     </div>
                   </TableCell>
@@ -257,7 +259,7 @@ export function MembersPage() {
                         {member.member_role}
                       </span>
                     ) : (
-                      <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500 ml-2">Member</span>
+                      <span className="text-[10px] font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500 ml-2">{t("landing.adminMembers.member")}</span>
                     )}
                   </TableCell>
                   <TableCell>
@@ -281,9 +283,9 @@ export function MembersPage() {
       {filteredMembers.length === 0 && !isLoading && (
         <div className="text-center py-20 bg-white dark:bg-stone-900 border border-neutral-100 dark:border-stone-800 rounded-[2rem] shadow-sm">
           <User className="w-16 h-16 text-neutral-200 dark:text-stone-800 mx-auto mb-6" />
-          <h3 className="text-xl font-black text-neutral-900 dark:text-white uppercase tracking-tight mb-2">No members found</h3>
+          <h3 className="text-xl font-black text-neutral-900 dark:text-white uppercase tracking-tight mb-2">{t("landing.adminMembers.noMembers")}</h3>
           <p className="text-neutral-500 dark:text-stone-400 font-medium">
-            {searchTerm ? 'Try adjusting your search terms.' : 'Get started by adding your first member.'}
+            {searchTerm ? t("landing.adminMembers.adjustSearch") : t("landing.adminMembers.addFirstMember")}
           </p>
         </div>
       )}

@@ -13,8 +13,10 @@ import { UploadGroupDocumentDialog } from "@/components/groups/UploadGroupDocume
 import { UploadGroupPhotoDialog } from "@/components/groups/UploadGroupPhotoDialog";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export function GroupsPage() {
+  const { t } = useTranslation();
   const [searchTerm, setSearchTerm] = useState("");
   const { toast } = useToast();
   const { user, canManageGroup } = useAuth();
@@ -48,8 +50,8 @@ export function GroupsPage() {
 
   if (error) {
     toast({
-      title: "Error",
-      description: "Failed to load groups data",
+      title: t("landing.adminGroups.errorTitle"),
+      description: t("landing.adminGroups.errorDesc"),
       variant: "destructive",
     });
   }
@@ -58,11 +60,11 @@ export function GroupsPage() {
     <div className="space-y-8 min-h-screen">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-3xl font-black text-neutral-900 dark:text-white tracking-tight uppercase">Youth Groups</h1>
-          <p className="text-neutral-600 dark:text-stone-400 mt-2 font-medium">Manage youth groups and their activities</p>
+          <h1 className="text-3xl font-black text-neutral-900 dark:text-white tracking-tight uppercase">{t("landing.adminGroups.title")}</h1>
+          <p className="text-neutral-600 dark:text-stone-400 mt-2 font-medium">{t("landing.adminGroups.subtitle")}</p>
         </div>
         {user?.role === 'admin' && (
-          <GroupDialog mode="add" trigger={<Button className="bg-brand-500 text-black hover:bg-brand-600 font-black uppercase tracking-widest text-xs px-6 py-4 h-auto shadow-lg shadow-brand-500/20">Add Group</Button>} />
+          <GroupDialog mode="add" trigger={<Button className="bg-brand-500 text-black hover:bg-brand-600 font-black uppercase tracking-widest text-xs px-6 py-4 h-auto shadow-lg shadow-brand-500/20">{t("landing.adminGroups.addGroup")}</Button>} />
         )}
       </div>
 
@@ -70,7 +72,7 @@ export function GroupsPage() {
         <div className="relative flex-1 max-w-md">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-neutral-400 dark:text-stone-500 w-4 h-4" />
           <Input
-            placeholder="Search groups..."
+            placeholder={t("landing.adminGroups.searchPlaceholder")}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="pl-10 bg-white dark:bg-stone-900 border-neutral-200 dark:border-stone-800 text-neutral-900 dark:text-white"
@@ -113,7 +115,7 @@ export function GroupsPage() {
               <CardContent>
                 <div className="space-y-4">
                   <div className="flex justify-between items-center py-2 border-b border-neutral-50 dark:border-stone-800/50">
-                    <span className="text-xs font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">Status</span>
+                    <span className="text-xs font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500">{t("landing.adminGroups.status")}</span>
                     <span className={`text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full ${group.status === 'active'
                         ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400'
                         : group.status === 'suspended'
@@ -131,7 +133,7 @@ export function GroupsPage() {
 
                   {group.primary_contact_name && (
                     <div className="text-sm border-t border-neutral-50 dark:border-stone-800/50 pt-4">
-                      <span className="text-xs font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500 block mb-1">Primary Contact</span>
+                      <span className="text-xs font-black uppercase tracking-widest text-neutral-400 dark:text-stone-500 block mb-1">{t("landing.adminGroups.primaryContact")}</span>
                       <span className="font-black text-neutral-900 dark:text-white">{group.primary_contact_name}</span>
                     </div>
                   )}
@@ -140,7 +142,7 @@ export function GroupsPage() {
                     <Link to={`/groups/${group.id}`} className="block">
                       <Button variant="outline" size="sm" className="w-full border-neutral-200 dark:border-stone-800 dark:text-stone-300 font-extrabold uppercase tracking-widest text-[10px] h-10 hover:bg-brand-500 hover:text-black hover:border-brand-500 transition-all">
                         <Eye className="w-3 h-3 mr-2" />
-                        View Details
+                        {t("landing.adminGroups.viewDetails")}
                       </Button>
                     </Link>
                   </div>
@@ -154,9 +156,9 @@ export function GroupsPage() {
       {filteredGroups.length === 0 && !isLoading && (
         <div className="text-center py-20 bg-white dark:bg-stone-900 border border-neutral-100 dark:border-stone-800 rounded-[2rem] shadow-sm">
           <Users className="w-16 h-16 text-neutral-200 dark:text-stone-800 mx-auto mb-6" />
-          <h3 className="text-xl font-black text-neutral-900 dark:text-white uppercase tracking-tight mb-2">No groups found</h3>
+          <h3 className="text-xl font-black text-neutral-900 dark:text-white uppercase tracking-tight mb-2">{t("landing.adminGroups.noGroups")}</h3>
           <p className="text-neutral-500 dark:text-stone-400 font-medium">
-            {searchTerm ? 'Try adjusting your search terms.' : 'Get started by adding your first youth group.'}
+            {searchTerm ? t("landing.adminGroups.adjustSearch") : t("landing.adminGroups.addFirstGroup")}
           </p>
         </div>
       )}
